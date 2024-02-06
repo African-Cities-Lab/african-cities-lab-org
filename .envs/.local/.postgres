@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=african-cities-lab-org
+POSTGRES_USER=xzZvWmVnUICZXMXalyCcvYlzvXzkANKF
+POSTGRES_PASSWORD=Xb8Hf4RZfHLaYkMDoiSQxfWvSQSPR7qpp9a3HahFxxQZMVYy2pp91xUJgeqP31gc
