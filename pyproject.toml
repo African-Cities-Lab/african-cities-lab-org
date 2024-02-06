@@ -13,24 +13,19 @@ include = ["african_cities_lab/**"]
 omit = ["*/migrations/*", "*/tests/*"]
 plugins = ["django_coverage_plugin"]
 
-
-# ==== black ====
-[tool.black]
+# ===== ruff ====
+[tool.ruff]
 line-length = 119
-target-version = ['py311']
+target-version = "py311"
+exclude = [".tox", ".git", "**/migrations/*", "**/static/CACHE/*", "docs", "node_modules", "venv", ".venv"]
 
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E203"]
+exclude = ["venv/", "**/migrations/*.py"]
 
-# ==== isort ====
-[tool.isort]
-profile = "black"
-line_length = 119
-known_first_party = [
-    "african_cities_lab",
-    "config",
-]
-skip = ["venv/"]
-skip_glob = ["**/migrations/*.py"]
-
+[tool.ruff.lint.isort]
+known-first-party = ["african_cities_lab", "config"]
 
 # ==== mypy ====
 [tool.mypy]

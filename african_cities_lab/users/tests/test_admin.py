@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
 from pytest_django.asserts import assertRedirects
+
 from african_cities_lab.users.models import User
 
 
