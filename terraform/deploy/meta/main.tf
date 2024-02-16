@@ -216,6 +216,13 @@ resource "tfe_variable" "gh_token" {
   sensitive       = true
 }
 
+resource "tfe_variable" "gh_owner" {
+  key             = "gh_owner"
+  value           = var.gh_owner
+  category        = "terraform"
+  variable_set_id = tfe_variable_set.shared.id
+}
+
 resource "tfe_workspace_variable_set" "shared_base" {
   variable_set_id = tfe_variable_set.shared.id
   workspace_id    = tfe_workspace.base.id
