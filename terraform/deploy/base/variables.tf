@@ -17,3 +17,5 @@ variable "tf_api_token" {}
 variable "do_token" {}
 
 variable "gh_token" {}
+
+variable "gh_owner" {}

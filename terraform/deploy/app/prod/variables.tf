@@ -19,3 +19,5 @@ variable "do_spaces_access_id" {}
 variable "do_spaces_secret_key" {}
 
 variable "gh_token" {}
+
+variable "gh_owner" {}

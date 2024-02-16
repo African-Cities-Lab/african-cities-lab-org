@@ -38,6 +38,12 @@ SITE_ID = 1
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+# Wagtail internationalization
+WAGTAIL_I18N_ENABLED = True
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ("en", "English"),
+    ("fr", "French"),
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(BASE_DIR / "locale")]
 
@@ -82,9 +88,30 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "african_cities_lab.users",
     # Your stuff: custom apps go here
+    "african_cities_lab.home.apps.HomeConfig",
 ]
+
+WAGTAIL_APPS = [
+    # "african_cities_lab.search",
+    "wagtail_localize",
+    "wagtail_localize.locales",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    "wagtail",
+    "modelcluster",
+    "taggit",
+]
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + WAGTAIL_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -136,6 +163,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 # STATIC
@@ -221,7 +249,8 @@ EMAIL_TIMEOUT = 5
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = "admin/"
+ADMIN_URL = "django-admin/"
+WAGTAIL_ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [("""Martí Bosch""", "marti.bosch@epfl.ch")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -322,3 +351,5 @@ WEBPACK_LOADER = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+WAGTAIL_SITE_NAME = "African Cities Lab"
+WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"

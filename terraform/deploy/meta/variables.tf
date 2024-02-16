@@ -14,6 +14,8 @@ variable "do_project_name" {}
 
 variable "do_project_description" {}
 
+variable "gh_owner" {}
+
 variable "gh_repo_name" {}
 
 variable "tf_api_token" {}
