@@ -1,5 +1,11 @@
 services:
   django: &django
+    build:
+      args:
+        # These variable can be defined in an .env file in the root of the repo
+        DJANGO_AWS_STORAGE_BUCKET_NAME: ${DJANGO_AWS_STORAGE_BUCKET_NAME}
+        DJANGO_AWS_S3_CUSTOM_DOMAIN: ${DJANGO_AWS_S3_CUSTOM_DOMAIN}
+
     env_file:
       - ./.envs/.staging/.django
       - ./.envs/.production/.postgres
