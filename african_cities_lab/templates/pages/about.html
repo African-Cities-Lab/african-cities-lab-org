@@ -1,1 +1,275 @@
 {% extends "base.html" %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+
+{% block content %}
+    {% image self.banner_image original as img %}
+    <section class="page-banner" 
+        style="background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), 
+                 url({{ img.url }});">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-12 col-lg-6 col-md-10">
+                    <div class="position-relative h1">
+                        {% translate "By 2050, African cities will be home to 2.5 billion people" %}
+                        <span class="dash-accent"></span>
+                    </div>
+                    <ul class="banner-text-list">
+                        <li class="banner-text__item one">
+                            <img width="12" 
+                                 height="30" 
+                                 alt="icon" 
+                                 src="{% static 'images/assets/small-pointer.svg' %}"/>
+                            <h2 class="bannner__add-text"><span>{% translate "700 million" %}</span>{% translate " new homes" %}</h2>
+                        </li>
+                        <li class="banner-text__item two">
+                            <img width="12" 
+                                 height="30"
+                                 alt="icon" 
+                                src="{% static 'images/assets/small-pointer.svg' %}"/>
+                            <h2 class="bannner__add-text"><span>{% translate "300,000" %}</span>{% translate " schools" %}</h2>
+                        </li>
+                        <li class="banner-text__item three">
+                            <h2 class="bannner__add-text">{% translate " and almost " %}</h2>
+                        </li>
+                        <li class="banner-text__item four">
+                            <img width="12" 
+                                 height="30" 
+                                 alt="icon" 
+                                 src="{% static 'images/assets/small-pointer.svg' %}"/>
+                            <h2 class="bannner__add-text"><span>{% translate "100,000" %}</span>{% translate " health centers" %}</h2>
+                        </li>
+                        <li class="banner-text__item five">
+                            <h2 class="bannner__add-text">{% translate "remain to be built." %}</h2>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="acl-sharpes right-sharpe">
+            <img class="d-none d-lg-block" 
+                alt="icon" 
+                width="195" 
+                height="380" 
+                src="{% static 'images/assets/outline-sharpe-right.svg' %}"/>
+        </div>
+    </section>
+
+    <section class="p-lg-5 position-relative">
+        <div class="container-xl">
+            <div class="row justify-content-around">
+                <div class="col-12 col-md-3 col-lg-4 p-5 p-md-3 order-1 order-md-0">
+                    <img class="about-mission__img" 
+                         width="408" 
+                         height="500" 
+                         alt="about-mission" 
+                         src="{% static 'images/assets/about-mission.webp' %}"/>
+                </div>
+                <div class="col-12 col-md-9 col-lg-8 order-0 order-md-1 pt-5 px-lg-5">
+                    <h2 class="section-title mb-3">{% translate "Our Mission" %}</h2>
+                    <h3 class="text_primary">{% translate "Training a new generation of professionals to build the African cities of the future" %}</h3>
+                    <p class="py-3 font-size-16 text-justify">
+                        {% blocktranslate %}
+                        We believe that the challenge of building sustainable african cities able to offer to the population quality access to essential services will not be achieved without an adequate training of those in charge of the transformation. This is why we have created the largest online learning platform on sustainable urban development in Africa.
+                        {% endblocktranslate %}
+                    </p>
+                    <div class="banner-counter row justify-content-center justify-content-md-between text-center mt-5">
+                        <div class="stats-item col-md-4 col-lg-3 mt-3">
+                            <h3 class="stats-title">
+                                <span>+ </span><span class="counter" >5000</span>
+                            </h3>
+                            <span class="banner-counter-title">{% translate "Professionals trained in 2024" %}</span>
+                        </div>
+                        <div class="stats-item col-md-4 col-lg-3 mt-3">
+                            <h3 class="stats-title">
+                                <span class="counter">13</span>
+                            </h3>
+                            <span class="banner-counter-title">{% translate "Moocs released in 2023" %}</span>
+                        </div>
+                        <div class="stats-item col-md-4 col-lg-3 mt-3">
+                            <h3 class="stats-title">
+                                <span class="counter">6</span>
+                            </h3>
+                            <span class="banner-counter-title">{% translate "African University partners" %}</span>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container p-md-5">
+             <div class="row d-flex justify-content-center pt-5 pt-md-0">
+                 <div class="col-12 col-lg-10">
+                     <h3 class="section-title text-center">{% translate "The ACL Platform" %}</h3>
+
+                     <div class="font-size-16 py-3">
+                        {% blocktranslate %}
+                        The African Cities Lab e-learning platform is available in French and English.
+                        This initiative funded by the <a target="_blank" href="https://www.seco.admin.ch/seco/en/home.html" class="text_primary">State Secretariat for Economic Affairs SECO</a>,
+                        allows all stakeholders involved in the construction, development and
+                        operation in urban areas to access quality education on sustainable
+                        urbanization to meet the 2050 challenges of African cities.
+                        {% endblocktranslate %}
+                     </div>
+                 </div>
+             </div>
+        </div>
+        <div class="container-xl">
+             <div class="row justify-content-lg-center mb-5">
+                 <div class="col-12 col-md-6 col-lg-4 p-3 platform-feature__card d-flex">
+                     <div class="card">
+                         <div class="card-body">
+                             <h5 class="feature-card__title text_primary py-3">
+                                {% translate "The MOOCs" %}
+                             </h5>
+                             <p class="feature-card__exerpt">
+                                {% blocktranslate %}
+                                The MOOCs (Massive Open Online Courses) are online course, free of charge.
+                                Our MOOCs focus on all aspects of urban space planning and are divided into eight themes.
+                                They are taught by experts from Africa.
+                                {% endblocktranslate %}
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-12 col-md-6 col-lg-4 p-3 platform-feature__card d-flex">
+                     <div class="card">
+                         <div class="card-body">
+                             <h5 class="feature-card__title text_primary py-3">
+                                {% translate "Online training courses" %}
+                             </h5>
+                             <p class="feature-card__exerpt">
+                                {% blocktranslate %}
+                                These are in-depth courses, designed for professionals involved in the construction of african cities of today and tomorrow who want to improve their professional practice and expertise.
+                                {% endblocktranslate %}
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-12 col-md-6 col-lg-4 p-3 platform-feature__card d-flex">
+                     <div class="card">
+                         <div class="card-body">
+                             <h5 class="feature-card__title text_primary py-3">
+                                {% translate "Hybrid training courses" %}
+                             </h5>
+                             <p class="feature-card__exerpt">
+                                {% blocktranslate %}
+                                We offer deep-dive trainings to key decision makers. The courses are made of an eLearning component to gain foundation knowledge, as well as classroom training and field visits to deepen and contextualise knowledge.
+                                {% endblocktranslate %}
+                            </p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container p-lg-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-md-10 text-center">
+                    <h3 class="section-title">{% translate "African Cities Lab Webinars" %}</h3>
+
+                    <div class="py-3 font-size-16 text-justify">
+                        {% blocktranslate %}
+                        Through a series of 4 webinars, the partners of the African Cities Lab,
+                        in collaboration with EPFL, are providing insights for the political and scientific
+                        dialogue in the run-up to the Cotonou conference in 2023.
+                        The objective of these webinars is to discuss the major themes that make
+                        up the African digital city and set the framework for the agenda of the
+                        Conference. This webinar series will present research, trends, use cases
+                        and critical insights on how cities are or could be more effective in
+                        harnessing and leveraging digital technologies to promote sustainable
+                        development and achieve SDGs.
+                        {% endblocktranslate %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="timeline-wrapper" dir="ltr">
+                <ul class="list-inline timeline-container">
+                    <li class="list-inline-item timeline-step">
+                        <a href="#" class="px-2 d-block">
+                            <div class="timeline-pointer"></div>
+                            <h5>{% translate "July 5, 2022" %}</h5>
+                            <span>{% translate "1st webinar" %}</span>
+                            <p class="text-muted">{% translate "Integration of open data and artificial intelligence in the development of smart cities in Africa." %}</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item timeline-step">
+                        <a href="#" class="px-2 d-block">
+                            <div class="timeline-pointer"></div>
+                            <h5>{% translate "October 11, 2022" %}</h5>
+                            <span>{% translate "2nd webinar" %}</span>
+                            <p class="text-muted">{% translate "African Cities: What role for the youth?" %}</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item timeline-step">
+                        <a href="#" class="px-2 d-block">
+                            <div class="timeline-pointer"></div>
+                            <h5>{% translate "November 24, 2022" %}</h5>
+                            <span>{% translate "3rd webinar" %}</span>
+                            <p class="text-muted">
+                                {% translate "How to build resilient African Cities in response to climate change?" %}
+                            </p>
+                        </a>
+                    </li> 
+                    <li class="list-inline-item timeline-step">
+                        <a href="#" class="px-2 d-block">
+                            <div class="timeline-pointer"></div>
+                            <h4 class="text_primary">{% translate "23 & 24 May 2023" %}</h4>
+                            <span class="font-size-16">African Cities lab - 2023 SUMMIT</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--div class="mt-5 text-center">
+                <a href="#!" class="btn btn__primary my-5 btn__small">
+                    {% translate "Register for the next webinar" %}
+                </a>
+            </div-->
+        </div>
+    </section>
+
+    <section class="acl-conference" 
+        style="background-image: linear-gradient(105deg, rgba(0,0,0,.5) 12%, rgba(0,0,0,0.10) 60%),
+                url({% static 'images/assets/city-of-port-louis-mauritius.webp' %});">
+        <div class="acl-sharpes top-right__sharpe">
+            <img class="d-none d-lg-block" alt="icon" width="400" height="205" src="{% static 'images/assets/outline-sharpe-top.svg' %}"/>
+        </div>
+        <div class="container position-relative">
+            <div class="row p-3 py-5 p-md-5">
+                <div class="col-12 col-lg-8 pt-lg-3 pb-3">
+                    <div class="content-holder">
+                        <h1 class="font-size-2-75em">
+                            {% translate "African Cities lab - 2023 SUMMIT" %}
+                        </h1>
+                        <div class="hidden-details py-3">
+                            <p class="font-size-16">
+                            {% blocktranslate %}
+                            Challenging the current vision of African cities, digital cities are presented as a rational response to future demographic projections.
+                            African Cities Lab creates the "African Cities lab - 2023 SUMMIT", a major event that aims to increase the scope and develop synergies
+                            between research and entrepreneurship on the African continent.  It is all about accelerating digitization of cities and promoting scientific excellence
+                            in Africa. The first edition of the Conference will take place in 2023 in Cotonou, Benin.
+                            {% endblocktranslate %}</p>
+                        </div>
+                        <div class="mt-2">
+                            <a href="https://summit.africancitieslab.org/" target="_blank" class="btn btn__primary btn-small font-size-14">
+                                {% translate "Learn more" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start Partners Area-->
+    <section class="our-partners">
+        {% include "components/partners_section.html" %}
+    </section>
+    <!-- End Partners Area -->
+{% endblock content %}

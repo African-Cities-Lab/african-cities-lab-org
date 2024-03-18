@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+
+{% block content %}
+
+    <section class="page-banner" 
+        style="background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), 
+                url({% static 'images/assets/acl-contest-banner.jpg' %});">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-12 col-lg-6 col-md-10">
+                    <div class="position-relative h1">
+                        {% translate 'Participate to the "African urban visions" contest' %}
+                        <span class="dash-accent"></span>
+                    </div>
+                    <ul class="banner-text-list">
+                        <li class="banner-text__item one">
+                            <img width="12" 
+                                height="30" 
+                                alt="icon" 
+                                src="{% static 'images/assets/small-pointer.svg' %}"/>
+                            <h2 class="bannner__add-text"><span>2</span>{% translate " categories" %}</h2>
+                        </li>
+                        <li class="banner-text__item two">
+                            <img width="12" 
+                                height="30"
+                                alt="icon" 
+                                src="{% static 'images/assets/small-pointer.svg' %}"/>
+                            <h2 class="bannner__add-text"><span>6</span>{% translate " prices" %}</h2>
+                        </li>
+                        <li class="banner-text__item three">
+                            <h2 class="bannner__add-text"><span>7</span>{% translate " MOOCs " %}</h2>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="acl-sharpes right-sharpe">
+            <img class="d-none d-lg-block" 
+                alt="icon" 
+                width="195" 
+                height="380" 
+                src="{% static 'images/assets/outline-sharpe-right.svg' %}"/>
+        </div>
+    </section>
+
+    <section class="p-lg-5 position-relative">
+        <div class="container-xl">
+            <div class="row justify-content-around">
+                <div class="col-12 col-md-3 col-lg-4 p-5 p-md-3 order-1 order-md-0">
+                    <img class="about-mission__img" 
+                         width="408" 
+                         height="500" 
+                         alt="contest-visual" 
+                         src="{% static 'images/assets/acl-contest-visual.png' %}"/>
+                </div>
+                <div class="col-12 col-md-9 col-lg-8 order-0 order-md-1 pt-5 px-lg-5">
+                    <h2 class="section-title mb-3">{% translate "Context" %}</h2>
+                    <h3 class="text_primary">
+                        {% translate "Highlighting the talent of change agents in African cities" %}
+                    </h3>
+                    <p class="py-3 font-size-16 text-justify">
+                        {% blocktranslate %}
+                        The ACL platform offers several MOOCs (Massive Open Online Courses), taught by African experts, all covering aspects of urban planning.
+                        {% endblocktranslate %}
+                    </p>
+                    <p class="py-3 font-size-16 text-justify">
+                        {% blocktranslate %}
+                        This innovative training space generates a dynamic and creative learning community, which the African Cities Lab wishes to highlight by launching the "African Urban Visions" contest.
+                        {% endblocktranslate %}
+                    </p>
+                    <div class="banner-counter row justify-content-center justify-content-md-between text-center mt-5">
+                        <div class="stats-item col-md-4 col-lg-3 mt-3">
+                            <h3 class="stats-title">
+                                <span class="counter" >2</span>
+                            </h3>
+                            <span class="banner-counter-title">{% translate "Categories" %}</span>
+                        </div>
+                        <div class="stats-item col-md-4 col-lg-3 mt-3">
+                            <h3 class="stats-title">
+                                <span class="counter">6</span>
+                            </h3>
+                            <span class="banner-counter-title">{% translate "Prices" %}</span>
+                        </div>
+                        <div class="stats-item col-md-4 col-lg-3 mt-3">
+                            <h3 class="stats-title">
+                                <span class="counter">7</span>
+                            </h3>
+                            <span class="banner-counter-title">{% translate "MOOCs" %}</span>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container p-md-5">
+             <div class="row d-flex justify-content-center pt-5 pt-md-0">
+                 <div class="col-12 col-lg-10">
+                     <h3 class="section-title text-center">{% translate "The contest" %}</h3>
+
+                     <div class="font-size-16 py-3">
+                        {% blocktranslate %}
+                        Its aim is to <strong>catalyze the ingenuity and creativity of those involved in Africa's urban fabric</strong>, 
+                        by inviting participants to <strong>capture the best of urban innovation and transformation at the very heart of their city</strong>, 
+                        and to share their vision through the prism of a <strong>photograph</strong> or <strong>short video</strong>.
+                        {% endblocktranslate %}
+                     </div>
+                 </div>
+             </div>
+        </div>
+        <div class="container-xl">
+             <div class="row justify-content-lg-center mb-5">
+                 <div class="col-12 col-md-6 col-lg-4 p-3 platform-feature__card d-flex">
+                     <div class="card">
+                         <div class="card-body">
+                            <img src="{% static 'images/assets/photo-icon.png' %}" 
+                                 alt="photo-icon" 
+                                 class="pb-3">
+
+                             <h5 class="feature-card__title text_primary py-3">
+                                {% translate "Urban photography" %}
+                             </h5>
+
+                             <p class="feature-card__exerpt">
+                                {% blocktranslate %}
+                                Capture the essence of a vision of the African city in transformation with a powerful image.
+                                {% endblocktranslate %}
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-12 col-md-6 col-lg-4 p-3 platform-feature__card d-flex">
+                     <div class="card">
+                         <div class="card-body">
+                            <img src="{% static 'images/assets/video-icon.png' %}" 
+                                 alt="photo-icon" 
+                                 class="pb-3">
+
+                             <h5 class="feature-card__title text_primary py-3">
+                                {% translate "Creative video" %}
+                             </h5>
+
+                             <p class="feature-card__exerpt">
+                                {% blocktranslate %}
+                                Create a short "real-life" video (maximum 90 seconds) that illustrates an immersive story of the African city in transformation.
+                                {% endblocktranslate %}
+                             </p>
+                         </div>
+                     </div>
+                 </div> 
+
+                 <div class="col-12 col-lg-8 p-3 d-flex justify-content-center">
+                    <p>
+                        {% blocktranslate %}
+                        Works will automatically be licensed under the <strong>Creative Commons CC-by-nc 4.0</strong> license 
+                        (see <a class="text_primary fw-bold" href="https://drive.switch.ch/index.php/s/XhXrQ7BeTivT6xd" target="_blank">rules</a> 
+                        for details).
+                        {% endblocktranslate %}
+                    </p>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container p-lg-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-md-10 text-center">
+                    <h3 class="section-title">{% translate "Terms of participation" %}</h3>
+
+                    <div class="py-3 font-size-16 text-justify">
+                        {% blocktranslate %} 
+                        Have obtained a <strong>certificate of achievement</strong> for one or more MOOCs available on 
+                        the <a href="https://courses.africancitieslab.org">African Cities Lab</a> platform.
+                        {% endblocktranslate %}
+                    </div>
+                    <div class="py-3 font-size-16 text-justify">
+                        {% blocktranslate %} 
+                        Submit your work by completing this <a class="text_primary fw-bold" href="https://forms.gle/wKeZhzTM2a76W4sB9" target="_blank">form</a>.
+                        {% endblocktranslate %}
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="timeline-wrapper" dir="ltr">
+                <ul class="list-inline timeline-container">
+                    <li class="list-inline-item timeline-step">
+                        <div class="timeline-pointer"></div>
+                        <h5>{% translate "December 11, 2023" %}</h5>
+                        <span>{% translate "Contest opening" %}</span> 
+                    </li> 
+                    <li class="list-inline-item timeline-step">
+                        <div class="timeline-pointer"></div>
+                        <h5>{% translate "January 19, 2024" %}</h5>
+                        <span>{% translate "Application deadline" %}</span> 
+                    </li>
+                    <li class="list-inline-item timeline-step">
+                        <div class="timeline-pointer"></div>
+                        <h5>{% translate "Jury meeting" %}</h5>
+                        <span>{% translate "Selection of winners" %}</span> 
+                    </li>
+                    <li class="list-inline-item timeline-step">
+                        <div class="timeline-pointer"></div>
+                        <h5>{% translate "February 2024" %}</h5>
+                        <span>
+                            {% blocktranslate %}
+                            Announcement of results during the "Building a new paradigm around African cities: Exploring the contributions 
+                            of research innovation and cultural industries creative" webinar.
+                            {% endblocktranslate %}
+                        </span> 
+                    </li>
+                </ul>
+            </div> 
+        </div>
+    </section>
+
+    <!-- Start Partners Area-->
+    <section class="our-partners">
+        {% include "components/partners_section.html" %}
+    </section>
+    <!-- End Partners Area -->
+{% endblock content %}

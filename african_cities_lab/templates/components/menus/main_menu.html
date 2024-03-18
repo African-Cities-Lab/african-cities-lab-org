@@ -1,0 +1,5 @@
+{% for item in menu_items %}
+  <li class="nav-item mx-3">
+    <a class="nav-link {{ item.active_class }}" href="{{ item.href }}">{{ item.text }}</a>
+</li>
+{% endfor %}
