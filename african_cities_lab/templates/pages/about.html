@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+{% block meta_tag %}
+  {% meta_tags %}
+{% endblock %}
 
 {% block content %}
     {% image self.banner_image original as img %}

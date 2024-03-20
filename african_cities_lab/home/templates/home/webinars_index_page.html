@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+{% block meta_tag %}
+  {% meta_tags %}
+{% endblock %}
 
 {% block content %}
 
@@ -36,9 +39,9 @@
                 
                         <div class="col-md-2 col-lg-1 col-sm-2 col-xs-12">
                             <div class="event-meta__card float-md-end">
-                                <div class="date-d">24</div>
-                                <div class="date-m">{{ webinar.specific.date }}</div>
-                                <div class="date-y">2022</div>
+                                <div class="date-d">{{ webinar.specific.date.day }}</div> 
+                                <div class="date-m">{{ webinar.specific.get_month_published }}</div>
+                                <div class="date-y">{{ webinar.specific.date.year }}</div>
                             </div>
                         </div>
                 

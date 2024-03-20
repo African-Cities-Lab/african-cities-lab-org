@@ -2,6 +2,7 @@ from django import template
 from wagtail.models import Locale, Page, Site
 from wagtail.templatetags.wagtailcore_tags import pageurl
 
+
 register = template.Library()
 
 

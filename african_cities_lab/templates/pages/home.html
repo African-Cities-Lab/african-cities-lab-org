@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+{% block meta_tag %}
+  {% meta_tags %}
+{% endblock %}
 
 {% block content %} 
+
     <!-- Slider-->
     <section class="homepage-slider">
         <div class="swiper home-swiper">
@@ -324,6 +328,73 @@
             </div>
         </div>
     </section>
+
+    <!--Display 3 latest webinars-->
+    {% if latest_webinars %} 
+    <section class="featured-events pt-5">
+        <div class="container-lg py-md-5">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <h3 class="section-title mb-3">
+                        {% translate "Webinars" %}
+                    </h3>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block">
+                    <a class="float-end btn __btn-outline-more btn__xxsmall" 
+                        role="button" 
+                        href="{% localized_slugurl 'webinars' %}">
+                        <span class="font-size-16">{% translate "All webinars" %}</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for webinar in latest_webinars %}
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="featured-event__content">
+                            <div class="featured-img">
+                                <a href="{{ webinar.url }}">
+                                    <div class="featured-img__inner">
+                                        {% image webinar.main_image original as img %} 
+                                        <img width="416" 
+                                            height="250" 
+                                            alt="{{ img.alt }}" 
+                                            src="{{ img.url }}"/>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-xs-12">
+                                    <div class="event-meta__card"> 
+
+                                        <div class="date-d">{{ webinar.date.day }}</div> 
+                                        <div class="date-m">{{ webinar.get_month_published }}</div>
+                                        <div class="date-y">{{ webinar.date.year }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-xs-12 ">
+                                    <div class="featured-event-inner">
+                                        <a href="{{ webinar.url }}" class="h4">
+                                            {{ webinar.title }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div> 
+                {% endfor %}
+            </div>
+            <div class="my-5 text-center d-md-none">
+                <a class="btn __btn-outline-more btn__xxsmall" 
+                    role="button" 
+                    href="{% localized_slugurl 'webinars' %}">
+                    <span class="font-size-16">{% translate "All webinars" %}</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--Display 3 latest webinars-->
 
     <!-- Start Topics Area-->
     <section class="explore-topic position-relative bg-light__ py-5">

@@ -1,6 +1,6 @@
 from django.db import models
 
-from wagtail.models import Page, Orderable
+from wagtail.models import Page, Orderable, Locale
 
 from modelcluster.fields import ParentalKey
 
@@ -69,6 +69,25 @@ class HomePage(MetadataPageMixin, Page):
             heading="Slider",
         ), 
     ]
+    
+    def get_context(self, request):
+        
+        # Get current language
+        current_lang = Locale.get_active()
+        
+        # Get last 3 webinars
+        latest_webinars = (
+            WebinarsPage.objects.filter(locale=current_lang)
+            .live()
+            .public()
+            .order_by("-first_published_at")[:3]
+        )
+        # Update template context
+        context = super().get_context(request)
+        context["latest_webinars"] = latest_webinars
+        
+        return context
+    
     class Meta:
         verbose_name = "Home Page" 
         
@@ -165,6 +184,34 @@ class ContactPage(MetadataPageMixin, Page):
     
     class Meta:
         verbose_name = "Contact Page" 
+
+
+class TeamPage(MetadataPageMixin, Page): 
+    """TeamPage page model."""
+    
+    template = "pages/team.html" 
+    
+    banner_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name="+"
+    )
+    
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([ 
+            FieldPanel("banner_image"), 
+        ], heading="Hero section"), 
+    ]
+    
+    parent_page_type = [
+        "home.HomePage",
+    ]
+    max_count = 1
+    
+    class Meta:
+        verbose_name = "Team Page"      
         
 class FlatPage(MetadataPageMixin, Page):
     """FlatPage page model."""
@@ -218,7 +265,6 @@ class WebinarsIndexPage(MetadataPageMixin, Page):
     class Meta:
         verbose_name = "Webinar Index Page" 
 
-
 class WebinarsPage(MetadataPageMixin, Page):
 
     main_image = models.ForeignKey(
@@ -232,9 +278,17 @@ class WebinarsPage(MetadataPageMixin, Page):
     register_link = models.URLField(blank=True)
     replay_link = models.URLField(blank=True)
     
-    body = StreamField(
+    overview = RichTextField(features=['h2', 'h3', 'h4', 'ol', 'ul', 'bold', 'italic', 'link'], blank=True)
+    
+    agenda = StreamField(
         [
-            ("agenda_layout", AgendaLayout()),
+            ("agenda_layout", AgendaLayout())
+        ],
+        blank=True,
+        use_json_field=True
+    )
+    speakers = StreamField(
+        [
             ("speaker_layout", SpeakerLayout()),
         ],
         blank=True,
@@ -251,7 +305,9 @@ class WebinarsPage(MetadataPageMixin, Page):
             FieldPanel("register_link"),
             FieldPanel("replay_link"),
         ], heading="About Webinar"), 
-        FieldPanel("body"),
+        FieldPanel("overview"),
+        FieldPanel("agenda"),
+        FieldPanel("speakers"),
     ]
 
     parent_page_type = [
@@ -260,6 +316,11 @@ class WebinarsPage(MetadataPageMixin, Page):
 
     def __str__(self):
         return self.title
+    
+    
+    def get_month_published(self): 
+        month = self.date.strftime('%B')
+        return month[:3]
     
     
 class FormationsIndexPage(MetadataPageMixin, Page):
@@ -295,11 +356,16 @@ class FormationsPage(MetadataPageMixin, Page):
         on_delete=models.PROTECT,
     ) 
     summary = models.TextField(blank=False)
-    date = models.DateField("Webinar date") 
+    starting_date = models.DateField("Starting date", null=True, blank=True) 
+    ending_date = models.DateField("Ending date", null=True, blank=True) 
+    location = models.CharField(max_length=100, blank=True, null=True)
+    register_link = models.URLField(blank=True)
     
-    body = StreamField(
-        [ 
-            ("speaker_layout", SpeakerLayout()),
+    overview = RichTextField(features=['h2', 'h3', 'h4', 'ol', 'ul', 'bold', 'italic', 'link'], blank=True)
+    
+    agenda = StreamField(
+        [
+            ("agenda_layout", AgendaLayout()), 
         ],
         blank=True,
         use_json_field=True
@@ -308,10 +374,14 @@ class FormationsPage(MetadataPageMixin, Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel([ 
             FieldPanel("main_image"), 
-            FieldPanel("date"),  
-            FieldPanel("summary"), 
+            FieldPanel("starting_date"),
+            FieldPanel("ending_date"),  
+            FieldPanel("summary"),  
+            FieldPanel("location"),
+            FieldPanel("register_link"),
         ], heading="About Formation"), 
-        FieldPanel("body"),
+        FieldPanel("overview"),
+        FieldPanel("agenda"),
     ]
 
     parent_page_type = [
@@ -320,4 +390,18 @@ class FormationsPage(MetadataPageMixin, Page):
 
     def __str__(self):
         return self.title
+    
+    def get_start_month_published(self):  
+        return self.starting_date.strftime('%B')
+    
+    def get_end_month_published(self):  
+        return self.ending_date.strftime('%B')
+    
+    def get_split_start_month(self):
+        month = self.starting_date.strftime('%B')
+        return month[:3]
+    
+    def get_split_end_month(self):
+        month = self.ending_date.strftime('%B')
+        return month[:3]
     
