@@ -10,52 +10,25 @@ class AgendaLayout(blocks.StructBlock):
     session = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ("time", blocks.CharBlock()),
-                ("session_title", blocks.CharBlock()),
-                ("language", blocks.CharBlock()),
+                ("time", blocks.CharBlock(required=False)),
+                ("session_title", blocks.CharBlock(required=False)),
+                ("language", blocks.CharBlock(required=False)),
+                ("moderator_name", blocks.CharBlock(required=False)),
+                
                 (
-                    "program",
+                    "timeline",
                     blocks.ListBlock(
                         blocks.StructBlock(
                             [
-                                (
-                                    "timeline",
+                                ("time", blocks.CharBlock(required=False)),
+                                ("title", blocks.RichTextBlock(equired=False)),
+                                ("description", blocks.RichTextBlock(required=False)),
+                                ("speakers",
                                     blocks.ListBlock(
                                         blocks.StructBlock(
                                             [
-                                                (
-                                                    "time",
-                                                    blocks.CharBlock(required=False),
-                                                ),
-                                                ("title", blocks.RichTextBlock()),
-                                                (
-                                                    "description",
-                                                    blocks.RichTextBlock(
-                                                        required=False
-                                                    ),
-                                                ),
-                                                (
-                                                    "speakers",
-                                                    blocks.ListBlock(
-                                                        blocks.StructBlock(
-                                                            [
-                                                                
-                                                                (
-                                                                    "name",
-                                                                    blocks.CharBlock(
-                                                                        required=False
-                                                                    ),
-                                                                ),
-                                                                (
-                                                                    "designation",
-                                                                    blocks.CharBlock(
-                                                                        required=False
-                                                                    ),
-                                                                ),
-                                                            ]
-                                                        ),
-                                                    ),
-                                                ),
+                                                ("name", blocks.CharBlock(required=False)),
+                                                ("designation", blocks.CharBlock(required=False)),
                                             ]
                                         ),
                                     ),
@@ -101,5 +74,5 @@ class SpeakerLayout(blocks.StructBlock):
     )
 
     class Meta:
-        template = "componants/speaker_layout.html"
+        template = "components/speaker_layout.html"
 

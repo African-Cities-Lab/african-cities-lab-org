@@ -721,7 +721,7 @@ a:hover {
   padding: 10px 25px;
 }
 .btn__xxsmall {
-  padding: 6px 20px;
+  padding: 6px 20px !important;
   font-size: 14px;
 }
 .btn__big {
@@ -1398,40 +1398,72 @@ a.novashare-button {
   -o-transition: 0.3s ease;
   transition: 0.3s ease;
 }
-.event-meta__card {
+.event-meta__card, .formation-meta__card {
   position: relative;
   display: inline-block;
-  width: 50px;
   padding-top: 4px;
   margin-bottom: 15px;
   vertical-align: top;
   max-width: 100%;
-  border: 2px solid #be3712;
+  border: 2px solid hsl(13, 83%, 41%);
   text-align: center;
 }
-.event-meta__card .date-d {
+.event-meta__card {
+  width: 50px;
+}
+.formation-meta__card {
+  width: 155px;
+}
+.formation-meta__card .formation-date {
+  display: grid; 
+  grid-template-columns: 60px 30px 60px; 
+  align-items: center;
+}
+.formation-date__wrapper {
+  display: grid; 
+  grid-template-columns: auto 48px auto;
+  align-items: center;
+}
+.formation-date__wrapper .start-date,
+.formation-date__wrapper .end-date {
+    display: flex; 
+    align-items: center;
+    padding: 8px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.formation-meta__card .formation-date .start-date,
+.formation-meta__card .formation-date .end-date {
+  padding: 8px;
+}
+.event-meta__card .date-d,
+.formation-meta__card .date-d {
   padding: 0 5px;
   margin-bottom: -4px;
   font-size: 24px;
   font-weight: 500;
   color: #be3712;
 }
-.event-meta__card .date-m {
+.event-meta__card .date-m,
+.formation-meta__card .date-m {
   padding: 0 5px;
   font-size: 16px;
   text-transform: uppercase;
   color: #be3712;
 }
-.event-meta__card .date-y {
+.event-meta__card .date-y,
+.formation-meta__card .date-y {
   padding: 0 5px;
   margin-top: 1px;
-  border-top: 2px solid #be3712;
   color: #be3712;
   vertical-align: top;
 }
+.event-meta__card .date-y {
+  border-top: 2px solid #be3712;
+}
 .featured-event__content .featured-event-inner {
   padding-top: 8px;
-  margin-left: -30px;
+  margin-left: -45px;
 }
 .featured-event__content .featured-event-inner > a {
   display: block;
@@ -1453,25 +1485,28 @@ a.novashare-button {
 .post-content__body p {
   margin-bottom: 1rem !important;
 }
-.event-item {
+.event-item, .formation-item {
   padding-bottom: 30px;
   overflow: hidden;
   margin: 30px 0;
 }
-.event-item .event-item__img {
+.event-item .event-item__img, 
+.formation-item .formation-item__img {
   vertical-align: top;
   display: block;
   max-width: 100%;
   margin-bottom: 20px;
   overflow: hidden;
 }
-.event-item .event-item__img a {
+.event-item .event-item__img a,
+.formation-item .formation-item__img a {
   display: block;
   max-width: 100%;
   vertical-align: top;
   position: relative;
 }
-.event-item .event-item__img a div {
+.event-item .event-item__img a div,
+.formation-item .formation-item__img a div {
   padding-bottom: 60%;
   position: relative;
   display: block;
@@ -1480,7 +1515,8 @@ a.novashare-button {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
-.event-item .event-item__img a div > img {
+.event-item .event-item__img a div > img,
+.formation-item .formation-item__img a div > img {
   position: absolute;
   top: 0;
   left: 0;
@@ -2688,7 +2724,20 @@ h2.bannner__add-text {
     min-height: 372px;
   }
 }
-
+@media (max-width: 600px) {
+  .formation-meta__card {
+    width: 100%;
+  }
+  .formation-meta__card .formation-date {
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+  }
+  .formation-meta__card .formation-date .start-date,
+  .formation-meta__card .formation-date .end-date {
+    display: flex; 
+    align-items: center;
+  }
+}
 @media (max-width: 768px) {
   .container-fluid {
     padding-left: 15px !important;
@@ -2757,6 +2806,14 @@ h2.bannner__add-text {
   }
   .featured-event__content .featured-event-inner > a {
     font-size: 18px;
+  }
+  .event-meta__card {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+  }
+  .event-meta__card .date-y {
+    border-top: none;
   }
 }
 @media (max-width: 992px) {
@@ -3055,7 +3112,6 @@ h2.bannner__add-text {
     top: -2px;
   }
 }
-
 @media (min-width: 600px) and (max-width: 991.99px) {
   .civa-partners-wrapper .partners-item,
   .civa-partners-wrapper.row-title h3 {
@@ -3070,16 +3126,13 @@ h2.bannner__add-text {
     max-width: 455px;
   }
 }
-
 @media (max-width: 1400px) {
 }
-
 @media (max-width: 1200px) {
   .featured-event__content .featured-event-inner {
     margin-left: 0;
   }
 }
-
 @media (min-width: 1200px) {
   .container-fluid {
     padding-right: 85px;
@@ -3094,7 +3147,6 @@ h2.bannner__add-text {
     padding-left: 30px;
   }
 }
-
 @keyframes appear {
   0% {
     opacity: 0;

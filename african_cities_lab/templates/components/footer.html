@@ -1,4 +1,4 @@
-{% load menu_tags i18n static %}
+{% load home_tags menu_tags i18n static wagtailcore_tags %}
 
 <footer>
     <div class="footer-top">
@@ -9,19 +9,15 @@
               <div class="col-6 col-sm-4">
                 <h5 class="footer__col-title my-3">{% translate "Get to know us" %}</h5>
                 <ul class="footer-menu list-unstyled">
-                  <li>
-                    <a href=""></a>
-                  </li>
+                  {% flat_menu 'footer_menu_1' template="components/menus/menu_footer.html" %} 
                 </ul>
               </div> 
               <div class="col-6 col-sm-4">
                 <h5 class="footer__col-title my-3">{% translate "Legal" %}</h5>
                 <ul class="footer-menu list-unstyled">
-                  <li>
-                    <a href=""></a>
-                  </li> 
+                  {% flat_menu 'footer_menu_2' template="components/menus/menu_footer.html" %}
                 </ul>
-              </div>
+              </div>  
             </div>
           </div>
           <div class="col-12 col-md-9 col-lg-5 order-1 order-lg-2">
@@ -62,7 +58,7 @@
       <div class="container-fluid">
         <div class="row align-items-end p-3">
           <div class="col">
-            <p class="font-size-12">{% translate "© Copyright 2022 African Cities Lab. All rights reserved. " %}</p>
+            <p class="font-size-12">© Copyright {% now 'Y' %} {% translate "African Cities Lab. All rights reserved. " %}</p>
           </div>
           <div class="col d-flex justify-content-sm-end">
             <a href="">
