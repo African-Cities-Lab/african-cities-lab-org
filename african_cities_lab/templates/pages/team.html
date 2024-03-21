@@ -1,40 +1,35 @@
 {% extends "base.html" %}
+
 {% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+
 {% block meta_tag %}
   {% meta_tags %}
-{% endblock %}
-
+{% endblock meta_tag %}
 {% block content %}
-
-    {% image self.banner_image original as img %}
-    <section class="page-banner" 
-            style="background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), 
-                url({{ img.url }});">
-        <div class="container-fluid">
-            <div class="row py-5">
-                <div class="col-12 col-lg-6 col-md-10">
-                    <div class="position-relative h1">
-                        {{ page.title }}
-                        <span class="dash-accent"></span>
-                    </div>
-                </div>
-            </div>
+  {% image self.banner_image original as img %}
+  <section class="page-banner"
+           style="background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})">
+    <div class="container-fluid">
+      <div class="row py-5">
+        <div class="col-12 col-lg-6 col-md-10">
+          <div class="position-relative h1">
+            {{ page.title }}
+            <span class="dash-accent"></span>
+          </div>
         </div>
-        <div class="acl-sharpes bottom-right__sharpe">
-            <img alt="icon" 
-                 class="d-none d-lg-block" 
-                 width="400" 
-                 height="205" 
-                 src="{% static 'images/assets/outline-sharpe-bottom.svg' %}"/>
-        </div>
-    </section>
-
-
-
-    <!-- Start Partners Area-->
-    <section class="our-partners">
-        {% include "components/partners_section.html" %}
-    </section>
-    <!-- End Partners Area -->
-
+      </div>
+    </div>
+    <div class="acl-sharpes bottom-right__sharpe">
+      <img alt="icon"
+           class="d-none d-lg-block"
+           width="400"
+           height="205"
+           src="{% static 'images/assets/outline-sharpe-bottom.svg' %}" />
+    </div>
+  </section>
+  <!-- Start Partners Area-->
+  <section class="our-partners">
+    {% include "components/partners_section.html" %}
+  </section>
+  <!-- End Partners Area -->
 {% endblock content %}

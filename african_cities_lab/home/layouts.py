@@ -1,10 +1,6 @@
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.admin.panels import (
-    FieldPanel,
-    MultiFieldPanel,
-    InlinePanel,
-)
+
 
 class AgendaLayout(blocks.StructBlock):
     session = blocks.ListBlock(
@@ -14,7 +10,6 @@ class AgendaLayout(blocks.StructBlock):
                 ("session_title", blocks.CharBlock(required=False)),
                 ("language", blocks.CharBlock(required=False)),
                 ("moderator_name", blocks.CharBlock(required=False)),
-                
                 (
                     "timeline",
                     blocks.ListBlock(
@@ -23,12 +18,19 @@ class AgendaLayout(blocks.StructBlock):
                                 ("time", blocks.CharBlock(required=False)),
                                 ("title", blocks.RichTextBlock(equired=False)),
                                 ("description", blocks.RichTextBlock(required=False)),
-                                ("speakers",
+                                (
+                                    "speakers",
                                     blocks.ListBlock(
                                         blocks.StructBlock(
                                             [
-                                                ("name", blocks.CharBlock(required=False)),
-                                                ("designation", blocks.CharBlock(required=False)),
+                                                (
+                                                    "name",
+                                                    blocks.CharBlock(required=False),
+                                                ),
+                                                (
+                                                    "designation",
+                                                    blocks.CharBlock(required=False),
+                                                ),
                                             ]
                                         ),
                                     ),
@@ -40,10 +42,11 @@ class AgendaLayout(blocks.StructBlock):
             ],
         ),
     )
+
     class Meta:
         template = "components/agenda_layout.html"
-        
-        
+
+
 class SpeakerLayout(blocks.StructBlock):
     speakers = blocks.ListBlock(
         blocks.StructBlock(
@@ -75,4 +78,3 @@ class SpeakerLayout(blocks.StructBlock):
 
     class Meta:
         template = "components/speaker_layout.html"
-

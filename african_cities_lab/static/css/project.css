@@ -195,9 +195,9 @@ select {
  */
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
 }
 
@@ -206,9 +206,9 @@ button,
  */
 
 button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -218,9 +218,9 @@ button::-moz-focus-inner,
  */
 
 button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
@@ -269,8 +269,8 @@ textarea {
  * 2. Remove the padding in IE 10.
  */
 
-[type="checkbox"],
-[type="radio"] {
+[type='checkbox'],
+[type='radio'] {
   box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
 }
@@ -279,8 +279,8 @@ textarea {
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -289,7 +289,7 @@ textarea {
  * 2. Correct the outline style in Safari.
  */
 
-[type="search"] {
+[type='search'] {
   -webkit-appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
@@ -298,7 +298,7 @@ textarea {
  * Remove the inner padding in Chrome and Safari on macOS.
  */
 
-[type="search"]::-webkit-search-decoration {
+[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -355,125 +355,147 @@ template {
  * ----------------------------------------------------------------------------
 */
 @font-face {
-  font-family: "Biko";
-  src: local("Biko Regular"), local("Biko-Regular"),
-    url("../fonts/biko/Biko_Regular.otf") format("opentype");
+  font-family: 'Biko';
+  src:
+    local('Biko Regular'),
+    local('Biko-Regular'),
+    url('../fonts/biko/Biko_Regular.otf') format('opentype');
   font-style: normal;
   font-weight: normal;
   font-display: auto;
 }
 @font-face {
-  font-family: "Biko";
-  src: local("Biko Bold"), local("Biko-Bold"),
-    url("../fonts/biko/Biko_Bold.otf") format("opentype");
+  font-family: 'Biko';
+  src:
+    local('Biko Bold'),
+    local('Biko-Bold'),
+    url('../fonts/biko/Biko_Bold.otf') format('opentype');
   font-style: normal;
   font-weight: bold;
   font-display: auto;
 }
 @font-face {
-  font-family: "Biko";
-  src: local("Biko-Black"), local("Biko-Black"),
-    url("../fonts/biko/Biko_Black.otf") format("opentype");
+  font-family: 'Biko';
+  src:
+    local('Biko-Black'),
+    local('Biko-Black'),
+    url('../fonts/biko/Biko_Black.otf') format('opentype');
   font-style: normal;
   font-weight: 800;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-Light.eot");
-  src: local("Gotham Light"), local("Gotham-Light"),
-    url("../fonts/gotham/Gotham-Light.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-Light.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-Light.woff") format("woff"),
-    url("../fonts/gotham/Gotham-Light.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-Light.eot');
+  src:
+    local('Gotham Light'),
+    local('Gotham-Light'),
+    url('../fonts/gotham/Gotham-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-Light.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-Light.woff') format('woff'),
+    url('../fonts/gotham/Gotham-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-LightItalic.eot");
-  src: local("Gotham Light Italic"), local("Gotham-LightItalic"),
-    url("../fonts/gotham/Gotham-LightItalic.eot?#iefix")
-      format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-LightItalic.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-LightItalic.woff") format("woff"),
-    url("../fonts/gotham/Gotham-LightItalic.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-LightItalic.eot');
+  src:
+    local('Gotham Light Italic'),
+    local('Gotham-LightItalic'),
+    url('../fonts/gotham/Gotham-LightItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-LightItalic.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-LightItalic.woff') format('woff'),
+    url('../fonts/gotham/Gotham-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-Book.eot");
-  src: local("Gotham Book"), local("Gotham-Book"),
-    url("../fonts/gotham/Gotham-Book.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-Book.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-Book.woff") format("woff"),
-    url("../fonts/gotham/Gotham-Book.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-Book.eot');
+  src:
+    local('Gotham Book'),
+    local('Gotham-Book'),
+    url('../fonts/gotham/Gotham-Book.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-Book.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-Book.woff') format('woff'),
+    url('../fonts/gotham/Gotham-Book.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-BookItalic.eot");
-  src: local("Gotham Book Italic"), local("Gotham-BookItalic"),
-    url("../fonts/gotham/Gotham-BookItalic.eot?#iefix")
-      format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-BookItalic.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-BookItalic.woff") format("woff"),
-    url("../fonts/gotham/Gotham-BookItalic.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-BookItalic.eot');
+  src:
+    local('Gotham Book Italic'),
+    local('Gotham-BookItalic'),
+    url('../fonts/gotham/Gotham-BookItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-BookItalic.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-BookItalic.woff') format('woff'),
+    url('../fonts/gotham/Gotham-BookItalic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-Medium.eot");
-  src: local("Gotham Medium"), local("Gotham-Medium"),
-    url("../fonts/gotham/Gotham-Medium.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-Medium.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-Medium.woff") format("woff"),
-    url("../fonts/gotham/Gotham-Medium.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-Medium.eot');
+  src:
+    local('Gotham Medium'),
+    local('Gotham-Medium'),
+    url('../fonts/gotham/Gotham-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-Medium.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-Medium.woff') format('woff'),
+    url('../fonts/gotham/Gotham-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-MediumItalic.eot");
-  src: local("Gotham Medium Italic"), local("Gotham-MediumItalic"),
-    url("../fonts/gotham/Gotham-MediumItalic.eot?#iefix")
-      format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-MediumItalic.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-MediumItalic.woff") format("woff"),
-    url("../fonts/gotham/Gotham-MediumItalic.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-MediumItalic.eot');
+  src:
+    local('Gotham Medium Italic'),
+    local('Gotham-MediumItalic'),
+    url('../fonts/gotham/Gotham-MediumItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-MediumItalic.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-MediumItalic.woff') format('woff'),
+    url('../fonts/gotham/Gotham-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-Bold.eot");
-  src: local("Gotham Bold"), local("Gotham-Bold"),
-    url("../fonts/gotham/Gotham-Bold.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-Bold.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-Bold.woff") format("woff"),
-    url("../fonts/gotham/Gotham-Bold.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-Bold.eot');
+  src:
+    local('Gotham Bold'),
+    local('Gotham-Bold'),
+    url('../fonts/gotham/Gotham-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-Bold.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-Bold.woff') format('woff'),
+    url('../fonts/gotham/Gotham-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: auto;
 }
 @font-face {
-  font-family: "Gotham";
-  src: url("../fonts/gotham/Gotham-BoldItalic.eot");
-  src: local("Gotham Bold Italic"), local("Gotham-BoldItalic"),
-    url("../fonts/gotham/Gotham-BoldItalic.eot?#iefix")
-      format("embedded-opentype"),
-    url("../fonts/gotham/Gotham-BoldItalic.woff2") format("woff2"),
-    url("../fonts/gotham/Gotham-BoldItalic.woff") format("woff"),
-    url("../fonts/gotham/Gotham-BoldItalic.ttf") format("truetype");
+  font-family: 'Gotham';
+  src: url('../fonts/gotham/Gotham-BoldItalic.eot');
+  src:
+    local('Gotham Bold Italic'),
+    local('Gotham-BoldItalic'),
+    url('../fonts/gotham/Gotham-BoldItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/gotham/Gotham-BoldItalic.woff2') format('woff2'),
+    url('../fonts/gotham/Gotham-BoldItalic.woff') format('woff'),
+    url('../fonts/gotham/Gotham-BoldItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
   font-display: auto;
@@ -489,7 +511,7 @@ html {
 }
 
 body {
-  font-family: "Gotham", "Calibri", sans-serif;
+  font-family: 'Gotham', 'Calibri', sans-serif;
   color: #000;
   font-size: 14px;
   overflow-x: hidden;
@@ -511,14 +533,14 @@ h4,
 .h4,
 h5,
 .h5 h6 {
-  font-family: "Biko", "Calibri", sans-serif;
+  font-family: 'Biko', 'Calibri', sans-serif;
   font-weight: 700;
   margin: 0;
   padding: 0;
 }
 
 .xxl-title-font-family {
-  font-family: "Haudrey", "Biko", sans-serif;
+  font-family: 'Haudrey', 'Biko', sans-serif;
 }
 
 .xxl-title {
@@ -552,7 +574,7 @@ input,
 select,
 optgroup,
 textarea {
-  font-family: "Gotham", "Calibri", sans-serif;
+  font-family: 'Gotham', 'Calibri', sans-serif;
   color: #000;
   font-size: 14px !important;
   font-weight: 400;
@@ -729,14 +751,14 @@ a:hover {
   font-size: 1.3rem;
 }
 .bg_primary {
-  background-color: #BE3712 !important;
+  background-color: #be3712 !important;
 }
 .bg_secondary {
   background-color: #402781 !important;
 }
 .bg_tertiary {
-  background-color: #1CA199 !important;
- }
+  background-color: #1ca199 !important;
+}
 .btn-arrow > i {
   margin-left: 23px;
 }
@@ -780,7 +802,7 @@ a:hover {
   border-top-right-radius: 0.25rem !important;
   border-bottom-right-radius: 0.25rem !important;
 }
-.append-form button[type="submit"] {
+.append-form button[type='submit'] {
   width: 55px;
   height: 55px;
   color: #fff;
@@ -789,7 +811,7 @@ a:hover {
   transition: all ease 0.4s;
   text-decoration: none;
 }
-.append-form button[type="submit"]:hover {
+.append-form button[type='submit']:hover {
   color: #be3712 !important;
   background: #fff !important;
   border-left: 1px solid #be3712;
@@ -813,7 +835,9 @@ a:hover {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   height: 55px;
 }
 .newsletter-widget .input-group-append span.btn {
@@ -918,7 +942,7 @@ a:hover {
       rgba(255, 255, 255, 0.45),
       rgba(255, 255, 255, 0.45)
     ),
-    url("../images/assets/section-pattern.png");
+    url('../images/assets/section-pattern.png');
   background-position: top left;
   background-repeat: repeat-y;
   background-size: 100% auto;
@@ -1139,7 +1163,7 @@ a.novashare-button {
   min-height: 465px;
   color: #fff;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 .homepage-slider .swiper-button-next,
 .homepage-slider .swiper-button-prev {
@@ -1150,15 +1174,15 @@ a.novashare-button {
 }
 .homepage-slider .swiper-button-next:after,
 .homepage-slider .swiper-rtl .swiper-button-prev:after {
-  content: "\f105";
-  font-family: "Font Awesome 5 Free";
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   font-size: 26px;
 }
 .homepage-slider .swiper-button-prev:after,
 .homepage-slider .swiper-rtl .swiper-button-next:after {
-  content: "\f104";
-  font-family: "Font Awesome 5 Free";
+  content: '\f104';
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   font-size: 26px;
 }
@@ -1187,7 +1211,7 @@ a.novashare-button {
   border: 1px solid #be3712;
 }
 .main-sponsor:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 12px;
   left: 25px;
@@ -1196,7 +1220,7 @@ a.novashare-button {
   background: #e9e9e9;
 }
 .topic-wrapper .topic-item:before {
-  content: "";
+  content: '';
   position: absolute;
   display: flex;
   width: 5px;
@@ -1272,7 +1296,8 @@ a.novashare-button {
   transition: 0.5s;
   width: 500px;
   min-height: 402px;
-  box-shadow: 0 1px 10px 0 rgb(0 0 0 / 13%),
+  box-shadow:
+    0 1px 10px 0 rgb(0 0 0 / 13%),
     inset 0 0 0 1px rgb(255 255 255 / 75%);
 }
 .moocsCard-title > a {
@@ -1310,7 +1335,7 @@ a.novashare-button {
   width: 95px;
   height: auto;
   object-fit: contain;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 .moocs-card .moocsCard-university .university__divider {
   height: 50px;
@@ -1398,7 +1423,8 @@ a.novashare-button {
   -o-transition: 0.3s ease;
   transition: 0.3s ease;
 }
-.event-meta__card, .formation-meta__card {
+.event-meta__card,
+.formation-meta__card {
   position: relative;
   display: inline-block;
   padding-top: 4px;
@@ -1415,22 +1441,22 @@ a.novashare-button {
   width: 155px;
 }
 .formation-meta__card .formation-date {
-  display: grid; 
-  grid-template-columns: 60px 30px 60px; 
+  display: grid;
+  grid-template-columns: 60px 30px 60px;
   align-items: center;
 }
 .formation-date__wrapper {
-  display: grid; 
+  display: grid;
   grid-template-columns: auto 48px auto;
   align-items: center;
 }
 .formation-date__wrapper .start-date,
 .formation-date__wrapper .end-date {
-    display: flex; 
-    align-items: center;
-    padding: 8px;
-    font-size: 20px;
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: 500;
 }
 .formation-meta__card .formation-date .start-date,
 .formation-meta__card .formation-date .end-date {
@@ -1485,12 +1511,13 @@ a.novashare-button {
 .post-content__body p {
   margin-bottom: 1rem !important;
 }
-.event-item, .formation-item {
+.event-item,
+.formation-item {
   padding-bottom: 30px;
   overflow: hidden;
   margin: 30px 0;
 }
-.event-item .event-item__img, 
+.event-item .event-item__img,
 .formation-item .formation-item__img {
   vertical-align: top;
   display: block;
@@ -1543,16 +1570,16 @@ a.novashare-button {
   font-weight: 500;
 }
 .angle__pointer:before {
-  content: "";
-  background: url("../images/assets/small-pointer.svg") no-repeat center;
+  content: '';
+  background: url('../images/assets/small-pointer.svg') no-repeat center;
   background-size: contain;
   height: 28px;
   width: 28px;
   margin-right: 12px;
 }
 .double-angle__pointer:before {
-  content: "";
-  background: url("../images/assets/big-pointer.svg") no-repeat center;
+  content: '';
+  background: url('../images/assets/big-pointer.svg') no-repeat center;
   background-size: contain;
   height: 28px;
   width: 28px;
@@ -1565,7 +1592,7 @@ a.novashare-button {
   margin-right: 16px;
 }
 .speakers-card .card-header::before {
-  content: "";
+  content: '';
   position: absolute;
   background: #402781;
   background: -webkit-gradient(
@@ -1581,7 +1608,9 @@ a.novashare-button {
   -webkit-transition: -webkit-transform 0.4s ease-in;
   transition: -webkit-transform 0.4s ease-in;
   transition: transform 0.4s ease-in;
-  transition: transform 0.4s ease-in, -webkit-transform 0.4s ease-in;
+  transition:
+    transform 0.4s ease-in,
+    -webkit-transform 0.4s ease-in;
   height: 100%;
   width: 100%;
   -webkit-transform: scaleY(0);
@@ -1663,7 +1692,7 @@ ul.event-meta {
   margin-right: 2rem;
 }
 .event-meta li:before {
-  content: "";
+  content: '';
   display: inline-block;
   background-color: #be3712;
   height: 8px;
@@ -1703,8 +1732,8 @@ ul.event-meta {
   border-bottom: 2px solid #dee2e6;
 }
 .speaker-ico:before {
-  content: "";
-  background: url("../images/assets/speaker-ico.svg") no-repeat center;
+  content: '';
+  background: url('../images/assets/speaker-ico.svg') no-repeat center;
   background-size: contain;
   display: inline-block;
   height: 16px;
@@ -1713,8 +1742,8 @@ ul.event-meta {
   margin-right: 3px;
 }
 .moderator-ico:before {
-  content: "";
-  background: url("../images/assets/moderator-ico.png") no-repeat center;
+  content: '';
+  background: url('../images/assets/moderator-ico.png') no-repeat center;
   background-size: contain;
   display: inline-block;
   height: 22px;
@@ -1733,11 +1762,11 @@ ul.event-meta {
   width: 100%;
   z-index: 3;
   text-align: center;
-  padding: .75rem 0;
+  padding: 0.75rem 0;
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
   background-color: rgba(25, 255, 255, 0.2);
- }
+}
 
 /*----------------------------------------*/
 /*  ACC 2023 Pages
@@ -1785,7 +1814,7 @@ ul.event-meta {
   height: 100%;
   width: 55px;
   background-color: transparent;
-  background-image: url("../images/assets/subnavOverlay.png");
+  background-image: url('../images/assets/subnavOverlay.png');
   background-size: 100%;
   background-repeat: no-repeat;
   text-indent: -9999px;
@@ -1808,7 +1837,7 @@ ul.event-meta {
 }
 .subnavigation a:after {
   display: block;
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: -2px;
@@ -1821,7 +1850,9 @@ ul.event-meta {
   -webkit-transition: -webkit-transform 0.2s ease;
   transition: -webkit-transform 0.2s ease;
   transition: transform 0.2s ease;
-  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    -webkit-transform 0.2s ease;
   background-color: #000;
 }
 .visuallyhidden {
@@ -1855,9 +1886,9 @@ ul.event-meta {
   max-width: 685px;
 }
 .countdown-timer__widget .timer-container:not(:first-child):after {
-  content: "";
+  content: '';
   position: absolute;
-  background: url("../images/assets/colon_white.svg") no-repeat center;
+  background: url('../images/assets/colon_white.svg') no-repeat center;
   background-size: contain;
   width: 12px;
   height: 34px;
@@ -2024,8 +2055,8 @@ ul.event-meta {
 #ACC-highlights .accordion-button::after {
   width: 1.25rem;
   height: 1.25rem;
-  content: "\f078";
-  font-family: "Font Awesome 5 Free";
+  content: '\f078';
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   font-size: 16px;
   background-image: unset;
@@ -2143,7 +2174,7 @@ ul.event-meta {
   color: #fff !important;
 }
 .hover-bg {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -2186,7 +2217,7 @@ ul.event-meta {
   left: -1rem;
   width: 0.5rem;
   height: 100%;
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 5rem;
 }
@@ -2198,7 +2229,7 @@ ul.event-meta {
   left: -2rem;
   width: 0.5rem;
   height: 3rem;
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 5rem;
   border: 0.1rem solid #ecf1f9;
@@ -2261,7 +2292,7 @@ ul.event-meta {
 #acc-program .nav-tabs .nav-item .nav-link.active::after {
   left: 0;
   bottom: 0;
-  content: "";
+  content: '';
   background: #be3712;
   width: 100%;
   height: 3px;
@@ -2295,7 +2326,7 @@ ul.event-meta {
   padding: 0 25px 0 0;
 }
 #acc-program-content .program-list .program-hour-text::after {
-  content: "";
+  content: '';
   background: #402781;
   width: 16px;
   height: 16px;
@@ -2338,7 +2369,7 @@ ul.event-meta {
 }
 .acl-conference {
   background-position: bottom center;
-  background-size: cover; 
+  background-size: cover;
   position: relative;
   background-repeat: no-repeat;
   min-height: 465px;
@@ -2372,7 +2403,7 @@ ul.event-meta {
   padding-top: 6px;
 }
 .timeline-wrapper .timeline-container .timeline-step:before {
-  content: "";
+  content: '';
   position: absolute;
   height: 36px;
   border-right: 2px dashed #cdcdcd;
@@ -2579,17 +2610,17 @@ h2.bannner__add-text {
   box-shadow: 0 3px 6px -3px rgb(0 0 0 / 50%);
 }
 .mooc-status {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    padding: 2px 4px;
-    min-width: 47px;
-    background-color: #BE3712;
-    font-size: 15px;
-    text-align: center;
-    color: #fff;
-    text-transform: uppercase;
-    border-radius: 4px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 2px 4px;
+  min-width: 47px;
+  background-color: #be3712;
+  font-size: 15px;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 4px;
 }
 /*----------------------------------------*/
 /*  Footer
@@ -2638,7 +2669,7 @@ h2.bannner__add-text {
   top: 1px;
   bottom: 0;
   margin: auto;
-  content: "";
+  content: '';
   background: #5f5e6f;
   width: 5px;
   height: 5px;
@@ -2734,7 +2765,7 @@ h2.bannner__add-text {
   }
   .formation-meta__card .formation-date .start-date,
   .formation-meta__card .formation-date .end-date {
-    display: flex; 
+    display: flex;
     align-items: center;
   }
 }
@@ -2914,9 +2945,10 @@ h2.bannner__add-text {
   }
 }
 @media (min-width: 992px) {
-  .register-link-lg, .floating-navbar {
+  .register-link-lg,
+  .floating-navbar {
     display: none;
-  } 
+  }
   .right-header .register-link {
     display: inline-block;
   }
@@ -3137,7 +3169,7 @@ h2.bannner__add-text {
   .container-fluid {
     padding-right: 85px;
     padding-left: 85px;
-  } 
+  }
   #main-nav > .container-fluid {
     padding-right: 25px;
     padding-left: 25px;
