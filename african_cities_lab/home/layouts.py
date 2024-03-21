@@ -42,8 +42,7 @@ class AgendaLayout(blocks.StructBlock):
     )
     class Meta:
         template = "components/agenda_layout.html"
-        
-        
+           
 class SpeakerLayout(blocks.StructBlock):
     speakers = blocks.ListBlock(
         blocks.StructBlock(
@@ -72,7 +71,5 @@ class SpeakerLayout(blocks.StructBlock):
             ],
         ),
     )
-
     class Meta:
         template = "components/speaker_layout.html"
-

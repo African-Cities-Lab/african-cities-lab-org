@@ -80,7 +80,7 @@
                                                 {% for social in speaker.value.social_links %}
                                                 <li class="list-inline-item">
                                                     <a href="{{ social.value.profile_link }}">
-                                                        <i class="fab fa-{{ social.value.social_network }}-in"></i>
+                                                        <i class="{{ social.value.fa_class }}"></i>
                                                     </a>
                                                 </li>
                                                 {% endfor %}

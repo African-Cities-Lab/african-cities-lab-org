@@ -13,12 +13,13 @@ from wagtail.admin.panels import (
 from wagtail.fields import RichTextField, StreamField 
 
 from wagtail import blocks
+from wagtail.images.blocks import ImageChooserBlock
 
 from wagtailmetadata.models import MetadataPageMixin
 
 from african_cities_lab.home.layouts import (
     AgendaLayout, 
-    SpeakerLayout,
+    SpeakerLayout, 
 )
 
 class HomePageCarouselImages(Orderable):
@@ -55,6 +56,7 @@ class HomePage(MetadataPageMixin, Page):
         "home.FormationsIndexPage",
         "home.ContestPage",
         "home.ContactPage",
+        "home.TeamPage",
         "home.FlatPage",
     ]
     
@@ -185,7 +187,6 @@ class ContactPage(MetadataPageMixin, Page):
     class Meta:
         verbose_name = "Contact Page" 
 
-
 class TeamPage(MetadataPageMixin, Page): 
     """TeamPage page model."""
     
@@ -199,10 +200,82 @@ class TeamPage(MetadataPageMixin, Page):
         related_name="+"
     )
     
+    overview_section = StreamField(
+        [
+            ("overview", blocks.StructBlock([
+                ("image", ImageChooserBlock()),
+                ("heading", blocks.CharBlock(required=False)),
+                ("paragraph", blocks.RichTextBlock(required=False)),
+            ])),
+        ], min_num=1, max_num=1,
+        blank=True,
+        use_json_field=True
+    )
+    
+    board_directors_section = StreamField(
+        [
+            ("board", blocks.StructBlock([
+                ("heading", blocks.CharBlock(required=False)),
+                ("sub_paragraph", blocks.RichTextBlock(required=False)), 
+                ("board_director", blocks.ListBlock(blocks.StructBlock(
+                            [ 
+                                ("image", ImageChooserBlock(required=False)),
+                                ("name", blocks.CharBlock(required=False)),
+                                ("function", blocks.CharBlock(required=False),),
+                                ("social_links", blocks.ListBlock(
+                                        blocks.StructBlock(
+                                            [
+                                                ("fa_class", blocks.CharBlock(required=False)),
+                                                ("profile_link", blocks.CharBlock(required=False)),
+                                            ]
+                                        ),
+                                    ),
+                                ), 
+                            ],
+                        ),
+                    )
+                ) 
+            ])), 
+        ], min_num=1, max_num=1,
+        blank=True,
+        use_json_field=True
+    )
+    
+    collaborators_section = StreamField(
+        [
+            ("collaborators", blocks.StructBlock([
+                ("heading", blocks.CharBlock(required=False)),
+                ("sub_paragraph", blocks.RichTextBlock(required=False)),
+                ("collaborator", blocks.ListBlock(blocks.StructBlock(
+                            [ 
+                                ("name", blocks.CharBlock(required=False)),
+                                ("function", blocks.CharBlock(required=False)),
+                                ("social_links", blocks.ListBlock(
+                                        blocks.StructBlock(
+                                            [
+                                                ("fa_class", blocks.CharBlock(required=False)),
+                                                ("profile_link", blocks.CharBlock(required=False)),
+                                            ]
+                                        ),
+                                    ),
+                                ), 
+                            ],
+                        ),
+                    )
+                )
+            ])), 
+        ], min_num=1, max_num=1,
+        blank=True,
+        use_json_field=True
+    )
+    
     content_panels = Page.content_panels + [
         MultiFieldPanel([ 
             FieldPanel("banner_image"), 
-        ], heading="Hero section"), 
+        ], heading="Hero section"),
+        FieldPanel("overview_section"),
+        FieldPanel("board_directors_section"),
+        FieldPanel("collaborators_section")
     ]
     
     parent_page_type = [

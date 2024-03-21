@@ -1636,7 +1636,7 @@ a.novashare-button {
 .mdl-speaker-social-list li > a {
   margin-right: 1rem;
   color: #be3712 !important;
-  font-size: 28px;
+  font-size: 24px;
 }
 .mdl-speaker-avatar > img {
   width: 100%;
@@ -1721,6 +1721,29 @@ ul.event-meta {
   width: 22px;
   vertical-align: 0;
   margin-right: 3px;
+}
+
+.team-box {
+  border: 1px solid #000; 
+  margin-bottom: 60px; 
+  height: 550px
+}
+.team-box .director-img > img {
+  object-fit: cover;
+  height: 242px;
+  width: 312px
+}
+.team-box .box-container {
+  padding: 40px 30px; 
+  font-size: 16px;
+}
+.team-box.cooperator {
+  border: none; 
+  height: auto; 
+  margin-bottom: 40px;
+}
+.team-box.cooperator .box-container {
+  padding: 0;
 }
 
 /*----------------------------------------*/
