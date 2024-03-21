@@ -1,12 +1,28 @@
 {% extends "base.html" %}
 
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags %}
+
 {% block title %}
-  Server Error
+    500  - African Cities Lab
 {% endblock title %}
+
 {% block content %}
-  <h1>Ooops!!! 500</h1>
-  <h3>Looks like something went wrong!</h3>
-  <p>
-    We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.
-  </p>
+    <section class="404-page py-5">
+        <div class="container py-3 p-md-5">
+            <div class="row align-items-center justify-content-lg-between">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <h2>{% translate "Oops... Internal Server Error" %}</h2>
+                    <p class="py-3">
+                        {% translate "We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing." %}
+                    </p>
+                    <div class="my-5">
+                        <a href="{% localized_slugurl 'home' %}" class="btn btn__primary btn__big">{% translate "Go to homepage" %}</a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 py-5 text-center">
+                    <img alt="Internal Server Error" src="{% static 'images/assets/500.png' %}" width="510" height="378">
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock content %}

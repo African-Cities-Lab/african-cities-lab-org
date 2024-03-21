@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+{% block meta_tag %}
+  {% meta_tags %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="page-banner bg_primary">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-12 col-lg-6 col-md-10">
+                    <div class="position-relative h1">
+                        {{ page.title }}
+                        <span class="dash-accent__"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="acl-sharpes bottom-right__sharpe">
+            <img alt="icon" 
+                 class="d-none d-lg-block" 
+                 width="400" 
+                 height="205" 
+                 src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}"/>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container p-md-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 page-content"> 
+                    {{ page.body|richtext }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start Partners Area-->
+        <section class="our-partners">
+                {% include "components/partners_section.html" %}
+        </section>
+    <!-- End Partners Area -->
+
+{% endblock content %}

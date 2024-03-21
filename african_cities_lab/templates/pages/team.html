@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+{% block meta_tag %}
+  {% meta_tags %}
+{% endblock %}
+
+{% block content %}
+
+    {% image self.banner_image original as img %}
+    <section class="page-banner" 
+            style="background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), 
+                url({{ img.url }});">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-12 col-lg-6 col-md-10">
+                    <div class="position-relative h1">
+                        {{ self.title }}
+                        <span class="dash-accent"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="acl-sharpes bottom-right__sharpe">
+            <img alt="icon" 
+                 class="d-none d-lg-block" 
+                 width="400" 
+                 height="205" 
+                 src="{% static 'images/assets/outline-sharpe-bottom.svg' %}"/>
+        </div>
+    </section>
+
+    {% if self.overview_section %}
+        <section class="overview-section p-lg-5">
+            <div class="container-xl">
+                {% for block in self.overview_section %} 
+                    {% if block.block_type == "overview" %}
+                        <div class="row justify-content-around">
+                            <div class="col-12 col-md-3 col-lg-4 p-5 p-md-3 order-1 order-md-0">
+                                {% image block.value.image original  as img %} 
+                                <img class="about-mission__img" 
+                                    width="408" 
+                                    height="500" 
+                                    alt="acl-team" 
+                                    src="{{ img.url }}"/>
+                            </div>
+                            <div class="col-12 col-md-9 col-lg-8 order-0 order-md-1 pt-5 px-lg-5">
+                                <h2 class="section-title mb-3">{{block.value.heading}}</h2>
+                                <div class="py-3 font-size-16 text-justify"> 
+                                    {{block.value.paragraph}}
+                                </div> 
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    {% if self.board_directors_section %}
+        {% for block in self.board_directors_section %}
+            {% if block.block_type == "board" %}
+                <section class="boards-section">
+                    <div class="container p-md-5"> 
+                        <div class="row d-flex justify-content-center pt-5 pt-md-0">
+                            <div class="col-12 col-lg-10">
+                                <h2 class="section-title text-center">{{block.value.heading}}</h2> 
+                                <div class="font-size-16 py-3"> 
+                                    {{block.value.sub_paragraph}}
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="container-xl">
+                        {% if block.value.board_director %}
+                            <div class="row mb-5">
+                                {% for director in block.value.board_director %}
+                                    <div class="col-xl-3 col-md-4">
+                                        <div class="team-box">
+                                            {% image director.image original  as img %} 
+                                            <div class="director-img">
+                                                <img
+                                                    width="312" 
+                                                    height="242" 
+                                                    alt="{{ img.alt }}" 
+                                                    src="{{ img.url }}" /> 
+                                            </div> 
+                                            <div class="box-container">
+                                                <h4 class="name">{{director.name}}</h4>
+                                                <p class="my-2">{{director.function}}</p> 
+                                                {% if director.social_links %}
+                                                    <ul class="mdl-speaker-social-list list-inline m-0">
+                                                        {% for social in director.social_links %}
+                                                            <li class="list-inline-item" target="_blank">
+                                                                <a href="{{ social.profile_link }}">
+                                                                    <i class="{{ social.fa_class }}"></i>
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %} 
+                                            </div> <!-- .box-container -->
+                                        </div>
+                                    </div>
+                                {% endfor %} 
+                            </div> 
+                        {% endif %}
+                    </div>
+                </section>  
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    
+    {% if self.collaborators_section %}
+        {% for block in self.collaborators_section %} 
+            {% if block.block_type == "collaborators" %}
+                <section class="collaborators-section">
+                    <div class="container p-md-5">
+                        <div class="row d-flex justify-content-center pt-5 pt-md-0">
+                            <div class="col-12 col-lg-10">
+                                <h3 class="section-title text-center">{{block.value.heading}}</h3> 
+                                <div class="font-size-16 py-3"> 
+                                    {{block.value.sub_paragraph}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        {% if block.value.collaborator %}
+                            <div class="row p-md-5">
+                                {% for collaborator in block.value.collaborator %}
+                                    <div class="col-sm-4">
+                                        <div class="team-box cooperator">
+                                            <div class="box-container">
+                                                <h4 class="name">{{collaborator.name}}</h4>
+                                                <p class="function">{{collaborator.function}}</p>
+                                                {% if collaborator.social_links %}
+                                                    <ul class="mdl-speaker-social-list list-inline m-0">
+                                                        {% for social in collaborator.social_links %}
+                                                            <li class="list-inline-item" target="_blank">
+                                                                <a href="{{ social.profile_link }}">
+                                                                    <i class="{{ social.fa_class }}"></i>
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %} 
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <!-- Start Partners Area-->
+    <section class="our-partners">
+        {% include "components/partners_section.html" %}
+    </section>
+    <!-- End Partners Area -->
+
+{% endblock content %}
