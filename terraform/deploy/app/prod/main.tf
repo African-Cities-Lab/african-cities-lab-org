@@ -9,7 +9,7 @@ data "terraform_remote_state" "base" {
 }
 
 module "app" {
-  source = "github.com/martibosch/african-cities-lab-org//terraform/modules/app"
+  source = "github.com/African-Cities-Lab/african-cities-lab-org//terraform/modules/app?ref=fix-tf-versions"
   env    = "prod"
 
   resource_prefix = var.resource_prefix
