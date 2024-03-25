@@ -32,11 +32,11 @@ runs:
   steps:
     - name: build the stack
       shell: bash
-      run: docker-compose ${{ inputs.compose-config-args }} up -d --build
+      run: docker compose ${{ inputs.compose-config-args }} up -d --build
 
     - name: tear down the stack
       shell: bash
-      run: docker-compose ${{ inputs.compose-config-args }} down
+      run: docker compose ${{ inputs.compose-config-args }} down
 
     - name: setup terraform
       uses: hashicorp/setup-terraform@v1
