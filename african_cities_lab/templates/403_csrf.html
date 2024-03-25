@@ -5,27 +5,25 @@
 {% block title %}
   Forbidden (403)
 {% endblock title %}
-
 {% block content %}
-    <section class="404-page py-5">
-        <div class="container py-3 p-md-5">
-            <div class="row align-items-center justify-content-lg-between">
-                <div class="col-12 col-md-6 col-lg-4 py-5 text-center"> 
-                    <div class="font-size-4em py-3">
-                        {% translate "Forbidden (403)" %}
-                    </div>
-                    <p>
-                      {% if exception %}
-                        {{ exception }}
-                      {% else %}
-                        {% translate "You're not allowed to access this page." %}
-                      {% endif %}
-                    </p> 
-                    <div class="my-5">
-                        <a href="{% localized_slugurl 'home' %}" class="btn btn__primary btn__big">{% translate "Go to homepage" %}</a>
-                    </div>
-                </div> 
-            </div>
+  <section class="404-page py-5">
+    <div class="container py-3 p-md-5">
+      <div class="row align-items-center justify-content-lg-between">
+        <div class="col-12 col-md-6 col-lg-4 py-5 text-center">
+          <div class="font-size-4em py-3">{% translate "Forbidden (403)" %}</div>
+          <p>
+            {% if exception %}
+              {{ exception }}
+            {% else %}
+              {% translate "You're not allowed to access this page." %}
+            {% endif %}
+          </p>
+          <div class="my-5">
+            <a href="{% localized_slugurl 'home' %}"
+               class="btn btn__primary btn__big">{% translate "Go to homepage" %}</a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 {% endblock content %}

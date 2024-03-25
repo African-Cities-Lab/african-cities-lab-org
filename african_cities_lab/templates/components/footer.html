@@ -1,74 +1,86 @@
 {% load home_tags menu_tags i18n static wagtailcore_tags %}
 
 <footer>
-    <div class="footer-top">
-      <div class="container-lg py-3">
-        <div class="row justify-content-lg-between p-md-5">
-          <div class="col-12 col-lg-7 order-2 order-lg-1">
-            <div class="row">
-              <div class="col-6 col-sm-4">
-                <h5 class="footer__col-title my-3">{% translate "Get to know us" %}</h5>
-                <ul class="footer-menu list-unstyled">
-                  {% flat_menu 'footer_menu_1' template="components/menus/menu_footer.html" %} 
-                </ul>
-              </div> 
-              <div class="col-6 col-sm-4">
-                <h5 class="footer__col-title my-3">{% translate "Legal" %}</h5>
-                <ul class="footer-menu list-unstyled">
-                  {% flat_menu 'footer_menu_2' template="components/menus/menu_footer.html" %}
-                </ul>
-              </div>  
+  <div class="footer-top">
+    <div class="container-lg py-3">
+      <div class="row justify-content-lg-between p-md-5">
+        <div class="col-12 col-lg-7 order-2 order-lg-1">
+          <div class="row">
+            <div class="col-6 col-sm-4">
+              <h5 class="footer__col-title my-3">{% translate "Get to know us" %}</h5>
+              <ul class="footer-menu list-unstyled">
+                {% flat_menu 'footer_menu_1' template="components/menus/menu_footer.html" %}
+              </ul>
+            </div>
+            <div class="col-6 col-sm-4">
+              <h5 class="footer__col-title my-3">{% translate "Legal" %}</h5>
+              <ul class="footer-menu list-unstyled">
+                {% flat_menu 'footer_menu_2' template="components/menus/menu_footer.html" %}
+              </ul>
             </div>
           </div>
-          <div class="col-12 col-md-9 col-lg-5 order-1 order-lg-2">
-            <div class="footer__articleletter-col">
-              <h5 class="footer__col-title my-3">{% translate "Stay updated with our newsletter" %}</h5>
-              <p class="footer__col-text">
-                {% translate "Stay up to date with all the recent news, updates, and courses by simply your email address to our mailing list. We promise to never spam you." %}
-              </p>
-              <div class="newsletter-widget my-3">
-                <a href="" class="input-group">
-                  <span class="newsletter-widget__title">
-                    {% translate 'Subscribe to our newsletter!' %}
-                  </span>
-                  <div class="input-group-append">
-                    <span class="btn">
-                      {% translate "Sign up" %}
-                    </span>
-                  </div>
-                </a>
-              </div>
-              <div class="social-media__wrapper">
-                <span>{% translate "Connect with us :" %}</span>
-                <ul class="list-inline m-3">
-                  <li class="list-inline-item mx-2"><a  href="https://twitter.com/AfricanCtiesLab" class="text_primary"><i class="fab fa-twitter"></i></a></li>
-                  <li class="list-inline-item mx-2"><a href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true" class="text_primary"><i class="fab fa-linkedin-in"></i></a></li>
-                  <li class="list-inline-item mx-2"><a href="https://www.facebook.com/African-Cities-Lab-103073095772023" class="text_primary"><i class="fab fa-facebook-f"></i></a></li>
-                  <li class="list-inline-item mx-2"><a href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y=" class="text_primary"><i class="fab fa-instagram"></i></a></li>
-                  <li class="list-inline-item mx-2"><a href="https://medium.com/@African_Cities_Lab" class="text_primary"><i class="fab fa-medium-m"></i></a></li>
-                  <li class="list-inline-item mx-2"><a href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA" class="text_primary"><i class="fab fa-youtube"></i></a></li>
-                </ul>
-              </div>
+        </div>
+        <div class="col-12 col-md-9 col-lg-5 order-1 order-lg-2">
+          <div class="footer__articleletter-col">
+            <h5 class="footer__col-title my-3">{% translate "Stay updated with our newsletter" %}</h5>
+            <p class="footer__col-text">
+              {% translate "Stay up to date with all the recent news, updates, and courses by simply your email address to our mailing list. We promise to never spam you." %}
+            </p>
+            <div class="newsletter-widget my-3">
+              <a href="" class="input-group">
+                <span class="newsletter-widget__title">{% translate 'Subscribe to our newsletter!' %}</span>
+                <div class="input-group-append">
+                  <span class="btn">{% translate "Sign up" %}</span>
+                </div>
+              </a>
+            </div>
+            <div class="social-media__wrapper">
+              <span>{% translate "Connect with us :" %}</span>
+              <ul class="list-inline m-3">
+                <li class="list-inline-item mx-2">
+                  <a href="https://twitter.com/AfricanCtiesLab" class="text_primary"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li class="list-inline-item mx-2">
+                  <a href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true"
+                     class="text_primary"><i class="fab fa-linkedin-in"></i></a>
+                </li>
+                <li class="list-inline-item mx-2">
+                  <a href="https://www.facebook.com/African-Cities-Lab-103073095772023"
+                     class="text_primary"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="list-inline-item mx-2">
+                  <a href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y="
+                     class="text_primary"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li class="list-inline-item mx-2">
+                  <a href="https://medium.com/@African_Cities_Lab" class="text_primary"><i class="fab fa-medium-m"></i></a>
+                </li>
+                <li class="list-inline-item mx-2">
+                  <a href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA"
+                     class="text_primary"><i class="fab fa-youtube"></i></a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="container-fluid">
-        <div class="row align-items-end p-3">
-          <div class="col">
-            <p class="font-size-12">© Copyright {% now 'Y' %} {% translate "African Cities Lab. All rights reserved. " %}</p>
-          </div>
-          <div class="col d-flex justify-content-sm-end">
-            <a href="">
-              <img src="{% static 'images/assets/logo-white.webp' %}"
-                  alt="African Cities Lab"
-                  width="155"
-                  height="38"/>
-            </a>
-          </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container-fluid">
+      <div class="row align-items-end p-3">
+        <div class="col">
+          <p class="font-size-12">© Copyright {% now 'Y' %} {% translate "African Cities Lab. All rights reserved. " %}</p>
+        </div>
+        <div class="col d-flex justify-content-sm-end">
+          <a href="">
+            <img src="{% static 'images/assets/logo-white.webp' %}"
+                 alt="African Cities Lab"
+                 width="155"
+                 height="38" />
+          </a>
         </div>
       </div>
     </div>
+  </div>
 </footer>
