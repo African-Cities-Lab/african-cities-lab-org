@@ -97,6 +97,7 @@ WAGTAIL_APPS = [
     "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.modeladmin",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -105,9 +106,11 @@ WAGTAIL_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+    "wagtailmenus",
     "wagtail",
     "modelcluster",
     "taggit",
+    "wagtailmetadata",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -209,6 +212,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
+                "wagtailmenus.context_processors.wagtailmenus",
                 "african_cities_lab.users.context_processors.allauth_settings",
             ],
         },
@@ -349,6 +353,16 @@ WEBPACK_LOADER = {
         "IGNORE": [r".+\.hot-update.js", r".+\.map"],
     }
 }
+
+# Wagtail stuff
+# ------------------------------------------------------------------------------
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    "default": {
+        "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
+        "OPTIONS": {"features": ["h2", "h3", "h4", "bold", "italic", "link", "ol", "ul", "image"]},
+    },
+}
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "African Cities Lab"

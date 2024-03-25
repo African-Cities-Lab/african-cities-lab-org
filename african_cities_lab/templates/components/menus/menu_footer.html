@@ -1,0 +1,11 @@
+{% for item in menu_items %}
+  <li>
+    <a href="{% if item.link_page.localized.url %}{{ item.link_page.localized.url }}{% else %}{{ item.href }}{% endif %}">
+      {% if item.link_page.localized.title %}
+        {{ item.link_page.localized.title }}
+      {% else %}
+        {{ item.text }}
+      {% endif %}
+    </a>
+  </li>
+{% endfor %}
