@@ -2,7 +2,6 @@ from django import template
 from wagtail.models import Locale, Page, Site
 from wagtail.templatetags.wagtailcore_tags import pageurl
 
-
 register = template.Library()
 
 
@@ -26,11 +25,7 @@ def localized_slugurl(context, slug):
     else:
         if current_site is not None:
             # TODO: use `.filter(locale=english).filter(slug=slug)`?
-            page = (
-                Page.objects.in_site(current_site)
-                .filter(locale=english, slug=slug)
-                .first()
-            )
+            page = Page.objects.in_site(current_site).filter(locale=english, slug=slug).first()
 
     # If no page is found, fall back to searching the whole tree.
     if page is None:

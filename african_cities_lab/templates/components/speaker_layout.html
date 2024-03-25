@@ -1,100 +1,98 @@
 {% load static wagtailimages_tags %}
 
 {% for speaker in self.speakers %}
-    <div class="col-lg-3 col-md-4 speakers-card">
-        <div class="card border-0 bg-transparent">
-            <div class="card-header p-0">
+  <div class="col-lg-3 col-md-4 speakers-card">
+    <div class="card border-0 bg-transparent">
+      <div class="card-header p-0">
+        <a href="#speaker-modal-{{ forloop.counter }}"
+           type="button"
+           class="d-block"
+           data-bs-toggle="modal"
+           data-bs-target="#speaker-modal-{{ forloop.counter }}">
+          {% image speaker.image original class="speaker-avatar" %}
+        </a>
+        <div class="speaker-hover-content">
+          <a href="#speaker-modal-{{ forloop.counter }}"
+             type="button"
+             class="d-block"
+             data-bs-toggle="modal"
+             data-bs-target="#speaker-modal-{{ forloop.counter }}">
+            <img class="pb-5"
+                 src="{% static 'images/assets/icon-plus-circle.svg' %}"
+                 width="50"
+                 height="50"
+                 alt="+" />
+          </a>
+          {% if speaker.social_links %}
+            <ul class="speakers-social-lists list-inline p-0 mb-0">
+              <a href="#speaker-modal-{{ forloop.counter }}"
+                 type="button"
+                 class="d-block"
+                 data-bs-toggle="modal"
+                 data-bs-target="#speaker-modal-{{ forloop.counter }}"></a>
+              <li class="list-inline-item">
                 <a href="#speaker-modal-{{ forloop.counter }}"
-                    type="button"
+                   type="button"
                    class="d-block"
                    data-bs-toggle="modal"
-                    data-bs-target="#speaker-modal-{{ forloop.counter }}">
-                    {% image speaker.image original class="speaker-avatar" %}
-                </a>
-                <div class="speaker-hover-content">
-                    <a href="#speaker-modal-{{ forloop.counter }}"
-                        type="button"
-                        class="d-block"
-                        data-bs-toggle="modal"
-                        data-bs-target="#speaker-modal-{{ forloop.counter }}">
-                        <img class="pb-5"
-                             src="{% static 'images/assets/icon-plus-circle.svg' %}"
-                             width="50"
-                             height="50"
-                             alt="+"/>
-                    </a>
-                    {% if speaker.social_links %}
-                        <ul class="speakers-social-lists list-inline p-0 mb-0">
-                            <a href="#speaker-modal-{{ forloop.counter }}"
-                               type="button"
-                               class="d-block"
-                               data-bs-toggle="modal"
-                               data-bs-target="#speaker-modal-{{ forloop.counter }}">
-                            </a>
-                            <li class="list-inline-item">
-                                <a href="#speaker-modal-{{ forloop.counter }}"
-                                   type="button"
-                                   class="d-block"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#speaker-modal-{{ forloop.counter }}">
-                                </a>
-                                {% for social in speaker.social_links %}
-                                    <a href="{{ social.profile_link }}">
-                                        <i class="fab {{ social.fa_class }}"></i>
-                                    </a>
-                                {% endfor %}
-                            </li>
-                        </ul>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="card-body border-0">
-                <h4 class="speaker-title">{{ speaker.name }}</h4>
-                <p class="speaker-designation">{{ speaker.designation }}</p>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade"
-                 id="speaker-modal-{{ forloop.counter }}"
-                 tabindex="-1"
-                 aria-labelledby="speaker-modal-{{ forloop.counter }}"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header border-0">
-                            <button type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body pb-5">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-5">
-                                    <div class="mdl-speaker-avatar">{% image speaker.image original class="speaker-avatar" %}</div>
-                                </div>
-                                <div class="col-lg-8 col-md-7">
-                                    <div class="mdl-speaker-details p-3">
-                                        <h2>{{ speaker.name }}</h2>
-                                        <p class="my-2">{{ speaker.designation }}</p>
-                                        {% if speaker.value.social_links %}
-                                            <ul class="mdl-speaker-social-list list-inline m-0">
-                                                {% for social in speaker.value.social_links %}
-                                                <li class="list-inline-item">
-                                                    <a href="{{ social.value.profile_link }}">
-                                                        <i class="{{ social.value.fa_class }}"></i>
-                                                    </a>
-                                                </li>
-                                                {% endfor %}
-                                            </ul>
-                                        {% endif %}
-                                        <span class="xs-hr-line"></span>
-                                        {{ speaker.biography }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                   data-bs-target="#speaker-modal-{{ forloop.counter }}"></a>
+                {% for social in speaker.social_links %}
+                  <a href="{{ social.profile_link }}">
+                    <i class="fab {{ social.fa_class }}"></i>
+                  </a>
+                {% endfor %}
+              </li>
+            </ul>
+          {% endif %}
         </div>
+      </div>
+      <div class="card-body border-0">
+        <h4 class="speaker-title">{{ speaker.name }}</h4>
+        <p class="speaker-designation">{{ speaker.designation }}</p>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade"
+           id="speaker-modal-{{ forloop.counter }}"
+           tabindex="-1"
+           aria-labelledby="speaker-modal-{{ forloop.counter }}"
+           aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header border-0">
+              <button type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-5">
+              <div class="row">
+                <div class="col-lg-4 col-md-5">
+                  <div class="mdl-speaker-avatar">{% image speaker.image original class="speaker-avatar" %}</div>
+                </div>
+                <div class="col-lg-8 col-md-7">
+                  <div class="mdl-speaker-details p-3">
+                    <h2>{{ speaker.name }}</h2>
+                    <p class="my-2">{{ speaker.designation }}</p>
+                    {% if speaker.value.social_links %}
+                      <ul class="mdl-speaker-social-list list-inline m-0">
+                        {% for social in speaker.value.social_links %}
+                          <li class="list-inline-item">
+                            <a href="{{ social.value.profile_link }}">
+                              <i class="{{ social.value.fa_class }}"></i>
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                    <span class="xs-hr-line"></span>
+                    {{ speaker.biography }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 {% endfor %}

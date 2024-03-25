@@ -6,33 +6,37 @@
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" /> 
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     {% block meta_tag %}
       <title>
         {% block title %}
-          {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-        {% endblock %}
+          {% if self.seo_title %}
+            {{ self.seo_title }}
+          {% else %}
+            {{ self.title }}
+          {% endif %}
+        {% endblock title %}
         {% block title_suffix %}
           {% with self.get_site.site_name as site_name %}
             {% if site_name %}- {{ site_name }}{% endif %}
           {% endwith %}
-        {% endblock %}
+        {% endblock title_suffix %}
       </title>
       <meta name="description" content="{{ page.search_description }}" />
-    {% endblock %}
+    {% endblock meta_tag %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Martí Bosch - Nabil Raimi" />
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
     {% block css %}
-      <!-- Your stuff: Third-party CSS libraries go here -->  
+      <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
       {% render_bundle 'project' 'css' %}
       <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
       <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
       <link rel="stylesheet"
-          href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+            href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     {% endblock css %}
     <!-- Le javascript
     ================================================== -->
@@ -41,7 +45,7 @@
       <!-- Vendor dependencies bundled as one file -->
       {% render_bundle 'vendors' 'js' attrs='defer' %}
       <!-- Bootstrap JS and its dependencies-->
-      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous"></script>
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous">
       </script>
       <script defer src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
       <script defer src="{% static 'js/jquery.waypoints.min.js' %}"></script>
@@ -49,38 +53,35 @@
       <!-- place project specific Javascript in this file -->
       {% render_bundle 'project' 'js' attrs='defer' %}
     {% endblock javascript %}
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-476VN6QQ4Y"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
 
       gtag('config', 'G-476VN6QQ4Y');
     </script>
   </head>
-
   <body>
     <!-- Hello Bar-->
     {% block hellobar %}
     {% endblock hellobar %}
     <!-- Hello Bar-->
-
     <header id="header">
       <!-- Navbar-->
-        {% include "components/navbar.html" %}
+      {% include "components/navbar.html" %}
       <!-- Navbar -->
     </header>
-
     <main>
       {% block content %}
       {% endblock content %}
     </main>
-
     <!-- Footer-->
-      {% include "components/footer.html" %}
+    {% include "components/footer.html" %}
     <!-- Footer -->
-
     <!-- /container -->
     {% block modal %}
     {% endblock modal %}
