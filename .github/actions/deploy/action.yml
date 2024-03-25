@@ -1,5 +1,5 @@
 name: deploy
-description: Github Action to deploy build (Docker), apply (Terraform) and deploy (rsync+docker-compose) changes.
+description: Github Action to deploy build (Docker), apply (Terraform) and deploy (rsync+docker compose) changes.
 branding:
   icon: 'cloud'
   color: 'orange'
@@ -129,4 +129,4 @@ runs:
         key: ${{ inputs.ssh-key }}
         script: |
           cd app
-          docker-compose ${{ inputs.compose-config-args }} up -d --build
+          docker compose ${{ inputs.compose-config-args }} up -d --build
