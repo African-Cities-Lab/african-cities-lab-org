@@ -1456,13 +1456,24 @@ a.novashare-button {
   grid-template-columns: auto 48px auto;
   align-items: center;
 }
+.formation-date__wrapper.featured-formation__date {
+  border: 2px solid hsl(13, 83%, 41%);
+  margin-bottom: 12px;
+}
 .formation-date__wrapper .start-date,
 .formation-date__wrapper .end-date {
   display: flex;
   align-items: center;
   padding: 8px;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 500;
+}
+.formation-date__wrapper.featured-formation__date .start-date,
+.formation-date__wrapper.featured-formation__date .end-date {
+  font-size: 16px;
+  padding: 6px;
+  color: #be3712;
+  font-weight: 400;
 }
 .formation-meta__card .formation-date .start-date,
 .formation-meta__card .formation-date .end-date {
@@ -1503,6 +1514,11 @@ a.novashare-button {
   font-weight: 500;
   line-height: 26px;
   font-size: 20px;
+}
+.featured-formation__title > a {
+  font-weight: 500;
+  line-height: 26px;
+  font-size: 22px;
 }
 
 /*----------------------------------------*/

@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
-{% load static i18n home_tags wagtailcore_tags
-wagtailimages_tags wagtailmetadata_tags %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
 
 {% block meta_tag %}
   {% meta_tags %}
 {% endblock meta_tag %}
 {% block content %}
-  {% image self.main_image original as
-  img %}
+  {% image self.main_image original as img %}
   <section class="page-banner"
            style="background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})">
     <div class="container-fluid">
@@ -17,7 +15,7 @@ wagtailimages_tags wagtailmetadata_tags %}
           <div class="meta-badge bg-transparent border-white">{% translate "Formation" %}</div>
           <div class="py-3 h2">{{ self.title }}</div>
           <div class="row">
-            <div class="col-12 col-md-4 mt-3">
+            <div class="col-12 col-md-8 mt-3">
               <div class="d-inline-flex align-items-start">
                 <div class="formation-date__wrapper">
                   <div class="start-date">
@@ -70,21 +68,23 @@ wagtailimages_tags wagtailmetadata_tags %}
       </div>
     </div>
   </section>
-  <section class="event-agenda pb-5">
-    <div class="container-fluid py-5">
-      <div class="row">
-        <div class="col-12 col-lg-11">
-          <h3 class="section-title">{% translate "On the program" %}</h3>
-          {{ self.agenda }}
+  {% if self.agenda %}
+    <section class="event-agenda pb-5">
+      <div class="container-fluid py-5">
+        <div class="row">
+          <div class="col-12 col-lg-11">
+            <h3 class="section-title">{% translate "On the program" %}</h3>
+            {{ self.agenda }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="my-5 text-center">
-      {% if self.register_link %}
-        <a href="{{ self.register_link }}"
-           target="_blank"
-           class="btn btn__primary btn__small">{% translate "Register now" %}</a>
-      {% endif %}
-    </div>
-  </section>
+      <div class="my-5 text-center">
+        {% if self.register_link %}
+          <a href="{{ self.register_link }}"
+             target="_blank"
+             class="btn btn__primary btn__small">{% translate "Register now" %}</a>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
 {% endblock content %}
