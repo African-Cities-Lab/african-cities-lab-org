@@ -6,6 +6,7 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
@@ -33,6 +34,7 @@ urlpatterns = [
     path("users/", include("african_cities_lab.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    path("sitemap.xml", sitemap),
     # For anything not caught by a more specific rule above, hand over to Wagtail's page
     # serving mechanism. This should be the last pattern in the list:
     # path("", include(wagtail_urls)),

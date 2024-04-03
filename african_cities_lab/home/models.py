@@ -48,6 +48,7 @@ class HomePage(MetadataPageMixin, Page):
     subpage_types = [
         "home.AboutPage",
         "home.MoocIndexPage",
+        "home.EventsPage",
         "home.WebinarsIndexPage",
         "home.FormationsIndexPage",
         "home.ContestPage",
@@ -319,7 +320,7 @@ class FlatPage(MetadataPageMixin, Page):
     template = "pages/flat_page.html"
 
     banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
     )
     body = RichTextField(features=["h2", "h3", "h4", "ol", "ul", "bold", "italic", "link"], blank=True)
 
@@ -341,6 +342,52 @@ class FlatPage(MetadataPageMixin, Page):
         verbose_name = "Flat Page"
 
 
+class EventsPage(MetadataPageMixin, Page):
+    """EventsPage page model."""
+
+    template = "pages/events_page.html"
+
+    banner_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("banner_image"),
+            ],
+            heading="Hero section",
+        ),
+    ]
+    parent_page_type = [
+        "home.HomePage",
+    ]
+    max_count = 1
+
+    def get_context(self, request):
+        # Get current language
+        current_lang = Locale.get_active()
+
+        # Get last 3 webinars
+        latest_webinars = (
+            WebinarsPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
+        )
+
+        # Get last 3 formations
+        latest_formations = (
+            FormationsPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
+        )
+
+        # Update template context
+        context = super().get_context(request)
+        context["latest_webinars"] = latest_webinars
+        context["latest_formations"] = latest_formations
+
+        return context
+
+    class Meta:
+        verbose_name = "Events Page"
+
+
 class WebinarsIndexPage(MetadataPageMixin, Page):
     banner_image = models.ForeignKey(
         "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
@@ -360,7 +407,6 @@ class WebinarsIndexPage(MetadataPageMixin, Page):
     parent_page_type = [
         "home.HomePage",
     ]
-    max_count = 1
 
     class Meta:
         verbose_name = "Webinar Index Page"
@@ -438,7 +484,6 @@ class FormationsIndexPage(MetadataPageMixin, Page):
     parent_page_type = [
         "home.HomePage",
     ]
-    max_count = 1
 
     class Meta:
         verbose_name = "Formation Index Page"

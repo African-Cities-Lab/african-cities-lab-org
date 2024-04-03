@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
-{% load static i18n home_tags wagtailcore_tags
-wagtailimages_tags wagtailmetadata_tags %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
 
 {% block meta_tag %}
   {% meta_tags %}
 {% endblock meta_tag %}
 {% block content %}
-  {% image self.main_image original as
-  img %}
+  {% image self.main_image original as img %}
   <section class="page-banner"
            style="background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})">
     <div class="container-fluid">
@@ -77,7 +75,7 @@ wagtailimages_tags wagtailmetadata_tags %}
   <section class="event-speakers py-5">
     <div class="container-fluid position-relative py-5">
       <h3 class="section-title mb-3">{% translate "Speakers" %}</h3>
-      <div class="row event-speakers__list py-3">{{ self.speakers }}</div>
+      {{ self.speakers }}
       {% if self.replay_link %}
         <div class="my-5 text-center">
           <a class="btn btn__primary btn__big d-block"
