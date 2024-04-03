@@ -1,3 +1,5 @@
+{% load home_tags menu_tags i18n static wagtailcore_tags %}
+
 {% for item in menu_items %}
   <li>
     <a href="{% if item.link_page.localized.url %}{{ item.link_page.localized.url }}{% else %}{{ item.href }}{% endif %}">

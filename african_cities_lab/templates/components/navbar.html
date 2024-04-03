@@ -3,7 +3,7 @@
 <nav id="main-nav"
      class="navbar w-100 navbar-expand-lg text-center py-3 shadow-sm z-index-2">
   <div class="container-fluid">
-    <a class="navbar-brand" href="">
+    <a class="navbar-brand" href="{% localized_slugurl 'home' %}">
       <img src="{% static 'images/assets/logo.webp' %}"
            alt="African Cities Lab"
            class="navbar-brand-image"
@@ -23,7 +23,7 @@
          class="collapse navbar-collapse justify-content-between">
       <ul class="navbar-nav text-uppercase mx-2">
         <!-- /Main menu -->
-        {% main_menu template="components/menus/main_menu.html" %}
+        {% main_menu template="components/menus/main_menu.html" sub_menu_template="components/menus/sub_menu.html" %}
         <!-- /Main menu -->
         <!-- Register/login link on mobile -->
         <li class="nav-item register-link-lg mx-3">

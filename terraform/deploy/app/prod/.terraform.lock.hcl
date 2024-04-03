@@ -6,6 +6,7 @@ provider "registry.terraform.io/digitalocean/digitalocean" {
   constraints = "~> 2.0"
   hashes = [
     "h1:RJRiSKNguA33LlEZ2KmK7EpvogdV8lUVlCD5M8lVqtE=",
+    "h1:x549fV+Qh5U62A6pF5slrfaQyaG3dljekiyT/riC01E=",
     "zh:023d11f654e4049e80254d8edb950f6c84c993134c8ffb5ec09a71e77f486cbe",
     "zh:1aa4d213d18c06df0d791aa154188517ea3efaac69f14e2de3f8e152961e22fd",
     "zh:1c6adfc92a8b450ff915e5c449b3f6d0e5736c10250327467333003e119005e8",
@@ -30,6 +31,7 @@ provider "registry.terraform.io/integrations/github" {
   constraints = "~> 6.0"
   hashes = [
     "h1:FdWqFyRBP1NkVVE2ZTbk2HdQ9FCuQ7Iiw+517sZUjOc=",
+    "h1:a6d0+g28W72xkGNSzbMLApNMtwT7uhvO2Hc45ghON4U=",
     "zh:1206dd543cbfb82510f3de8cebc60b3b53803ed2e58b155beae60ad47375da92",
     "zh:1b37f423227697a8dfedd12552826f22153c0125233caf2ab3426a968db63cfc",
     "zh:273f57855ded264c6e08260e536f495b5db836c369a567c54d3852c3f24f9256",
