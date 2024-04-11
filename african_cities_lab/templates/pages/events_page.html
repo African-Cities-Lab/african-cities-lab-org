@@ -7,7 +7,7 @@
 {% endblock meta_tag %}
 {% block content %}
   {% image self.banner_image original as img %}
-  <section {% if not img.url %}class="bg_primary"{% else %}class="page-banner"{% endif %}
+  <section class="{% if img.url %}page-banner{% else %}page-banner bg_primary{% endif %}"
            {% if img.url %} style='background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})' {% endif %}>
     <div class="container-fluid">
       <div class="row py-5">

@@ -7,55 +7,82 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-29 12:32+0100\n"
+"POT-Creation-Date: 2024-04-03 19:28+0200\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: african_cities_lab/home/templates/home/formations_index_page.html:73
+#: african_cities_lab/home/templates/home/webinars_index_page.html:58
+#: african_cities_lab/templates/pages/about.html:257
+#: african_cities_lab/templates/pages/home.html:29
 msgid "Learn more"
 msgstr "En savoir plus"
 
+#: african_cities_lab/home/templates/home/formations_page.html:15
 msgid "Formation"
 msgstr "Formation"
 
+#: african_cities_lab/home/templates/home/formations_page.html:52
+#: african_cities_lab/home/templates/home/formations_page.html:85
+#: african_cities_lab/home/templates/home/webinars_page.html:46
 msgid "Register now"
 msgstr "S'inscrire maintenant"
 
+#: african_cities_lab/home/templates/home/formations_page.html:64
+#: african_cities_lab/home/templates/home/webinars_page.html:58
 msgid "Overview"
 msgstr "Présentation"
 
+#: african_cities_lab/home/templates/home/formations_page.html:76
 msgid "On the program"
 msgstr "Au programme"
 
+#: african_cities_lab/home/templates/home/webinars_page.html:15
 msgid "Webinar"
 msgstr "Webinaire"
 
+#: african_cities_lab/home/templates/home/webinars_page.html:41
+#: african_cities_lab/home/templates/home/webinars_page.html:83
 msgid "Watch the replay"
 msgstr "Voir le replay"
 
+#: african_cities_lab/home/templates/home/webinars_page.html:69
 msgid "On the agenda"
 msgstr "Au programme"
 
+#: african_cities_lab/home/templates/home/webinars_page.html:77
 msgid "Speakers"
 msgstr "Intervenants"
 
+#: african_cities_lab/templates/403.html:13
+#: african_cities_lab/templates/403_csrf.html:13
 msgid "Forbidden (403)"
 msgstr ""
 
+#: african_cities_lab/templates/403.html:18
+#: african_cities_lab/templates/403_csrf.html:18
 msgid "You're not allowed to access this page."
 msgstr "Vous ne pouvez pas accéder à cette page."
 
+#: african_cities_lab/templates/403.html:23
+#: african_cities_lab/templates/403_csrf.html:23
+#: african_cities_lab/templates/404.html:20
+#: african_cities_lab/templates/500.html:19
 msgid "Go to homepage"
 msgstr "Accéder à la page d'accueil"
 
+#: african_cities_lab/templates/404.html:13
 msgid "Oops..."
 msgstr ""
 
+#: african_cities_lab/templates/404.html:14
 msgid "Page not found"
 msgstr "Page non trouvée"
 
+#: african_cities_lab/templates/404.html:16
 msgid ""
 "The page you are looking for might have been removed, had its name changed "
 "or is temporarily unavailable."
@@ -63,9 +90,11 @@ msgstr ""
 "La page que vous recherchez peut avoir été supprimée, avoir changé de nom ou "
 "être temporairement indisponible."
 
+#: african_cities_lab/templates/500.html:13
 msgid "Oops... Internal Server Error"
 msgstr "Oups... Erreur interne du serveur"
 
+#: african_cities_lab/templates/500.html:15
 msgid ""
 "We track these errors automatically, but if the problem persists feel free "
 "to contact us. In the meantime, try refreshing."
@@ -73,42 +102,56 @@ msgstr ""
 "Nous suivons ces erreurs automatiquement, mais si le problème persiste, "
 "n'hésitez pas à nous contacter. En attendant, essayez d'actualiser."
 
+#: african_cities_lab/templates/account/account_inactive.html:6
+#: african_cities_lab/templates/account/account_inactive.html:9
 msgid "Account Inactive"
 msgstr "Compte inactif"
 
+#: african_cities_lab/templates/account/account_inactive.html:10
 msgid "This account is inactive."
 msgstr "Ce compte est inactif."
 
+#: african_cities_lab/templates/account/email.html:7
 msgid "Account"
 msgstr "Compte"
 
+#: african_cities_lab/templates/account/email.html:10
 msgid "E-mail Addresses"
 msgstr "Adresses e-mail"
 
+#: african_cities_lab/templates/account/email.html:12
 msgid "The following e-mail addresses are associated with your account:"
 msgstr "Les adresses e-mail suivantes sont associées à votre compte :"
 
+#: african_cities_lab/templates/account/email.html:27
 msgid "Verified"
 msgstr "Vérifié"
 
+#: african_cities_lab/templates/account/email.html:29
 msgid "Unverified"
 msgstr "Non vérifié"
 
+#: african_cities_lab/templates/account/email.html:32
 msgid "Primary"
 msgstr "Primaire"
 
+#: african_cities_lab/templates/account/email.html:40
 msgid "Make Primary"
 msgstr "Changer Primaire"
 
+#: african_cities_lab/templates/account/email.html:43
 msgid "Re-send Verification"
 msgstr "Renvoyer vérification"
 
+#: african_cities_lab/templates/account/email.html:46
 msgid "Remove"
 msgstr "Supprimer"
 
+#: african_cities_lab/templates/account/email.html:52
 msgid "Warning:"
 msgstr "Avertissement:"
 
+#: african_cities_lab/templates/account/email.html:52
 msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
@@ -117,18 +160,24 @@ msgstr ""
 "ajouter une adresse e-mail pour reçevoir des notifications, réinitialiser "
 "votre mot de passe, etc."
 
+#: african_cities_lab/templates/account/email.html:55
 msgid "Add E-mail Address"
 msgstr "Ajouter une adresse e-mail"
 
+#: african_cities_lab/templates/account/email.html:59
 msgid "Add E-mail"
 msgstr "Ajouter e-mail"
 
+#: african_cities_lab/templates/account/email.html:66
 msgid "Do you really want to remove the selected e-mail address?"
 msgstr "Voulez-vous vraiment supprimer l'adresse e-mail sélectionnée ?"
 
+#: african_cities_lab/templates/account/email_confirm.html:7
+#: african_cities_lab/templates/account/email_confirm.html:10
 msgid "Confirm E-mail Address"
 msgstr "Confirmez votre adresse email"
 
+#: african_cities_lab/templates/account/email_confirm.html:14
 #, python-format
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
@@ -137,9 +186,11 @@ msgstr ""
 "Veuillez confirmer que <a href=\"mailto:%(email)s\">%(email)s</a> est un e-"
 "mail adresse de l'utilisateur %(user_display)s."
 
+#: african_cities_lab/templates/account/email_confirm.html:19
 msgid "Confirm"
 msgstr "Confirmé"
 
+#: african_cities_lab/templates/account/email_confirm.html:24
 #, python-format
 msgid ""
 "This e-mail confirmation link expired or is invalid. Please <a "
@@ -149,12 +200,17 @@ msgstr ""
 "href=\"%(email_url)s\">émettre une nouvelle demande de confirmation par e-"
 "mail</a>."
 
+#: african_cities_lab/templates/account/login.html:8
+#: african_cities_lab/templates/account/login.html:11
+#: african_cities_lab/templates/account/login.html:50
 msgid "Sign In"
 msgstr "Se connecter"
 
+#: african_cities_lab/templates/account/login.html:15
 msgid "Please sign in with one of your existing third party accounts:"
 msgstr "Veuillez vous connecter avec l'un de vos comptes tiers existants :"
 
+#: african_cities_lab/templates/account/login.html:17
 #, python-format
 msgid ""
 "Or, <a href=\"%(signup_url)s\">sign up</a> for a %(site_name)s account and "
@@ -163,9 +219,11 @@ msgstr ""
 "Ou, <a href=\"%(signup_url)s\">créez</a> un compte %(site_name)s et "
 "connectez-vous ci-dessous :"
 
+#: african_cities_lab/templates/account/login.html:27
 msgid "or"
 msgstr "ou"
 
+#: african_cities_lab/templates/account/login.html:33
 #, python-format
 msgid ""
 "If you have not created an account yet, then please <a "
@@ -174,21 +232,38 @@ msgstr ""
 "Si vous n'avez pas encore créé de compte, veuillez d'abord <a "
 "href=\"%(signup_url)s\">vous inscrire</a>."
 
+#: african_cities_lab/templates/account/login.html:49
 msgid "Forgot Password?"
 msgstr "Mot de passe oublié?"
 
+#: african_cities_lab/templates/account/logout.html:6
+#: african_cities_lab/templates/account/logout.html:9
+#: african_cities_lab/templates/account/logout.html:18
 msgid "Sign Out"
 msgstr "Se déconnecter"
 
+#: african_cities_lab/templates/account/logout.html:10
 msgid "Are you sure you want to sign out?"
 msgstr "Êtes-vous certain de vouloir vous déconnecter?"
 
+#: african_cities_lab/templates/account/password_change.html:7
+#: african_cities_lab/templates/account/password_change.html:10
+#: african_cities_lab/templates/account/password_change.html:16
+#: african_cities_lab/templates/account/password_reset_from_key.html:7
+#: african_cities_lab/templates/account/password_reset_from_key.html:14
+#: african_cities_lab/templates/account/password_reset_from_key_done.html:6
+#: african_cities_lab/templates/account/password_reset_from_key_done.html:9
 msgid "Change Password"
 msgstr "Changer le mot de passe"
 
+#: african_cities_lab/templates/account/password_reset.html:8
+#: african_cities_lab/templates/account/password_reset.html:11
+#: african_cities_lab/templates/account/password_reset_done.html:7
+#: african_cities_lab/templates/account/password_reset_done.html:10
 msgid "Password Reset"
 msgstr "Réinitialisation du mot de passe"
 
+#: african_cities_lab/templates/account/password_reset.html:16
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
@@ -196,14 +271,17 @@ msgstr ""
 "Mot de passe oublié? Entrez votre adresse e-mail ci-dessous, et nous vous "
 "enverrons un e-mail vous permettant de le réinitialiser."
 
+#: african_cities_lab/templates/account/password_reset.html:25
 msgid "Reset My Password"
 msgstr "Réinitialiser mon mot de passe"
 
+#: african_cities_lab/templates/account/password_reset.html:27
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
 "Veuillez nous contacter si vous rencontrez des difficultés pour "
 "réinitialiservotre mot de passe."
 
+#: african_cities_lab/templates/account/password_reset_done.html:15
 msgid ""
 "We have sent you an e-mail. Please contact us if you do not receive it "
 "within a few minutes."
@@ -211,9 +289,11 @@ msgstr ""
 "Nous vous avons envoyé un e-mail. Veuillez nous contacter si vous ne le "
 "recevez pas d'ici quelques minutes."
 
+#: african_cities_lab/templates/account/password_reset_from_key.html:12
 msgid "Bad Token"
 msgstr "Token Invalide"
 
+#: african_cities_lab/templates/account/password_reset_from_key.html:20
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
@@ -225,21 +305,31 @@ msgstr ""
 "href=\"%(passwd_reset_url)s\"> nouvelle demande de réinitialisation de mot "
 "de passe</a>."
 
+#: african_cities_lab/templates/account/password_reset_from_key.html:30
 msgid "change password"
 msgstr "changer le mot de passe"
 
+#: african_cities_lab/templates/account/password_reset_from_key.html:33
+#: african_cities_lab/templates/account/password_reset_from_key_done.html:10
 msgid "Your password is now changed."
 msgstr "Votre mot de passe est maintenant modifié."
 
+#: african_cities_lab/templates/account/password_set.html:7
+#: african_cities_lab/templates/account/password_set.html:10
+#: african_cities_lab/templates/account/password_set.html:19
 msgid "Set Password"
 msgstr "Définir le mot de passe"
 
+#: african_cities_lab/templates/account/signup.html:7
 msgid "Signup"
 msgstr "S'inscrire"
 
+#: african_cities_lab/templates/account/signup.html:10
+#: african_cities_lab/templates/account/signup.html:25
 msgid "Sign Up"
 msgstr "S'inscrire"
 
+#: african_cities_lab/templates/account/signup.html:12
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
@@ -247,15 +337,23 @@ msgstr ""
 "Vous avez déjà un compte? Alors veuillez <a href=\"%(login_url)s\">vous "
 "connecter</a>."
 
+#: african_cities_lab/templates/account/signup_closed.html:6
+#: african_cities_lab/templates/account/signup_closed.html:9
 msgid "Sign Up Closed"
 msgstr "Inscriptions closes"
 
+#: african_cities_lab/templates/account/signup_closed.html:10
 msgid "We are sorry, but the sign up is currently closed."
 msgstr "Désolé, mais l'inscription est actuellement fermée."
 
+#: african_cities_lab/templates/account/verification_sent.html:6
+#: african_cities_lab/templates/account/verification_sent.html:9
+#: african_cities_lab/templates/account/verified_email_required.html:6
+#: african_cities_lab/templates/account/verified_email_required.html:9
 msgid "Verify Your E-mail Address"
 msgstr "Vérifiez votre adresse e-mail"
 
+#: african_cities_lab/templates/account/verification_sent.html:11
 msgid ""
 "We have sent an e-mail to you for verification. Follow the link provided to "
 "finalize the signup process. Please contact us if you do not receive it "
@@ -265,6 +363,7 @@ msgstr ""
 "pour finalisez le processus d'inscription. Veuillez nous contacter si vous "
 "ne le recevez pas d'ici quelques minutes."
 
+#: african_cities_lab/templates/account/verified_email_required.html:12
 msgid ""
 "This part of the site requires us to verify that\n"
 "you are who you claim to be. For this purpose, we require that you\n"
@@ -274,6 +373,7 @@ msgstr ""
 "vous êtes qui vous prétendez être. Nous vous demandons donc de\n"
 "vérifier la propriété de votre adresse e-mail."
 
+#: african_cities_lab/templates/account/verified_email_required.html:17
 msgid ""
 "We have sent an e-mail to you for\n"
 "verification. Please click on the link inside this e-mail. Please\n"
@@ -284,6 +384,7 @@ msgstr ""
 "nous\n"
 "contacter si vous ne le recevez pas d'ici quelques minutes."
 
+#: african_cities_lab/templates/account/verified_email_required.html:22
 #, python-format
 msgid ""
 "<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
@@ -292,27 +393,35 @@ msgstr ""
 "<strong>Remarque :</strong> vous pouvez toujours <a "
 "href=\"%(email_url)s\">changer votre e-adresse e-mail</a>."
 
+#: african_cities_lab/templates/components/agenda_layout.html:14
 msgid "Session"
 msgstr "Session"
 
+#: african_cities_lab/templates/components/agenda_layout.html:37
 msgid "Language:"
 msgstr "Langue :"
 
+#: african_cities_lab/templates/components/agenda_layout.html:51
 msgid "Speaker(s):"
 msgstr "Intervenant(s) :"
 
+#: african_cities_lab/templates/components/agenda_layout.html:73
 msgid "Moderator:"
 msgstr "Modérateur :"
 
+#: african_cities_lab/templates/components/footer.html:10
 msgid "Get to know us"
 msgstr "Nous connaître"
 
+#: african_cities_lab/templates/components/footer.html:16
 msgid "Legal"
 msgstr "Mentions légales"
 
+#: african_cities_lab/templates/components/footer.html:25
 msgid "Stay updated with our newsletter"
 msgstr "Recevez la newsletter ACL"
 
+#: african_cities_lab/templates/components/footer.html:27
 msgid ""
 "Stay up to date with all the recent news, updates, and courses by simply "
 "your email address to our mailing list. We promise to never spam you."
@@ -320,63 +429,86 @@ msgstr ""
 "Restez informés de la mise à jour des cours. Et suivez toute l’actualité de "
 "la transformation des villes africaines."
 
+#: african_cities_lab/templates/components/footer.html:31
 msgid "Subscribe to our newsletter!"
 msgstr "Inscrivez-vous à notre newsletter !"
 
+#: african_cities_lab/templates/components/footer.html:33
 msgid "Sign up"
 msgstr "S'inscrire"
 
+#: african_cities_lab/templates/components/footer.html:38
 msgid "Connect with us :"
 msgstr "Suivez-nous"
 
+#: african_cities_lab/templates/components/footer.html:73
 msgid "African Cities Lab. All rights reserved. "
 msgstr "African Cities Lab. Tous droits réservés."
 
+#: african_cities_lab/templates/components/navbar.html:32
+#: african_cities_lab/templates/components/navbar.html:82
+#: african_cities_lab/templates/pages/moocs_index_page.html:462
 msgid "Login"
 msgstr "Se connecter"
 
+#: african_cities_lab/templates/components/navbar.html:35
+#: african_cities_lab/templates/components/navbar.html:86
+#: african_cities_lab/templates/pages/moocs_index_page.html:465
 msgid "Register"
 msgstr "S'inscrire"
 
+#: african_cities_lab/templates/components/partners_section.html:4
 msgid "Our Partners"
 msgstr "Nos Partenaires"
 
+#: african_cities_lab/templates/pages/about.html:16
 msgid "By 2050, African cities will be home to 2.5 billion people"
 msgstr "D’ici 2050, les villes africaines abriteront 2,5 milliards d'habitants"
 
+#: african_cities_lab/templates/pages/about.html:26
 msgid "700 million"
 msgstr "700 millions"
 
+#: african_cities_lab/templates/pages/about.html:26
 msgid " new homes"
 msgstr " de nouveaux logements"
 
+#: african_cities_lab/templates/pages/about.html:35
 msgid "300,000"
 msgstr "300 000"
 
+#: african_cities_lab/templates/pages/about.html:35
 msgid " schools"
 msgstr " écoles"
 
+#: african_cities_lab/templates/pages/about.html:39
 msgid " and almost "
 msgstr " et presque"
 
+#: african_cities_lab/templates/pages/about.html:47
 msgid "100,000"
 msgstr "100 000"
 
+#: african_cities_lab/templates/pages/about.html:47
 msgid " health centers"
 msgstr " centres de santé"
 
+#: african_cities_lab/templates/pages/about.html:51
 msgid "remain to be built."
 msgstr "restent à construire."
 
+#: african_cities_lab/templates/pages/about.html:76
 msgid "Our Mission"
 msgstr "Notre mission"
 
+#: african_cities_lab/templates/pages/about.html:78
 msgid ""
 "Training a new generation of professionals to build the African cities of "
 "the future"
 msgstr ""
 "Former les générations d’acteurs au service des villes africaines de demain"
 
+#: african_cities_lab/templates/pages/about.html:81
 msgid ""
 "\n"
 "                        We believe that the challenge of building "
@@ -396,18 +528,23 @@ msgstr ""
 "durable en Afrique.\n"
 "                        "
 
+#: african_cities_lab/templates/pages/about.html:90
 msgid "Professionals trained in 2024"
 msgstr "Professionnels formés en 2024"
 
+#: african_cities_lab/templates/pages/about.html:96
 msgid "Moocs released in 2023"
 msgstr "MOOCs publiés en 2023"
 
+#: african_cities_lab/templates/pages/about.html:102
 msgid "African University partners"
 msgstr "Universités africaines partenaires"
 
+#: african_cities_lab/templates/pages/about.html:113
 msgid "The ACL Platform"
 msgstr "La plateforme ACL"
 
+#: african_cities_lab/templates/pages/about.html:115
 msgid ""
 "\n"
 "                        The African Cities Lab e-learning platform is "
@@ -435,9 +572,11 @@ msgstr ""
 "pour répondre aux défis 2050 des villes africaines.\n"
 "                        "
 
+#: african_cities_lab/templates/pages/about.html:131
 msgid "The MOOCs"
 msgstr "Les MOOCs"
 
+#: african_cities_lab/templates/pages/about.html:133
 msgid ""
 "\n"
 "                                The MOOCs (Massive Open Online Courses) are "
@@ -454,9 +593,11 @@ msgstr ""
 " Ils sont enseignés par des experts africains.\n"
 "                                "
 
+#: african_cities_lab/templates/pages/about.html:145
 msgid "Online training courses"
 msgstr "Les formations continues en ligne"
 
+#: african_cities_lab/templates/pages/about.html:147
 msgid ""
 "\n"
 "                                These are in-depth courses, designed for "
@@ -470,9 +611,11 @@ msgstr ""
 "souhaitent améliorer leur pratique professionnelle et leur expertise.\n"
 "                                "
 
+#: african_cities_lab/templates/pages/about.html:157
 msgid "Hybrid training courses"
 msgstr "Les formations continues hybrides"
 
+#: african_cities_lab/templates/pages/about.html:159
 msgid ""
 "\n"
 "                                We offer deep-dive trainings to key decision "
@@ -488,9 +631,11 @@ msgstr ""
 "approfondir et contextualiser les connaissances.\n"
 "                                "
 
+#: african_cities_lab/templates/pages/about.html:173
 msgid "African Cities Lab Webinars"
 msgstr "Les webinaires African Cities Lab"
 
+#: african_cities_lab/templates/pages/about.html:175
 msgid ""
 "\n"
 "                        Through a series of 4 webinars, the partners of the "
@@ -529,12 +674,15 @@ msgstr ""
 "numérique pour atteindre les ODD localement.\n"
 "                        "
 
+#: african_cities_lab/templates/pages/about.html:196
 msgid "July 5, 2022"
 msgstr "5 Juillet 2022"
 
+#: african_cities_lab/templates/pages/about.html:197
 msgid "1st webinar"
 msgstr "1er Webinaire"
 
+#: african_cities_lab/templates/pages/about.html:199
 msgid ""
 "Integration of open data and artificial intelligence in the development of "
 "smart cities in Africa."
@@ -542,32 +690,41 @@ msgstr ""
 "Intégration de l'open data et de l’intelligence artificielle dans le "
 "développement des smart cities en Afrique."
 
+#: african_cities_lab/templates/pages/about.html:206
 msgid "October 11, 2022"
 msgstr "11 Octobre 2022"
 
+#: african_cities_lab/templates/pages/about.html:207
 msgid "2nd webinar"
 msgstr "2ème webinaire"
 
+#: african_cities_lab/templates/pages/about.html:208
 msgid "African Cities: What role for the youth?"
 msgstr "Villes africaines : Quelle place pour les jeunes ?"
 
+#: african_cities_lab/templates/pages/about.html:214
 msgid "November 24, 2022"
 msgstr "24 Novembre 2022"
 
+#: african_cities_lab/templates/pages/about.html:215
 msgid "3rd webinar"
 msgstr "3ème Webinaire"
 
+#: african_cities_lab/templates/pages/about.html:216
 msgid "How to build resilient African Cities in response to climate change?"
 msgstr ""
 "Comment construire des villes africaines résilientes face aux changements "
 "climatiques ?"
 
+#: african_cities_lab/templates/pages/about.html:222
 msgid "23 & 24 May 2023"
 msgstr "23 & 24 Mai 2023"
 
+#: african_cities_lab/templates/pages/about.html:243
 msgid "African Cities lab - 2023 SUMMIT"
 msgstr "African Cities lab - 2023 SUMMIT"
 
+#: african_cities_lab/templates/pages/about.html:246
 msgid ""
 "\n"
 "                            Challenging the current vision of African "
@@ -596,39 +753,50 @@ msgstr ""
 "2023 à Cotonou, au Bénin.\n"
 "                            "
 
+#: african_cities_lab/templates/pages/contact.html:34
 msgid "We’re here to help"
 msgstr "Nous sommes là pour vous aider"
 
+#: african_cities_lab/templates/pages/contact.html:36
 msgid "Please contact us in case of any query. We are happy to help"
 msgstr ""
 "Merci de nous contacter en cas de question. Nous serons heureux de vous "
 "aider."
 
+#: african_cities_lab/templates/pages/contact.html:43
 msgid "Email Us To Get Information"
 msgstr "Écrivez-nous"
 
+#: african_cities_lab/templates/pages/contact.html:58
 msgid "Follow us on"
 msgstr "Suivez-nous"
 
+#: african_cities_lab/templates/pages/contest.html:15
 msgid "Participate to the \"African urban visions\" contest"
 msgstr "Participez au concours « Visions urbaines Africaines »"
 
+#: african_cities_lab/templates/pages/contest.html:25
 msgid " categories"
 msgstr " catégories"
 
+#: african_cities_lab/templates/pages/contest.html:34
 msgid " prices"
 msgstr " prix"
 
+#: african_cities_lab/templates/pages/contest.html:39
 msgid " MOOCs "
 msgstr ""
 
+#: african_cities_lab/templates/pages/contest.html:65
 msgid "Context"
 msgstr "Contexte"
 
+#: african_cities_lab/templates/pages/contest.html:66
 msgid "Highlighting the talent of change agents in African cities"
 msgstr ""
 "Mettre en lumière le talent des acteurs du changement des villes africaines"
 
+#: african_cities_lab/templates/pages/contest.html:68
 msgid ""
 "\n"
 "                        The ACL platform offers several MOOCs (Massive Open "
@@ -642,6 +810,7 @@ msgstr ""
 "l'aménagement de l'espace urbain.\n"
 "                        "
 
+#: african_cities_lab/templates/pages/contest.html:73
 msgid ""
 "\n"
 "                        This innovative training space generates a dynamic "
@@ -655,18 +824,24 @@ msgstr ""
 "en lançant le concours « Visions urbaines Africaines ».\n"
 "                        "
 
+#: african_cities_lab/templates/pages/contest.html:82
 msgid "Categories"
 msgstr "Catégories"
 
+#: african_cities_lab/templates/pages/contest.html:88
 msgid "Prices"
 msgstr "Prix"
 
+#: african_cities_lab/templates/pages/contest.html:94
+#: african_cities_lab/templates/pages/home.html:76
 msgid "MOOCs"
 msgstr "MOOCs"
 
+#: african_cities_lab/templates/pages/contest.html:105
 msgid "The contest"
 msgstr "Le concours"
 
+#: african_cities_lab/templates/pages/contest.html:107
 msgid ""
 "\n"
 "                        Its aim is to <strong>catalyze the ingenuity and "
@@ -688,9 +863,11 @@ msgstr ""
 "ou d’une <strong>courte vidéo</strong>.\n"
 "                        "
 
+#: african_cities_lab/templates/pages/contest.html:124
 msgid "Urban photography"
 msgstr "Photographie urbaine"
 
+#: african_cities_lab/templates/pages/contest.html:126
 msgid ""
 "\n"
 "                                Capture the essence of a vision of the "
@@ -702,9 +879,11 @@ msgstr ""
 "une image percutante.\n"
 "                                "
 
+#: african_cities_lab/templates/pages/contest.html:139
 msgid "Creative video"
 msgstr "Vidéo créative"
 
+#: african_cities_lab/templates/pages/contest.html:141
 msgid ""
 "\n"
 "                                Create a short \"real-life\" video (maximum "
@@ -717,6 +896,7 @@ msgstr ""
 "une histoire immersive de la ville africaine en transformation.\n"
 "                                "
 
+#: african_cities_lab/templates/pages/contest.html:150
 msgid ""
 "\n"
 "                        Works will automatically be licensed under the "
@@ -735,9 +915,11 @@ msgstr ""
 " ).\n"
 "                        "
 
+#: african_cities_lab/templates/pages/contest.html:164
 msgid "Terms of participation"
 msgstr "Conditions de participation"
 
+#: african_cities_lab/templates/pages/contest.html:166
 msgid ""
 "\n"
 "                        Have obtained a <strong>certificate of achievement</"
@@ -752,6 +934,7 @@ msgstr ""
 " l' <a href=\"https://courses.africancitieslab.African Cities Lab.</a>.\n"
 "                        "
 
+#: african_cities_lab/templates/pages/contest.html:172
 msgid ""
 "\n"
 "                        Submit your work by completing this <a "
@@ -765,27 +948,35 @@ msgstr ""
 "a>.\n"
 "                        "
 
+#: african_cities_lab/templates/pages/contest.html:184
 msgid "December 11, 2023"
 msgstr "11 Décembre 2023"
 
+#: african_cities_lab/templates/pages/contest.html:185
 msgid "Contest opening"
 msgstr "Ouverture du concours"
 
+#: african_cities_lab/templates/pages/contest.html:189
 msgid "January 19, 2024"
 msgstr "19 Janvier 2024"
 
+#: african_cities_lab/templates/pages/contest.html:190
 msgid "Application deadline"
 msgstr "Date limite de dépôt des candidatures"
 
+#: african_cities_lab/templates/pages/contest.html:194
 msgid "Jury meeting"
 msgstr "Réunion du jury"
 
+#: african_cities_lab/templates/pages/contest.html:195
 msgid "Selection of winners"
 msgstr "Sélection des gagnants"
 
+#: african_cities_lab/templates/pages/contest.html:199
 msgid "February 2024"
 msgstr "Février 2024"
 
+#: african_cities_lab/templates/pages/contest.html:201
 msgid ""
 "\n"
 "                            Announcement of results during the \"Building a "
@@ -801,21 +992,32 @@ msgstr ""
 "».\n"
 "                            "
 
+#: african_cities_lab/templates/pages/events_page.html:38
+#: african_cities_lab/templates/pages/home.html:343
 msgid "Webinars"
 msgstr "Webinaires"
 
+#: african_cities_lab/templates/pages/events_page.html:44
+#: african_cities_lab/templates/pages/events_page.html:82
+#: african_cities_lab/templates/pages/home.html:349
+#: african_cities_lab/templates/pages/home.html:387
 msgid "All webinars"
 msgstr "Voir tout"
 
+#: african_cities_lab/templates/pages/events_page.html:95
 msgid "Formations"
 msgstr "Formations"
 
+#: african_cities_lab/templates/pages/events_page.html:99
+#: african_cities_lab/templates/pages/events_page.html:146
 msgid "All formations"
 msgstr "Voir tout"
 
+#: african_cities_lab/templates/pages/home.html:55
 msgid "What we offer"
 msgstr "Ce que nous offrons"
 
+#: african_cities_lab/templates/pages/home.html:57
 msgid ""
 "Top-quality educational content to understand and provide practical "
 "solutions to the challenges presented by the accelerated urbanization of the "
@@ -825,6 +1027,7 @@ msgstr ""
 "pratiques aux enjeux que présente l’urbanisation accélérée du continent "
 "Africain."
 
+#: african_cities_lab/templates/pages/home.html:79
 msgid ""
 "A catalog of online training courses delivered by experts in the fields of "
 "urban planning on topics from eco-construction to sustainable development."
@@ -833,23 +1036,29 @@ msgstr ""
 "domaines de l’urbanisation sur des thématiques allant de l'éco-construction "
 "à la gestion des déchets."
 
+#: african_cities_lab/templates/pages/home.html:98
 msgid "Learn from the experts"
 msgstr "Apprendre des experts"
 
+#: african_cities_lab/templates/pages/home.html:100
 msgid "Experts on urban and sustainable development in Africa"
 msgstr "Experts du développement urbain et durable en Afrique"
 
+#: african_cities_lab/templates/pages/home.html:114
 msgid "6 African Universities"
 msgstr "6 Universités africaines"
 
+#: african_cities_lab/templates/pages/home.html:116
 msgid "Partners of the African Cities Lab's knowledge hub "
 msgstr ""
 "Qui s’unissent pour transmettre leurs connaissances sur les problématiques "
 "urbaines des villes africaines de demain."
 
+#: african_cities_lab/templates/pages/home.html:130
 msgid "A large community"
 msgstr "Une vaste communauté"
 
+#: african_cities_lab/templates/pages/home.html:133
 msgid ""
 "An active community of more than 5000 professionals concerned with the "
 "living environment that African cities will offer to their populations in "
@@ -858,9 +1067,11 @@ msgstr ""
 "Une communauté active de plus de 5000 professionnels soucieux du cadre de "
 "vie que les villes africaines offriront à leurs populations en 2050"
 
+#: african_cities_lab/templates/pages/home.html:145
 msgid "Our MOOCs"
 msgstr "Nos MOOCs"
 
+#: african_cities_lab/templates/pages/home.html:147
 msgid ""
 "We cover all aspects of urban development, considering into account issues "
 "related to housing, employment, transportation, access to water, sanitation, "
@@ -870,35 +1081,74 @@ msgstr ""
 "une approche qui tient compte des problématiques transverses de logement, "
 "transport, accès à l’eau et l’électricité, emploi et la qualité de vie."
 
+#: african_cities_lab/templates/pages/home.html:173
+#: african_cities_lab/templates/pages/home.html:259
+#: african_cities_lab/templates/pages/moocs_index_page.html:43
+#: african_cities_lab/templates/pages/moocs_index_page.html:129
+#: african_cities_lab/templates/pages/moocs_index_page.html:216
 msgid "UM6P - Université Mohammed VI Polytechnique"
 msgstr ""
 
+#: african_cities_lab/templates/pages/home.html:181
+#: african_cities_lab/templates/pages/home.html:213
+#: african_cities_lab/templates/pages/home.html:240
+#: african_cities_lab/templates/pages/home.html:269
+#: african_cities_lab/templates/pages/home.html:298
+#: african_cities_lab/templates/pages/home.html:327
+#: african_cities_lab/templates/pages/moocs_index_page.html:51
+#: african_cities_lab/templates/pages/moocs_index_page.html:83
+#: african_cities_lab/templates/pages/moocs_index_page.html:110
+#: african_cities_lab/templates/pages/moocs_index_page.html:139
+#: african_cities_lab/templates/pages/moocs_index_page.html:168
+#: african_cities_lab/templates/pages/moocs_index_page.html:197
+#: african_cities_lab/templates/pages/moocs_index_page.html:226
+#: african_cities_lab/templates/pages/moocs_index_page.html:255
+#: african_cities_lab/templates/pages/moocs_index_page.html:282
+#: african_cities_lab/templates/pages/moocs_index_page.html:309
+#: african_cities_lab/templates/pages/moocs_index_page.html:336
+#: african_cities_lab/templates/pages/moocs_index_page.html:363
+#: african_cities_lab/templates/pages/moocs_index_page.html:392
+#: african_cities_lab/templates/pages/moocs_index_page.html:419
+#: african_cities_lab/templates/pages/moocs_index_page.html:446
 msgid "Start date:"
 msgstr "Début :"
 
+#: african_cities_lab/templates/pages/home.html:232
+#: african_cities_lab/templates/pages/moocs_index_page.html:102
 msgid "Water Research Commission"
 msgstr ""
 
+#: african_cities_lab/templates/pages/home.html:237
+#: african_cities_lab/templates/pages/moocs_index_page.html:107
 msgid "Introduction to New Sanitation Systems, Economies & Markets"
 msgstr ""
 
+#: african_cities_lab/templates/pages/home.html:265
+#: african_cities_lab/templates/pages/moocs_index_page.html:135
 msgid "African Urban Economic Development in the Context of Climate Change"
 msgstr ""
 
+#: african_cities_lab/templates/pages/home.html:317
+#: african_cities_lab/templates/pages/moocs_index_page.html:187
 msgid "Centre for Affordable Housing Finance in Africa"
 msgstr ""
 
+#: african_cities_lab/templates/pages/home.html:323
+#: african_cities_lab/templates/pages/moocs_index_page.html:193
 msgid ""
 "Making housing markets work in African cities: understanding the role and "
 "opportunity of finance"
 msgstr ""
 
+#: african_cities_lab/templates/pages/home.html:332
 msgid "More MOOCs"
 msgstr "Voir plus"
 
+#: african_cities_lab/templates/pages/home.html:399
 msgid "Focus Areas"
 msgstr "Thématiques"
 
+#: african_cities_lab/templates/pages/home.html:401
 msgid ""
 "8 topics that address cross-cutting and multidisciplinary issues of urban "
 "transformation in Africa in an environmentally safe way."
@@ -906,93 +1156,130 @@ msgstr ""
 "8 thématiques qui abordent des sujets transverses et pluridisciplinaires de "
 "la mutation urbaine en Afrique, dans une démarche environnementale durable."
 
+#: african_cities_lab/templates/pages/home.html:410
 msgid "Housing"
 msgstr "Logement"
 
+#: african_cities_lab/templates/pages/home.html:415
 msgid "Digital"
 msgstr "Digital"
 
+#: african_cities_lab/templates/pages/home.html:420
 msgid "Building"
 msgstr "Construction"
 
+#: african_cities_lab/templates/pages/home.html:425
 msgid "Climate change"
 msgstr "Changement climatique"
 
+#: african_cities_lab/templates/pages/home.html:430
 msgid "Planning"
 msgstr "Planification"
 
+#: african_cities_lab/templates/pages/home.html:435
 msgid "Urban System"
 msgstr "Système urbain"
 
+#: african_cities_lab/templates/pages/home.html:440
 msgid "Gouvernance"
 msgstr "Gouvernance"
 
+#: african_cities_lab/templates/pages/home.html:445
 msgid "Energy"
 msgstr "Énergie"
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:13
 msgid "Explore our MOOCs"
 msgstr "Explorez nos MOOCs"
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:15
 msgid ""
 "Drive the change and contribute to the transformation of tomorrow’s African "
 "cities"
 msgstr "Devenez acteur de la transformation des villes africaines de demain"
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:222
 msgid ""
 "La gestion des données urbaines : clé du développement de villes africaines "
 "plus intelligentes"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:245
 msgid "UN-HABITAT"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:251
 msgid "Digital Governance for inclusive and sustainable African cities"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:274
+#: african_cities_lab/templates/pages/moocs_index_page.html:301
+#: african_cities_lab/templates/pages/moocs_index_page.html:328
+#: african_cities_lab/templates/pages/moocs_index_page.html:355
+#: african_cities_lab/templates/pages/moocs_index_page.html:382
+#: african_cities_lab/templates/pages/moocs_index_page.html:411
+#: african_cities_lab/templates/pages/moocs_index_page.html:438
 msgid "École Polytechnique Fédérale de Lausanne"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:279
 msgid "Villes africaines 2 : Planification et gestion urbaines"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:306
 msgid "Systèmes d'Information Géographique - Partie 1"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:333
 msgid "Systèmes d'Information Géographique - Partie 2"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:360
 msgid "Villes africaines : Mobilités et transports urbains"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:388
 msgid "Villes africaines : Environnement et enjeux de développement durable"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:416
 msgid "Villes africaines : Restructuration des quartiers précaires"
 msgstr ""
 
+#: african_cities_lab/templates/pages/moocs_index_page.html:443
 msgid "Villes africaines : Introduction à la planification urbaine"
 msgstr ""
 
+#: african_cities_lab/users/admin.py:23
 msgid "Personal info"
 msgstr "Personal info"
 
+#: african_cities_lab/users/admin.py:25
 msgid "Permissions"
 msgstr "Permissions"
 
+#: african_cities_lab/users/admin.py:36
 msgid "Important dates"
 msgstr "Dates importantes"
 
+#: african_cities_lab/users/apps.py:7
 msgid "Users"
 msgstr "Utilisateurs"
 
+#: african_cities_lab/users/forms.py:28
+#: african_cities_lab/users/tests/test_forms.py:35
 msgid "This email has already been taken."
 msgstr "Ce nom d'utilisateur est déjà pris."
 
+#: african_cities_lab/users/models.py:17
 msgid "Name of User"
 msgstr "Nom de l'utilisateur"
 
+#: african_cities_lab/users/models.py:20
 msgid "email address"
 msgstr "Adresses e-mail"
 
+#: african_cities_lab/users/tests/test_views.py:71
+#: african_cities_lab/users/views.py:23
 msgid "Information successfully updated"
 msgstr "Informations mises à jour avec succès"
