@@ -13,6 +13,11 @@ from wagtailmetadata.models import MetadataPageMixin
 
 from african_cities_lab.home.layouts import (
     AgendaLayout,
+    BlankSpace,
+    Button,
+    Map,
+    ParagraphLayout,
+    SectionLayout,
     SpeakerLayout,
 )
 
@@ -196,7 +201,7 @@ class TeamPage(MetadataPageMixin, Page):
                 "overview",
                 blocks.StructBlock(
                     [
-                        ("image", ImageChooserBlock()),
+                        ("image", ImageChooserBlock(required=False)),
                         ("heading", blocks.CharBlock(required=False)),
                         ("paragraph", blocks.RichTextBlock(required=False)),
                     ]
@@ -322,8 +327,19 @@ class FlatPage(MetadataPageMixin, Page):
     banner_image = models.ForeignKey(
         "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
     )
-    body = RichTextField(features=["h2", "h3", "h4", "ol", "ul", "bold", "italic", "link"], blank=True)
-
+    body = StreamField(
+        [
+            ("section_layout", SectionLayout()),
+            ("paragraph_layout", ParagraphLayout()),
+            ("button", Button()),
+            ("map", Map()),
+            ("blank_space", BlankSpace()),
+            ("speaker_layout", SpeakerLayout()),
+            ("agenda_layout", AgendaLayout()),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -333,7 +349,6 @@ class FlatPage(MetadataPageMixin, Page):
         ),
         FieldPanel("body"),
     ]
-
     parent_page_type = [
         "home.HomePage",
     ]
@@ -407,6 +422,11 @@ class WebinarsIndexPage(MetadataPageMixin, Page):
     parent_page_type = [
         "home.HomePage",
     ]
+
+    def get_children(self):
+        qs = super().get_children()
+        qs = qs.order_by("-first_published_at")
+        return qs
 
     class Meta:
         verbose_name = "Webinar Index Page"
@@ -485,6 +505,11 @@ class FormationsIndexPage(MetadataPageMixin, Page):
         "home.HomePage",
     ]
 
+    def get_children(self):
+        qs = super().get_children()
+        qs = qs.order_by("-first_published_at")
+        return qs
+
     class Meta:
         verbose_name = "Formation Index Page"
 
@@ -498,7 +523,7 @@ class FormationsPage(MetadataPageMixin, Page):
     starting_date = models.DateField("Starting date", null=True, blank=True)
     ending_date = models.DateField("Ending date", null=True, blank=True)
     location = models.CharField(max_length=100, blank=True, null=True)
-    register_link = models.URLField(blank=True)
+    register_link = models.CharField(blank=True)
 
     overview = RichTextField(features=["h2", "h3", "h4", "ol", "ul", "bold", "italic", "link"], blank=True)
 
