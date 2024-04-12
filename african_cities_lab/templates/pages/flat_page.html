@@ -29,10 +29,10 @@
            {% if img.url %} width="195" height="380" src="{% static 'images/assets/outline-sharpe-right.svg' %}" {% else %} width="400" height="205" src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}" {% endif %} />
     </div>
   </section>
-  <section class="py-5">
-    <div class="container p-md-5">
+  <section>
+    <div class="container-fluid p-md-5">
       <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 page-content">{{ page.body|richtext }}</div>
+        <div class="col-12 col-lg-11 page-content">{{ page.body }}</div>
       </div>
     </div>
   </section>
