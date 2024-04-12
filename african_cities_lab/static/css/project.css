@@ -624,6 +624,10 @@ a:hover {
   background-color: #fff;
   color: #be3712 !important;
 }
+b,
+strong {
+  font-weight: bold !important;
+}
 *::-moz-selection {
   background: #000;
   color: #fff;
@@ -694,7 +698,7 @@ a:hover {
 .btn__primary {
   background-color: #be3712;
   border-color: #be3712;
-  color: #fff;
+  color: #fff !important;
   font-weight: 500;
 }
 .btn__secondary {
@@ -1141,10 +1145,26 @@ a.nav-link:hover {
 .page-content .h5,
 .page-content h6,
 .page-content .h6 {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  padding-top: 1.5rem;
+}
+.block-agenda_layout h1,
+.block-agenda_layout .h1,
+.block-agenda_layout h2,
+.block-agenda_layout .h2,
+.block-agenda_layout h3,
+.block-agenda_layout .h3,
+.block-agenda_layout h4,
+.block-agenda_layout .h4,
+.block-agenda_layout h5,
+.block-agenda_layout .h5,
+.block-agenda_layout h6,
+.block-agenda_layout .h6 {
+  margin-bottom: 0 !important;
+  padding-top: 0;
 }
 .page-content a {
-  color: #be3712 !important;
+  color: #be3712;
 }
 .page-content img.richtext-image.full-width {
   width: 100%;
@@ -1576,7 +1596,6 @@ a.novashare-button {
 }
 .event-item .event-item__img,
 .formation-item .formation-item__img {
-  vertical-align: top;
   display: block;
   max-width: 100%;
   margin-bottom: 20px;
@@ -1586,26 +1605,18 @@ a.novashare-button {
 .formation-item .formation-item__img a {
   display: block;
   max-width: 100%;
-  vertical-align: top;
   position: relative;
 }
 .event-item .event-item__img a div,
 .formation-item .formation-item__img a div {
-  padding-bottom: 60%;
   position: relative;
   display: block;
-  height: 0;
   width: 100%;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 .event-item .event-item__img a div > img,
 .formation-item .formation-item__img a div > img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 265px;
   display: block;
   object-fit: cover;
   -o-object-fit: cover;
@@ -1617,7 +1628,6 @@ a.novashare-button {
   -o-transition: 0.3s ease;
   transition: 0.3s ease;
 }
-
 .page-banner .event-title {
   font-size: 2.25em;
   padding-top: 0.5rem;
@@ -1645,7 +1655,18 @@ a.novashare-button {
 /*----------------------------------------*/
 /*  Static page event
 /*----------------------------------------*/
-.speakers-social-lists > li:not(:last-child) {
+.block-speaker_layout .speakers-card h4.speaker-title,
+.block-speaker_layout .speakers-card p,
+.block-speaker_layout .mdl-speaker-details h2,
+.block-speaker_layout .mdl-speaker-details p {
+  margin-bottom: 0 !important;
+  padding-top: 0;
+}
+.block-speaker_layout
+  .mdl-speaker-details
+  h2
+  .speakers-social-lists
+  > li:not(:last-child) {
   margin-right: 16px;
 }
 .speakers-card .card-header::before {
@@ -1763,11 +1784,13 @@ ul.event-meta {
   padding: 0.5rem 0 0.5rem 1.5rem;
   margin-left: 1.5rem;
 }
-.event-agenda .nav-tabs {
+.event-agenda .nav-tabs,
+.block-agenda_layout .nav-tabs {
   border-radius: 0;
   margin-top: 2rem;
 }
-.event-agenda .nav-tabs .nav-link {
+.event-agenda .nav-tabs .nav-link,
+.block-agenda_layout .nav-tabs .nav-link {
   font-size: 18px;
   border: unset;
   background-color: #402781;
@@ -1781,7 +1804,12 @@ ul.event-meta {
   border-top-left-radius: unset;
   border-top-right-radius: unset;
 }
-.event-agenda .nav-tabs .nav-link.active {
+.block-agenda_layout .nav-tabs .nav-link h4 {
+  margin-bottom: 0 !important;
+  padding-top: 0;
+}
+.event-agenda .nav-tabs .nav-link.active,
+.block-agenda_layout .nav-tabs .nav-link.active {
   border-color: unset;
   background-color: transparent !important;
 }
@@ -1822,6 +1850,13 @@ ul.event-meta {
 .team-box .box-container {
   padding: 40px 30px;
   font-size: 16px;
+}
+.team-box .box-footer {
+  padding: 0 30px;
+  font-size: 16px;
+}
+.team-box .box-footer a {
+  color: #be3712;
 }
 .team-box.cooperator {
   border: none;

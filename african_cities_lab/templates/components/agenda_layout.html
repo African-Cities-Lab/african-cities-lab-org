@@ -40,12 +40,12 @@
       {% endif %}
       {% for content in session.timeline %}
         <div class="row border-bottom_grey">
-          <div class="col-12 col-sm-7 p-3 py-4">
+          <div class="col-12 col-sm-8 p-3 py-4">
             {% if content.time %}<div class="meta-badge">{{ content.time }}</div>{% endif %}
             <div class="font-size-18 font-weight-500">{{ content.title }}</div>
             <div>{{ content.description }}</div>
           </div>
-          <div class="col-12 col-sm-5 p-3 py-4">
+          <div class="col-12 col-sm-4 p-3 py-4">
             {% if content.speakers %}
               <h4 class="font-size-16">
                 <span class="speaker-ico"></span>{% translate "Speaker(s):" %}
