@@ -35,13 +35,15 @@ class HomePageCarouselImages(Orderable):
     )
     banner_title = models.CharField(max_length=100, blank=False, null=True)
     banner_subtitle = models.TextField(blank=True)
-    banner_cta = models.URLField(blank=False)
+    banner_cta = models.URLField(blank=False, help_text="Put URL here")
+    banner_button_label = models.CharField(blank=False, default="Learn more")
 
     panels = [
         FieldPanel("carousel_image"),
         FieldPanel("banner_title"),
         FieldPanel("banner_subtitle"),
         FieldPanel("banner_cta"),
+        FieldPanel("banner_button_label"),
     ]
 
 
@@ -208,7 +210,7 @@ class TeamPage(MetadataPageMixin, Page):
                 ),
             ),
         ],
-        min_num=1,
+        min_num=0,
         max_num=1,
         blank=True,
         use_json_field=True,
@@ -229,6 +231,7 @@ class TeamPage(MetadataPageMixin, Page):
                                     [
                                         ("image", ImageChooserBlock(required=False)),
                                         ("name", blocks.CharBlock(required=False)),
+                                        ("institution", blocks.CharBlock(required=False)),
                                         (
                                             "function",
                                             blocks.CharBlock(required=False),
@@ -243,6 +246,10 @@ class TeamPage(MetadataPageMixin, Page):
                                                     ]
                                                 ),
                                             ),
+                                        ),
+                                        (
+                                            "biography",
+                                            blocks.RichTextBlock(required=False),
                                         ),
                                     ],
                                 ),

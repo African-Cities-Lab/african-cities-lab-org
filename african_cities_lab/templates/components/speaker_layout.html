@@ -2,7 +2,7 @@
 
 <div class="row event-speakers__list py-3">
   {% for speaker in self.speakers %}
-    <div class="col-lg-3 col-md-4 speakers-card">
+    <div class="col-lg-3 col-md-4 speakers-card mb-4">
       <div class="card border-0 bg-transparent">
         <div class="card-header p-0">
           <a href="#speaker-modal-{{ forloop.counter }}"
@@ -74,12 +74,12 @@
                     <div class="mdl-speaker-details p-3">
                       <h2>{{ speaker.name }}</h2>
                       <p class="my-2">{{ speaker.designation }}</p>
-                      {% if speaker.value.social_links %}
+                      {% if speaker.social_links %}
                         <ul class="mdl-speaker-social-list list-inline m-0">
-                          {% for social in speaker.value.social_links %}
+                          {% for social in speaker.social_links %}
                             <li class="list-inline-item">
-                              <a href="{{ social.value.profile_link }}">
-                                <i class="{{ social.value.fa_class }}"></i>
+                              <a href="{{ social.profile_link }}">
+                                <i class="{{ social.fa_class }}"></i>
                               </a>
                             </li>
                           {% endfor %}

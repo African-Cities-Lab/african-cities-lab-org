@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 19:28+0200\n"
+"POT-Creation-Date: 2024-04-12 17:24+0200\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,7 +17,6 @@ msgstr ""
 #: african_cities_lab/home/templates/home/formations_index_page.html:73
 #: african_cities_lab/home/templates/home/webinars_index_page.html:58
 #: african_cities_lab/templates/pages/about.html:257
-#: african_cities_lab/templates/pages/home.html:29
 msgid "Learn more"
 msgstr "En savoir plus"
 
