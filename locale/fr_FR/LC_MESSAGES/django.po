@@ -7,12 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-12 17:24+0200\n"
+"POT-Creation-Date: 2024-05-07 14:00+0200\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: african_cities_lab/home/templates/home/blog_page.html:55
+msgid "Tags:"
+msgstr "Étiquettes"
+
+#: african_cities_lab/home/templates/home/blog_page.html:68
+msgid "Share"
+msgstr "Partager"
+
+#: african_cities_lab/home/templates/home/blog_tag_index_page.html:39
+msgid "Showing pages tagged"
+msgstr "Afficher les articles étiquetées"
+
+#: african_cities_lab/home/templates/home/blog_tag_index_page.html:83
+msgid "No pages found with that tag."
+msgstr "Aucune page n'a été trouvée avec cette étiquette."
 
 #: african_cities_lab/home/templates/home/formations_index_page.html:73
 #: african_cities_lab/home/templates/home/webinars_index_page.html:58
@@ -443,6 +459,31 @@ msgstr "Suivez-nous"
 #: african_cities_lab/templates/components/footer.html:73
 msgid "African Cities Lab. All rights reserved. "
 msgstr "African Cities Lab. Tous droits réservés."
+
+#: african_cities_lab/templates/components/mooc_card.html:29
+#: african_cities_lab/templates/pages/home.html:181
+#: african_cities_lab/templates/pages/home.html:213
+#: african_cities_lab/templates/pages/home.html:240
+#: african_cities_lab/templates/pages/home.html:269
+#: african_cities_lab/templates/pages/home.html:298
+#: african_cities_lab/templates/pages/home.html:327
+#: african_cities_lab/templates/pages/moocs_index_page.html:51
+#: african_cities_lab/templates/pages/moocs_index_page.html:83
+#: african_cities_lab/templates/pages/moocs_index_page.html:110
+#: african_cities_lab/templates/pages/moocs_index_page.html:139
+#: african_cities_lab/templates/pages/moocs_index_page.html:168
+#: african_cities_lab/templates/pages/moocs_index_page.html:197
+#: african_cities_lab/templates/pages/moocs_index_page.html:226
+#: african_cities_lab/templates/pages/moocs_index_page.html:255
+#: african_cities_lab/templates/pages/moocs_index_page.html:282
+#: african_cities_lab/templates/pages/moocs_index_page.html:309
+#: african_cities_lab/templates/pages/moocs_index_page.html:336
+#: african_cities_lab/templates/pages/moocs_index_page.html:363
+#: african_cities_lab/templates/pages/moocs_index_page.html:392
+#: african_cities_lab/templates/pages/moocs_index_page.html:419
+#: african_cities_lab/templates/pages/moocs_index_page.html:446
+msgid "Start date:"
+msgstr "Début :"
 
 #: african_cities_lab/templates/components/navbar.html:32
 #: african_cities_lab/templates/components/navbar.html:82
@@ -1088,30 +1129,6 @@ msgstr ""
 msgid "UM6P - Université Mohammed VI Polytechnique"
 msgstr ""
 
-#: african_cities_lab/templates/pages/home.html:181
-#: african_cities_lab/templates/pages/home.html:213
-#: african_cities_lab/templates/pages/home.html:240
-#: african_cities_lab/templates/pages/home.html:269
-#: african_cities_lab/templates/pages/home.html:298
-#: african_cities_lab/templates/pages/home.html:327
-#: african_cities_lab/templates/pages/moocs_index_page.html:51
-#: african_cities_lab/templates/pages/moocs_index_page.html:83
-#: african_cities_lab/templates/pages/moocs_index_page.html:110
-#: african_cities_lab/templates/pages/moocs_index_page.html:139
-#: african_cities_lab/templates/pages/moocs_index_page.html:168
-#: african_cities_lab/templates/pages/moocs_index_page.html:197
-#: african_cities_lab/templates/pages/moocs_index_page.html:226
-#: african_cities_lab/templates/pages/moocs_index_page.html:255
-#: african_cities_lab/templates/pages/moocs_index_page.html:282
-#: african_cities_lab/templates/pages/moocs_index_page.html:309
-#: african_cities_lab/templates/pages/moocs_index_page.html:336
-#: african_cities_lab/templates/pages/moocs_index_page.html:363
-#: african_cities_lab/templates/pages/moocs_index_page.html:392
-#: african_cities_lab/templates/pages/moocs_index_page.html:419
-#: african_cities_lab/templates/pages/moocs_index_page.html:446
-msgid "Start date:"
-msgstr "Début :"
-
 #: african_cities_lab/templates/pages/home.html:232
 #: african_cities_lab/templates/pages/moocs_index_page.html:102
 msgid "Water Research Commission"
@@ -1143,11 +1160,20 @@ msgstr ""
 msgid "More MOOCs"
 msgstr "Voir plus"
 
-#: african_cities_lab/templates/pages/home.html:399
+#: african_cities_lab/templates/pages/home.html:401
+msgid "Latest Articles"
+msgstr ""
+
+#: african_cities_lab/templates/pages/home.html:404
+#: african_cities_lab/templates/pages/home.html:449
+msgid "All articles"
+msgstr "Voir tout"
+
+#: african_cities_lab/templates/pages/home.html:461
 msgid "Focus Areas"
 msgstr "Thématiques"
 
-#: african_cities_lab/templates/pages/home.html:401
+#: african_cities_lab/templates/pages/home.html:463
 msgid ""
 "8 topics that address cross-cutting and multidisciplinary issues of urban "
 "transformation in Africa in an environmentally safe way."
@@ -1155,35 +1181,35 @@ msgstr ""
 "8 thématiques qui abordent des sujets transverses et pluridisciplinaires de "
 "la mutation urbaine en Afrique, dans une démarche environnementale durable."
 
-#: african_cities_lab/templates/pages/home.html:410
+#: african_cities_lab/templates/pages/home.html:472
 msgid "Housing"
 msgstr "Logement"
 
-#: african_cities_lab/templates/pages/home.html:415
+#: african_cities_lab/templates/pages/home.html:477
 msgid "Digital"
 msgstr "Digital"
 
-#: african_cities_lab/templates/pages/home.html:420
+#: african_cities_lab/templates/pages/home.html:482
 msgid "Building"
 msgstr "Construction"
 
-#: african_cities_lab/templates/pages/home.html:425
+#: african_cities_lab/templates/pages/home.html:487
 msgid "Climate change"
 msgstr "Changement climatique"
 
-#: african_cities_lab/templates/pages/home.html:430
+#: african_cities_lab/templates/pages/home.html:492
 msgid "Planning"
 msgstr "Planification"
 
-#: african_cities_lab/templates/pages/home.html:435
+#: african_cities_lab/templates/pages/home.html:497
 msgid "Urban System"
 msgstr "Système urbain"
 
-#: african_cities_lab/templates/pages/home.html:440
+#: african_cities_lab/templates/pages/home.html:502
 msgid "Gouvernance"
 msgstr "Gouvernance"
 
-#: african_cities_lab/templates/pages/home.html:445
+#: african_cities_lab/templates/pages/home.html:507
 msgid "Energy"
 msgstr "Énergie"
 
@@ -1248,6 +1274,10 @@ msgstr ""
 #: african_cities_lab/templates/pages/moocs_index_page.html:443
 msgid "Villes africaines : Introduction à la planification urbaine"
 msgstr ""
+
+#: african_cities_lab/templates/pages/team.html:98
+msgid "Read more"
+msgstr "En savoir plus"
 
 #: african_cities_lab/users/admin.py:23
 msgid "Personal info"
