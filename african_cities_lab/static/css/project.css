@@ -885,7 +885,7 @@ strong {
   display: inline-block;
   margin: 0 10px 8px 0;
   border-radius: 0.25rem;
-  background: #c9c9c9;
+  background: #f2f6f9;
   padding: 6px 15px;
 }
 .form-asterix {
@@ -1101,7 +1101,7 @@ a.nav-link:hover {
   object-fit: cover;
 }
 .post-hero__container {
-  background-color: #442683;
+  background-color: #402781;
   position: relative;
   min-height: 350px;
   border-style: solid;
@@ -1187,8 +1187,9 @@ a.nav-link:hover {
 .widget-share__title {
   align-items: center;
   flex-direction: row;
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 1em;
+  color: #999999;
 }
 .novashare-buttons-wrapper {
   align-items: center;
@@ -1202,6 +1203,7 @@ a.novashare-button {
   font-size: 22px;
   justify-content: center;
   padding: 0.75rem;
+  color: #999999;
 }
 /*----------------------------------------*/
 /*  HomePage
@@ -1356,7 +1358,7 @@ a.novashare-button {
   border: unset;
   transition: 0.5s;
   width: 500px;
-  min-height: 402px;
+  min-height: 350px;
   box-shadow:
     0 1px 10px 0 rgb(0 0 0 / 13%),
     inset 0 0 0 1px rgb(255 255 255 / 75%);
@@ -1403,8 +1405,9 @@ a.novashare-button {
   padding-left: 10px;
   border-right: 1px solid #dfe1e6;
 }
-.moocs-card .moocsCard-university .university__label {
-  margin-left: 12px;
+.moocs-card .moocsCard-university .university__label,
+.moocs-card .moocsCard-date-display span {
+  margin-left: 8px;
 }
 .card-body__divider {
   border-top: 0.5px solid #dfe1e6;
@@ -1412,10 +1415,12 @@ a.novashare-button {
 .moocs-card .card-footer {
   font-size: 16px;
   background-color: #fff;
-  color: #be3712;
   border-bottom: 6px solid #402781;
   border-top: unset;
   padding: 0.75rem 1.85rem;
+}
+.moocs-card .card-footer .moocsCard-university span {
+  color: #be3712;
 }
 .article-card .card {
   min-height: 430px;

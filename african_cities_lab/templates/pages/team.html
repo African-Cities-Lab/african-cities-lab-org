@@ -65,7 +65,7 @@
           </div>
           <div class="container-xl">
             {% if block.value.board_director %}
-              <div class="row mb-5">
+              <div class="row justify-content-center mb-5">
                 {% for director in block.value.board_director %}
                   <div class="col-xl-3 col-md-4">
                     <div class="team-box">
@@ -91,19 +91,18 @@
                       </div>
                       <div class="box-footer">
                         <a ref="#speaker-modal-{{ forloop.counter }}"
-                            type="button"
-                            class="d-block"
-                            data-bs-toggle="modal"
-                            data-bs-target="#speaker-modal-{{ forloop.counter }}">
-                              {% translate "Read more" %}</a>
+                           type="button"
+                           class="d-block"
+                           data-bs-toggle="modal"
+                           data-bs-target="#speaker-modal-{{ forloop.counter }}">{% translate "Read more" %}</a>
                       </div>
                       <!-- .box-container -->
                       <!-- Modal -->
                       <div class="modal fade"
-                            id="speaker-modal-{{ forloop.counter }}"
-                            tabindex="-1"
-                            aria-labelledby="speaker-modal-{{ forloop.counter }}"
-                            aria-hidden="true">
+                           id="speaker-modal-{{ forloop.counter }}"
+                           tabindex="-1"
+                           aria-labelledby="speaker-modal-{{ forloop.counter }}"
+                           aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                           <div class="modal-content">
                             <div class="modal-header border-0">
