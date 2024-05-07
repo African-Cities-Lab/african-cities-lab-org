@@ -1,5 +1,8 @@
+from django import forms
 from django.db import models
-from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from taggit.models import TaggedItemBase
 from wagtail import blocks
 from wagtail.admin.panels import (
     FieldPanel,
@@ -9,6 +12,7 @@ from wagtail.admin.panels import (
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Locale, Orderable, Page
+from wagtail.snippets.models import register_snippet
 from wagtailmetadata.models import MetadataPageMixin
 
 from african_cities_lab.home.layouts import (
@@ -56,6 +60,7 @@ class HomePage(MetadataPageMixin, Page):
         "home.AboutPage",
         "home.MoocIndexPage",
         "home.EventsPage",
+        "home.BlogIndexPage",
         "home.WebinarsIndexPage",
         "home.FormationsIndexPage",
         "home.ContestPage",
@@ -84,9 +89,14 @@ class HomePage(MetadataPageMixin, Page):
         latest_webinars = (
             WebinarsPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
         )
+        # Get last 3 articles
+        latest_articles = (
+            BlogPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
+        )
         # Update template context
         context = super().get_context(request)
         context["latest_webinars"] = latest_webinars
+        context["latest_articles"] = latest_articles
 
         return context
 
@@ -532,7 +542,7 @@ class FormationsPage(MetadataPageMixin, Page):
     location = models.CharField(max_length=100, blank=True, null=True)
     register_link = models.CharField(blank=True)
 
-    overview = RichTextField(features=["h2", "h3", "h4", "ol", "ul", "bold", "italic", "link"], blank=True)
+    overview = RichTextField(blank=True)
 
     agenda = StreamField(
         [
@@ -578,3 +588,143 @@ class FormationsPage(MetadataPageMixin, Page):
     def get_split_end_month(self):
         month = self.ending_date.strftime("%B")
         return month[:3]
+
+
+class BlogIndexPage(MetadataPageMixin, Page):
+    banner_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("banner_image"),
+            ],
+            heading="Hero section",
+        ),
+    ]
+
+    subpage_types = ["home.BlogPage"]
+
+    parent_page_type = [
+        "home.HomePage",
+    ]
+
+    def get_context(self, request):
+        # Get current language
+        current_lang = Locale.get_active()
+
+        # Get categories
+        categories = BlogCategory.objects.filter(language=current_lang).all()
+
+        # Update template context
+        context = super().get_context(request)
+        context["categories"] = categories
+        return context
+
+    def get_children(self):
+        qs = super().get_children()
+        qs = qs.order_by("-first_published_at")
+        return qs
+
+    class Meta:
+        verbose_name = "Blog Index Page"
+
+
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey("BlogPage", related_name="tagged_items", on_delete=models.CASCADE)
+
+
+class BlogTagIndexPage(Page):
+    def get_context(self, request):
+        # Get current language
+        current_lang = Locale.get_active()
+        # Filter by tag
+        tag = request.GET.get("tag")
+        blogpages = BlogPage.objects.filter(tags__name=tag, locale=current_lang).live().public()
+
+        # Update template context
+        context = super().get_context(request)
+        context["blogpages"] = blogpages
+        return context
+
+
+class BlogPage(MetadataPageMixin, Page):
+    summary = models.TextField(blank=False)
+    main_image = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.PROTECT,
+    )
+    date = models.DateField("Post date")
+    body = RichTextField(blank=True)
+    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
+    categories = ParentalManyToManyField("BlogCategory", blank=True)
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("date"),
+                FieldPanel("tags"),
+                FieldPanel("categories", widget=forms.CheckboxSelectMultiple),
+            ],
+            heading="Blog details",
+        ),
+        FieldPanel("summary"),
+        FieldPanel("main_image"),
+        FieldPanel("body"),
+    ]
+
+    parent_page_type = [
+        "home.BlogIndexPage",
+    ]
+
+    def __str__(self):
+        return self.title
+
+
+class LangChoices(models.TextChoices):
+    ENGLISH = ("English",)
+    FRENCH = "French"
+
+
+@register_snippet
+class BlogCategory(models.Model):
+    name = models.CharField(max_length=255)
+    language = models.TextField(
+        max_length=10,
+        choices=LangChoices.choices,
+        default=LangChoices.ENGLISH,
+    )
+    slug = models.SlugField(
+        verbose_name="slug",
+        allow_unicode=True,
+        null=True,
+        max_length=255,
+        help_text="A slug to identify posts by this category",
+    )
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("language", widget=forms.Select),
+        FieldPanel("slug"),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Blog Category"
+        verbose_name_plural = "blog categories"
+        ordering = ["name"]
+
+
+class Mooc(models.Model):
+    name = models.CharField(blank=False)
+    url = models.SlugField(blank=False, unique=True)
+    organisation = models.CharField(blank=False)
+    course_image = models.ImageField(upload_to="moocs", blank=False, null=True)
+    start_date = models.CharField(max_length=50, blank=False)
+    start_display = models.CharField(max_length=50, blank=False)
+
+    def __str__(self):
+        return self.name

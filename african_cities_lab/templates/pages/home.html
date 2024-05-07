@@ -391,6 +391,53 @@
     </section>
   {% endif %}
   <!--Display 3 latest webinars-->
+  <!-- Start News Section -->
+  {% if latest_articles %}
+    <section class="latest-article pt-5">
+      <div class="container-xl py-5">
+        <div class="row">
+          <div class="col-12 col-md-8">
+            <h3 class="section-title">{% translate "Latest Articles" %}</h3>
+          </div>
+        </div>
+        <div class="row latest-article__list mt-3">
+          {% for article in latest_articles %}
+            <div class="col-12 col-lg-4 col-md-6 article-card">
+              <div class="card border-0">
+                <div class="card-header article-preview-img p-0">
+                  <a href="{{ article.url }}" class="d-block">{% image article.main_image original %}</a>
+                </div>
+                <div class="card-body">
+                  <div class="article-meta d-flex align-items-center">
+                    <div class="article__date">{{ article.date }}</div>
+                    <div class="fas fa-circle text_primary mx-2" style="font-size: 5px;"></div>
+                    <div class="article__category">
+                      {% with categories=article.categories.all %}
+                        {% if categories %}
+                          <ul class="list-inline mb-0">
+                            {% for category in categories %}
+                              <li class="post-info__item list-inline-item mr-2">
+                                <span class="text_primary font-weight-bold">{{ category.name }}</span>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      {% endwith %}
+                    </div>
+                  </div>
+                  <h5 class="article-title py-3">
+                    <a href="{{ article.url }}" class="d-block text-black">{{ article.title }}</a>
+                  </h5>
+                  <div class="article-exerpt">{{ article.summary }}</div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+  <!-- End News Section -->
   <!-- Start Topics Area-->
   <section class="explore-topic position-relative bg-light__ py-5">
     <div class="container-lg p-md-5">
