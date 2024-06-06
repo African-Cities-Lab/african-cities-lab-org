@@ -8,6 +8,7 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
+from wagtail_transfer import urls as wagtailtransfer_urls
 
 urlpatterns = [
     # Language Redirect
@@ -41,6 +42,8 @@ urlpatterns = [
     # Alternatively, if you want Wagtail pages to be served from a subpath of your site,
     # rather than the site root:
     #    url(r"^pages/", include(wagtail_urls)),
+    # wagtail transfer
+    path("^wagtail-transfer/", include(wagtailtransfer_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = urlpatterns + i18n_patterns(
