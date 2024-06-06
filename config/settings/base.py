@@ -112,6 +112,7 @@ WAGTAIL_APPS = [
     "modelcluster",
     "taggit",
     "wagtailmetadata",
+    "wagtail_transfer",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -363,3 +364,18 @@ WAGTAILEMBEDS_RESPONSIVE_HTML = True
 # ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "African Cities Lab"
 WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"
+
+# Wagtail transfer
+# ------------------------------------------------------------------------------
+# WAGTAILTRANSFER_SOURCES = {
+#     "staging": {
+#         "BASE_URL": "staging.africancitieslab.org",
+#         "SECRET_KEY": env("WAGTAILTRANSFER_STAGING_SECRET_KEY"),
+#     },
+#     "production": {
+#         "BASE_URL": "africancitieslab.org",
+#         "SECRET_KEY": env("WAGTAILTRANSFER_PRODUCTION_SECRET_KEY"),
+#     },
+# }
+
+WAGTAILTRANSFER_SECRET_KEY = env("WAGTAILTRANSFER_SECRET_KEY", default="some-key")
