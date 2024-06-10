@@ -363,3 +363,15 @@ WAGTAILEMBEDS_RESPONSIVE_HTML = True
 # ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "African Cities Lab"
 WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"
+
+# Wagtail localize
+# ------------------------------------------------------------------------------
+WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+    "CLASS": "wagtail_localize.machine_translators.deepl.DeepLTranslator",
+    "OPTIONS": {
+        "AUTH_KEY": env("DEEPL_AUTH_KEY", default=""),
+        # Optional DeepL API setting. Accepts "default", "prefer_more" or "prefer_less".\
+        # For more information see the API docs https://www.deepl.com/docs-api/translate-text/
+        "FORMALITY": "default",
+    },
+}
