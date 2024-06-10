@@ -48,96 +48,42 @@
     </div>
   </section>
   <!-- End Slider-->
-  <section class="position-relative">
-    <div class="container-lg py-5">
-      <div class="row d-flex justify-content-center p-md-5">
-        <div class="col-12 col-lg-8 text-center">
-          <h3 class="section-title">{% translate "What we offer" %}</h3>
-          <div class="my-3 font-size-16 text-align-left__max-576">
-            {% translate "Top-quality educational content to understand and provide practical solutions to the challenges presented by the accelerated urbanization of the African continent." %}
+  {% if self.offers_section %}
+    {% for block in self.offers_section %}
+      {% if block.block_type == "our_offers" %}
+        <section class="position-relative">
+          <div class="container-lg py-5">
+            <div class="row d-flex justify-content-center p-md-5">
+              <div class="col-12 col-lg-8 text-center">
+                <h3 class="section-title">{{ block.value.heading }}</h3>
+                <div class="my-3 font-size-16 text-align-left__max-576">{{ block.value.sub_paragraph }}</div>
+              </div>
+            </div>
+            {% if block.value.icon_box %}
+              <div class="row pb-4 justify-content-center">
+                {% for icon_box in block.value.icon_box %}
+                  <div class="col-12 col-lg-3 col-md-5 icon-box">
+                    <div class="card">
+                      {% image icon_box.icon original as icon %}
+                      <div class="card-header icon-container">
+                        <img alt="{{ icon.alt }}" src="{{ icon.url }}" height="62" width="62">
+                      </div>
+                      <div class="card-body">
+                        <div class="icon-box__title">
+                          <h6>{{ icon_box.title }}</h6>
+                        </div>
+                        <div class="icon-box__desc text-align-left__max-576">{{ icon_box.content }}</div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
-        </div>
-      </div>
-      <div class="row pb-4 justify-content-center">
-        <div class="col-12 col-lg-3 col-md-5 icon-box">
-          <div class="card">
-            <div class="card-header icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   xmlns:xlink="http://www.w3.org/1999/xlink"
-                   width="62"
-                   height="62"
-                   viewBox="0 0 20 20">
-                <path fill="#BE3712" d="M14.5 18h-10c-0.276 0-0.5-0.224-0.5-0.5s0.224-0.5 0.5-0.5h10c0.276 0 0.5 0.224 0.5 0.5s-0.224 0.5-0.5 0.5z" />
-                <path fill="#BE3712" d="M16.5 3c-0.276 0-0.5 0.224-0.5 0.5v15c0 0.276-0.224 0.5-0.5 0.5h-11c-0.827 0-1.5-0.673-1.5-1.5s0.673-1.5 1.5-1.5h9c0.827 0 1.5-0.673 1.5-1.5v-12c0-0.827-0.673-1.5-1.5-1.5h-10c-0.827 0-1.5 0.673-1.5 1.5v15c0 1.378 1.122 2.5 2.5 2.5h11c0.827 0 1.5-0.673 1.5-1.5v-15c0-0.276-0.224-0.5-0.5-0.5zM3.5 2h10c0.276 0 0.5 0.224 0.5 0.5v12c0 0.276-0.224 0.5-0.5 0.5h-9c-0.562 0-1.082 0.187-1.5 0.501v-13.001c0-0.276 0.224-0.5 0.5-0.5z" />
-              </svg>
-            </div>
-            <div class="card-body">
-              <div class="icon-box__title">
-                <h6>{% translate "MOOCs" %}</h6>
-              </div>
-              <div class="icon-box__desc text-align-left__max-576">
-                {% translate "A catalog of online training courses delivered by experts in the fields of urban planning on topics from eco-construction to sustainable development." %}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-3 col-md-5 icon-box">
-          <div class="card">
-            <div class="card-header icon-container">
-              <svg version="1.1"
-                   xmlns="http://www.w3.org/2000/svg"
-                   xmlns:xlink="http://www.w3.org/1999/xlink"
-                   width="62"
-                   height="62"
-                   viewBox="0 0 17 17">
-                <path d="M17 16.488c-0.063-2.687-2.778-4.999-6.521-5.609v-1.374c0.492-0.473 0.842-1.207 1.071-1.833 0.332-0.166 0.624-0.536 0.794-1.033 0.238-0.688 0.146-1.323-0.206-1.629 0.028-0.238 0.046-0.481 0.015-0.723-0.079-0.663 0.065-1.038 0.194-1.368 0.106-0.277 0.229-0.591 0.106-0.945-0.442-1.273-1.727-1.974-3.618-1.974l-0.264 0.005c-1.313 0.047-1.707 0.6-1.971 1.115-0.033 0.062-0.077 0.146-0.077 0.151-1.712 0.153-1.697 1.569-1.684 2.707l0.003 0.369c0 0.205 0.009 0.419 0.026 0.639-0.425 0.3-0.504 1.005-0.179 1.737 0.185 0.415 0.452 0.729 0.749 0.892 0.243 0.674 0.625 1.47 1.179 1.965v1.283c-3.798 0.589-6.554 2.907-6.617 5.625l-0.012 0.512h17.023l-0.011-0.512zM1.054 16c0.392-2.094 2.859-3.821 6.122-4.204l0.441-0.052v-2.666l-0.216-0.15c-0.393-0.272-0.791-0.947-1.090-1.851l-0.083-0.281-0.294-0.051c-0.053-0.019-0.208-0.153-0.33-0.428-0.075-0.168-0.104-0.312-0.112-0.415l0.51 0.143-0.096-0.749c-0.042-0.33-0.064-0.651-0.064-0.95l-0.003-0.38c-0.015-1.341 0.051-1.634 0.773-1.699 0.545-0.048 0.752-0.449 0.876-0.689 0.15-0.292 0.28-0.543 1.12-0.574l0.227-0.004c0.829 0 2.279 0.169 2.669 1.282 0 0.043-0.052 0.177-0.090 0.275-0.145 0.374-0.364 0.939-0.254 1.853 0.024 0.188-0.007 0.424-0.040 0.675l-0.089 0.805 0.441-0.048c0.008 0.104-0.004 0.269-0.075 0.472-0.097 0.289-0.242 0.438-0.237 0.454h-0.36l-0.114 0.342c-0.283 0.853-0.65 1.497-1.009 1.768l-0.198 0.15v2.726l0.438 0.055c3.211 0.401 5.641 2.123 6.030 4.192h-14.893z" fill="#BE3712" />
-              </svg>
-            </div>
-            <div class="card-body">
-              <div class="icon-box__title">
-                <h6>{% translate "Learn from the experts" %}</h6>
-              </div>
-              <div class="icon-box__desc">{% translate "Experts on urban and sustainable development in Africa" %}</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-3 col-md-5 icon-box">
-          <div class="card ">
-            <div class="card-header icon-container">
-              <img alt="icon"
-                   src="{% static 'images/assets/university.svg' %}"
-                   height="62"
-                   width="62" />
-            </div>
-            <div class="card-body">
-              <div class="icon-box__title">
-                <h6>{% translate "6 African Universities" %}</h6>
-              </div>
-              <div class="icon-box__desc">{% translate "Partners of the African Cities Lab's knowledge hub " %}</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-3 col-md-5 icon-box">
-          <div class="card">
-            <div class="card-header icon-container">
-              <img alt="icon"
-                   src="{% static 'images/assets/people-ico.svg' %}"
-                   height="78"
-                   width="78" />
-            </div>
-            <div class="card-body">
-              <div class="icon-box__title">
-                <h6>{% translate "A large community" %}</h6>
-              </div>
-              <div class="icon-box__desc">
-                {% translate "An active community of more than 5000 professionals concerned with the living environment that African cities will offer to their populations in 2050" %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
   <section class="featured-moocs position-relative bg_secondary py-5">
     <div class="container-lg pt-5 ">
       <div class="row d-flex justify-content-center">
@@ -439,64 +385,45 @@
   {% endif %}
   <!-- End News Section -->
   <!-- Start Topics Area-->
-  <section class="explore-topic position-relative bg-light__ py-5">
-    <div class="container-lg p-md-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-12 col-lg-8 text-center">
-          <h3 class="section-title mb-3">{% translate "Focus Areas" %}</h3>
-          <div class="font-size-16 my-3 text-align-left__max-576">
-            {% translate "8 topics that address cross-cutting and multidisciplinary issues of urban transformation in Africa in an environmentally safe way." %}
+  {% if self.focus_areas_section %}
+    {% for block in self.focus_areas_section %}
+      {% if block.block_type == "focus_areas" %}
+        <section class="explore-topic position-relative bg-light__ py-5">
+          <div class="container-lg p-md-5">
+            <div class="row d-flex justify-content-center">
+              <div class="col-12 col-lg-8 text-center">
+                <h3 class="section-title mb-3">{{ block.value.heading }}</h3>
+                <div class="font-size-16 my-3 text-align-left__max-576">{{ block.value.sub_paragraph }}</div>
+              </div>
+            </div>
+            {% if block.value.items %}
+              <div class="row justify-content-center py-3">
+
+                  <div class="col-12 col-lg-10">
+                    <div class="row justify-content-center">
+                      {% for item in block.value.items %}
+                        <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
+                          {% if item.link %}
+                            <p class="card card-link topic-item">
+                              <a href="{{ item.link }}">{{ item.title }}</a>
+                            </p>
+                            {% else %}
+                            <p class="card topic-item">
+                              <span>{{ item.title }}</span>
+                            </p>
+                            {% endif %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+              </div>
+            {% endif %}
           </div>
-        </div>
-      </div>
-      <div class="row justify-content-center py-3">
-        <div class="col-12 col-lg-10">
-          <div class="row justify-content-center">
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Housing" %}</span>
-              </p>
-            </div>
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Digital" %}</span>
-              </p>
-            </div>
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Building" %}</span>
-              </p>
-            </div>
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Climate change" %}</span>
-              </p>
-            </div>
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Planning" %}</span>
-              </p>
-            </div>
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Urban System" %}</span>
-              </p>
-            </div>
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Gouvernance" %}</span>
-              </p>
-            </div>
-            <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-              <p class="card topic-item">
-                <span>{% translate "Energy" %}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
   <!-- End Topics Section -->
   <!-- Partners Wrapper-->
   <section class="our-partners">

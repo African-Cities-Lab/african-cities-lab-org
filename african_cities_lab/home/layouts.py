@@ -2,13 +2,13 @@ from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
 
-class SectionLayout(blocks.StructBlock):
+class SectionTitleLayout(blocks.StructBlock):
     text_align = blocks.CharBlock(required=False, help_text="center")
     section_title = blocks.CharBlock()
     section_subparagraph = blocks.TextBlock(required=False)
 
     class Meta:
-        template = "components/section_layout.html"
+        template = "components/section_title_layout.html"
 
 
 class ParagraphLayout(blocks.StructBlock):
@@ -121,3 +121,96 @@ class SpeakerLayout(blocks.StructBlock):
 
     class Meta:
         template = "components/speaker_layout.html"
+
+
+class InfiniteScrollingText(blocks.StructBlock):
+    infinite_scrolling_text = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("content_text", blocks.CharBlock()),
+            ],
+        ),
+    )
+
+    class Meta:
+        template = "components/infinite_scrolling_text.html"
+
+
+class ContentBox(blocks.StructBlock):
+    content_box = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("box_title", blocks.CharBlock()),
+                ("box_content", blocks.TextBlock(required=False)),
+                ("box_link", blocks.URLBlock(required=False)),
+            ],
+        ),
+    )
+
+    class Meta:
+        template = "components/content_box_layout.html"
+
+
+class IconBox(blocks.StructBlock):
+    icon_box = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("icon", ImageChooserBlock()),
+                ("title", blocks.CharBlock()),
+                ("content", blocks.TextBlock(required=False)),
+                ("link", blocks.URLBlock(required=False)),
+            ]
+        )
+    )
+
+    class Meta:
+        template = "components/icon_box_layout.html"
+
+
+class Counter(blocks.StructBlock):
+    counter = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("counter_number", blocks.IntegerBlock(help_text="Only numerical values allowed.")),
+                ("symbol", blocks.CharBlock(required=False)),
+                ("counter_units", blocks.CharBlock(help_text="Ex: coffee drinks, projects, clients.")),
+            ]
+        )
+    )
+
+    class Meta:
+        template = "components/counter_layout.html"
+
+
+class Timeline(blocks.StructBlock):
+    timeline_item = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("date", blocks.CharBlock()),
+                ("title", blocks.CharBlock()),
+                ("description", blocks.TextBlock(required=False)),
+                ("link", blocks.URLBlock(required=False)),
+            ]
+        )
+    )
+
+    class Meta:
+        template = "components/timeline_layout.html"
+
+
+class Section(blocks.StructBlock):
+    section = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ("background_color", blocks.CharBlock(required=False)),
+                ("background_image", ImageChooserBlock(required=False)),
+                ("title", blocks.CharBlock()),
+                ("paragraph", blocks.RichTextBlock(required=False)),
+                ("link", blocks.URLBlock(required=False)),
+                ("content_alignement", blocks.CharBlock(required=False, help_text="center")),
+            ]
+        )
+    )
+
+    class Meta:
+        template = "components/row_layout.html"
