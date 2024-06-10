@@ -21,8 +21,14 @@ from african_cities_lab.home.layouts import (
     Button,
     Map,
     ParagraphLayout,
-    SectionLayout,
+    SectionTitleLayout,
     SpeakerLayout,
+    InfiniteScrollingText,
+    ContentBox,
+    IconBox,
+    Counter,
+    Timeline,
+    Section,
 )
 
 
@@ -74,11 +80,75 @@ class HomePage(MetadataPageMixin, Page):
     ]
     max_count = 1
 
+    offers_section = StreamField(
+        [
+            (
+                "our_offers",
+                blocks.StructBlock(
+                    [
+                        ("heading", blocks.CharBlock(required=False)),
+                        ("sub_paragraph", blocks.RichTextBlock(required=False)),
+                        (
+                            "icon_box",
+                            blocks.ListBlock(
+                                blocks.StructBlock(
+                                    [
+                                        ("icon", ImageChooserBlock(required=False)),
+                                        ("title", blocks.CharBlock(required=False)),
+                                        ("content", blocks.TextBlock(required=False)),
+                                    ],
+                                ),
+                            ),
+                        ),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    focus_areas_section = StreamField(
+        [
+            (
+                "focus_areas",
+                blocks.StructBlock(
+                    [
+                        ("heading", blocks.CharBlock(required=False)),
+                        ("sub_paragraph", blocks.RichTextBlock(required=False)),
+                        (
+                            "items",
+                            blocks.ListBlock(
+                                blocks.StructBlock(
+                                    [
+                                        ("title", blocks.CharBlock()),
+                                        (
+                                            "link",
+                                            blocks.URLBlock(required=False),
+                                        ),
+                                    ],
+                                ),
+                            ),
+                        ),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [InlinePanel("carousel_images", max_num=3, min_num=1, label="Caroussel Images")],
             heading="Slider",
         ),
+        FieldPanel("offers_section"),
+        FieldPanel("focus_areas_section"),
     ]
 
     def get_context(self, request):
@@ -112,14 +182,102 @@ class AboutPage(MetadataPageMixin, Page):
     banner_image = models.ForeignKey(
         "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
     )
+    page_title = models.CharField(blank=True, null=True)
+    infinite_scrolling_text = StreamField(
+        [
+            ("infinite_scrolling_text", InfiniteScrollingText()),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    mission_session = StreamField(
+        [
+            (
+                "mission",
+                blocks.StructBlock(
+                    [
+                        ("image", ImageChooserBlock(required=False)),
+                        ("title", blocks.CharBlock(required=False)),
+                        ("subtitle", blocks.TextBlock(required=False)),
+                        ("paragraph", blocks.RichTextBlock(required=False)),
+                        ("counter", Counter()),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    content_box_section = StreamField(
+        [
+            (
+                "content_box",
+                blocks.StructBlock(
+                    [
+                        ("title", blocks.CharBlock(required=False)),
+                        ("subtitle", blocks.RichTextBlock(required=False)),
+                        ("content_box", ContentBox()),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    timeline_section = StreamField(
+        [
+            (
+                "timeline",
+                blocks.StructBlock(
+                    [
+                        ("title", blocks.CharBlock(required=False)),
+                        ("subtitle", blocks.RichTextBlock(required=False)),
+                        ("timeline_item", Timeline()),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    section_layout = StreamField(
+        [
+            (
+                "section",
+                blocks.StructBlock(
+                    [
+                        ("section", Section()),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
+            [FieldPanel("banner_image"), FieldPanel("page_title"), FieldPanel("infinite_scrolling_text")],
             heading="Hero section",
         ),
+        FieldPanel("mission_session"),
+        FieldPanel("content_box_section"),
+        FieldPanel("timeline_section"),
+        FieldPanel("section_layout"),
     ]
 
     parent_page_type = [
@@ -346,9 +504,15 @@ class FlatPage(MetadataPageMixin, Page):
     )
     body = StreamField(
         [
-            ("section_layout", SectionLayout()),
+            ("section", Section()),
+            ("section_title_layout", SectionTitleLayout()),
             ("paragraph_layout", ParagraphLayout()),
             ("button", Button()),
+            ("infinite_scrolling_text", InfiniteScrollingText()),
+            ("counter", Counter()),
+            ("content_box", ContentBox()),
+            ("icon_box", IconBox()),
+            ("timeline_item", Timeline()),
             ("map", Map()),
             ("blank_space", BlankSpace()),
             ("speaker_layout", SpeakerLayout()),
