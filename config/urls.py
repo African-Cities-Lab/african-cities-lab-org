@@ -43,7 +43,7 @@ urlpatterns = [
     # rather than the site root:
     #    url(r"^pages/", include(wagtail_urls)),
     # wagtail transfer
-    path("^wagtail-transfer/", include(wagtailtransfer_urls)),
+    path("wagtail-transfer/", include(wagtailtransfer_urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = urlpatterns + i18n_patterns(
