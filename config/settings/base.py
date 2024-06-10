@@ -112,7 +112,6 @@ WAGTAIL_APPS = [
     "modelcluster",
     "taggit",
     "wagtailmetadata",
-    "wagtail_transfer",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -365,17 +364,14 @@ WAGTAILEMBEDS_RESPONSIVE_HTML = True
 WAGTAIL_SITE_NAME = "African Cities Lab"
 WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"
 
-# Wagtail transfer
+# Wagtail localize
 # ------------------------------------------------------------------------------
-# WAGTAILTRANSFER_SOURCES = {
-#     "staging": {
-#         "BASE_URL": "staging.africancitieslab.org",
-#         "SECRET_KEY": env("WAGTAILTRANSFER_STAGING_SECRET_KEY"),
-#     },
-#     "production": {
-#         "BASE_URL": "africancitieslab.org",
-#         "SECRET_KEY": env("WAGTAILTRANSFER_PRODUCTION_SECRET_KEY"),
-#     },
-# }
-
-WAGTAILTRANSFER_SECRET_KEY = env("WAGTAILTRANSFER_SECRET_KEY", default="some-key")
+WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+    "CLASS": "wagtail_localize.machine_translators.deepl.DeepLTranslator",
+    "OPTIONS": {
+        "AUTH_KEY": env("DEEPL_AUTH_KEY", default=""),
+        # Optional DeepL API setting. Accepts "default", "prefer_more" or "prefer_less".\
+        # For more information see the API docs https://www.deepl.com/docs-api/translate-text/
+        "FORMALITY": "default",
+    },
+}
