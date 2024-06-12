@@ -9,22 +9,14 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
+from african_cities_lab.home import views
+
 urlpatterns = [
     # Language Redirect
     path("i18n/", include("django.conf.urls.i18n")),
-    # path("", TemplateView.as_view(
-    #       template_name="pages/home.html"),
-    #       name="home"),
-    # path("about/", TemplateView.as_view(
-    #       template_name="pages/about.html"),
-    #       name="about"),
-    # path("webinars/", TemplateView.as_view(
-    #   template_name="webinars/webinars_index_page.html"),
-    #   name="webinars"),
-    # path("formations/", TemplateView.as_view(
-    #       template_name="formations/formations_index_page.html"),
-    #       name="formations"),
     # Django Admin, use {% url 'admin:index' %}
+    path("newsletter/subscription/", views.suscribe_newsletter, name="suscribe-newsletter"),
+    path("event-subscription/", views.subscribe_event, name="subscribe-event"),
     path(settings.ADMIN_URL, admin.site.urls),
     # Wagtail Admin
     path(settings.WAGTAIL_ADMIN_URL, include(wagtailadmin_urls)),

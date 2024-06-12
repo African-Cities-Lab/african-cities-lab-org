@@ -13,12 +13,14 @@
       <div class="row py-5">
         <div class="col-12 col-lg-6 col-md-10">
           <div class="position-relative h1">
-            {% if self.page_title %}{{ self.page_title }}{% else %}{{ self.title }}{% endif %}
+            {% if self.page_title %}
+              {{ self.page_title }}
+            {% else %}
+              {{ self.title }}
+            {% endif %}
             <span class="dash-accent"></span>
           </div>
-          <div class="infinite_scrolling_text__wrapper">
-            {{ self.infinite_scrolling_text }}
-          </div>
+          <div class="infinite_scrolling_text__wrapper">{{ self.infinite_scrolling_text }}</div>
         </div>
       </div>
     </div>
@@ -30,7 +32,6 @@
            src="{% static 'images/assets/outline-sharpe-right.svg' %}" />
     </div>
   </section>
-
   {% if self.mission_session %}
     <section class="p-lg-5 position-relative">
       <div class="container-xl">
@@ -40,20 +41,17 @@
               <div class="col-12 col-md-3 col-lg-4 p-5 p-md-3 order-1 order-md-0">
                 {% image block.value.image original as img %}
                 <img class="about-mission__img"
-                    width="408"
-                    height="500"
-                    alt="about-mission"
-                    src="{{ img.url }}" />
+                     width="408"
+                     height="500"
+                     alt="about-mission"
+                     src="{{ img.url }}" />
               </div>
               <div class="col-12 col-md-9 col-lg-8 order-0 order-md-1 pt-5 px-lg-5">
                 <h2 class="section-title mb-3">{{ block.value.title }}</h2>
                 <h3 class="text_primary">{{ block.value.subtitle }}</h3>
                 <div class="py-3 font-size-16 text-justify">{{ block.value.paragraph }}</div>
-
                 {% if block.value.counter %}
-                  <div class="banner-counter">
-                    {% include_block block.value.counter %}
-                  </div>
+                  <div class="banner-counter">{% include_block block.value.counter %}</div>
                 {% endif %}
               </div>
             </div>
@@ -62,7 +60,6 @@
       </div>
     </section>
   {% endif %}
-
   {% if self.content_box_section %}
     <section>
       {% for block in self.content_box_section %}
@@ -76,15 +73,12 @@
             </div>
           </div>
           {% if block.value.content_box %}
-            <div class="container-xl">
-              {% include_block block.value.content_box %}
-            </div>
+            <div class="container-xl">{% include_block block.value.content_box %}</div>
           {% endif %}
         {% endif %}
       {% endfor %}
     </section>
   {% endif %}
-
   {% if self.timeline_section %}
     <section>
       {% for block in self.timeline_section %}
@@ -97,19 +91,13 @@
               </div>
             </div>
           </div>
-
           {% if block.value.timeline_item %}
-            <div class="container-fluid">
-              <div class="timeline-wrapper" dir="ltr">
-                {% include_block block.value.timeline_item %}
-              </div>
-            </div>
+            <div class="container-fluid">{% include_block block.value.timeline_item %}</div>
           {% endif %}
         {% endif %}
       {% endfor %}
     </section>
   {% endif %}
-
   {% if self.section_layout %}
     {% for block in self.section_layout %}
       {% if block.block_type == "section" %}
@@ -117,7 +105,6 @@
       {% endif %}
     {% endfor %}
   {% endif %}
-
   <!-- Start Partners Area-->
   <section class="our-partners">
     {% include "components/partners_section.html" %}

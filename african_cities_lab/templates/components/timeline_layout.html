@@ -1,13 +1,14 @@
-
-<ul class="list-inline timeline-container">
+<div class="timeline-wrapper" dir="ltr">
+  <ul class="list-inline timeline-container">
     {% for timeline_item in self.timeline_item %}
-        <li class="list-inline-item timeline-step">
-            <a href="{{ timeline_item.link }}" class="px-2 d-block">
-                <div class="timeline-pointer"></div>
-                <h5>{{ timeline_item.date }}</h5>
-                <span>{{ timeline_item.title }}</span>
-                <p class="text-muted">{{ timeline_item.description }}</p>
-            </a>
-        </li>
+      <li class="list-inline-item timeline-step">
+        <a href="{{ timeline_item.link }}" class="px-2 d-block">
+          <div class="timeline-pointer"></div>
+          <h5>{{ timeline_item.date }}</h5>
+          <span>{{ timeline_item.title }}</span>
+          <p class="text-muted">{{ timeline_item.description }}</p>
+        </a>
+      </li>
     {% endfor %}
-</ul>
+  </ul>
+</div>

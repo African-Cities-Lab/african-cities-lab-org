@@ -29,13 +29,39 @@
            {% if img.url %} width="195" height="380" src="{% static 'images/assets/outline-sharpe-right.svg' %}" {% else %} width="400" height="205" src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}" {% endif %} />
     </div>
   </section>
-  <section>
-    <div class="container-fluid p-md-5">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-11 page-content">{{ page.body }}</div>
+  {% with blocks=self.body %}
+    <section>
+      <div class="container-fluid p-md-5">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-11 page-content">
+            {% for block in blocks %}
+              {% if block.block_type == "section_title_layout" %}
+                {% include_block block.value %}
+              {% elif block.block_type == "paragraph_layout" %}
+                {% include_block block.value %}
+              {% elif block.block_type == "button" %}
+                {% include_block block.value %}
+              {% elif block.block_type == "content_box" %}
+                {{ block }}
+              {% elif block.block_type == "icon_box" %}
+                {{ block }}
+              {% elif block.block_type == "timeline_item" %}
+                {{ block }}
+              {% elif block.block_type == "map" %}
+                {% include_block block.value %}
+              {% elif block.block_type == "blank_space" %}
+                {% include_block block.value %}
+              {% elif block.block_type == "speaker_layout" %}
+                {{ block }}
+              {% elif block.block_type == "agenda_layout" %}
+                {{ block }}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  {% endwith %}
   <!-- Start Partners Area-->
   <section class="our-partners">
     {% include "components/partners_section.html" %}

@@ -66,7 +66,7 @@
                     <div class="card">
                       {% image icon_box.icon original as icon %}
                       <div class="card-header icon-container">
-                        <img alt="{{ icon.alt }}" src="{{ icon.url }}" height="62" width="62">
+                        <img alt="{{ icon.alt }}" src="{{ icon.url }}" height="62" width="62" />
                       </div>
                       <div class="card-body">
                         <div class="icon-box__title">
@@ -398,25 +398,23 @@
             </div>
             {% if block.value.items %}
               <div class="row justify-content-center py-3">
-
-                  <div class="col-12 col-lg-10">
-                    <div class="row justify-content-center">
-                      {% for item in block.value.items %}
-                        <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
-                          {% if item.link %}
-                            <p class="card card-link topic-item">
-                              <a href="{{ item.link }}">{{ item.title }}</a>
-                            </p>
-                            {% else %}
-                            <p class="card topic-item">
-                              <span>{{ item.title }}</span>
-                            </p>
-                            {% endif %}
-                        </div>
-                      {% endfor %}
-                    </div>
+                <div class="col-12 col-lg-10">
+                  <div class="row justify-content-center">
+                    {% for item in block.value.items %}
+                      <div class="topic-wrapper col-lg-3 col-md-4 col-sm-4 col-6 p-3">
+                        {% if item.link %}
+                          <p class="card card-link topic-item">
+                            <a href="{{ item.link }}">{{ item.title }}</a>
+                          </p>
+                        {% else %}
+                          <p class="card topic-item">
+                            <span>{{ item.title }}</span>
+                          </p>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
                   </div>
-
+                </div>
               </div>
             {% endif %}
           </div>

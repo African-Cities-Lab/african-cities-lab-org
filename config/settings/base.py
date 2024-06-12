@@ -75,6 +75,7 @@ DJANGO_APPS = [
     "django.contrib.admin",
     "django.forms",
     "django.contrib.sitemaps",
+    "django_countries",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -99,6 +100,7 @@ WAGTAIL_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.modeladmin",
+    "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -215,6 +217,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "wagtailmenus.context_processors.wagtailmenus",
                 "african_cities_lab.users.context_processors.allauth_settings",
+                "wagtail.contrib.settings.context_processors.settings",
             ],
         },
     }
@@ -357,13 +360,16 @@ WEBPACK_LOADER = {
 
 # Wagtail stuff
 # ------------------------------------------------------------------------------
-WAGTAILEMBEDS_RESPONSIVE_HTML = True
+
 WAGTAIL_SITE_NAME = "African Cities Lab"
 WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"
 WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
-
-# Wagtail localize
-# ------------------------------------------------------------------------------
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
+WAGTAILMENUS_FLAT_MENUS_HANDLE_CHOICES = (
+    ("footer_menu_1", "FOOTERMENU_1"),
+    ("footer_menu_2", "FOOTERMENU_2"),
+    ("footer_menu_3", "FOOTERMENU_3"),
+)
 WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
     "CLASS": "wagtail_localize.machine_translators.deepl.DeepLTranslator",
     "OPTIONS": {
@@ -373,3 +379,12 @@ WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
         "FORMALITY": "default",
     },
 }
+
+# Mailchimp
+# ------------------------------------------------------------------------------
+MAILCHIMP_API_KEY = env("MAILCHIMP_API_KEY", default="")
+MAILCHIMP_DATA_CENTER = env("MAILCHIMP_DATA_CENTER", default="")
+MAILCHIMP_WEBINAR_EN_LIST_ID = env("MAILCHIMP_WEBINAR_EN_LIST_ID", default="")
+MAILCHIMP_WEBINAR_FR_LIST_ID = env("MAILCHIMP_WEBINAR_FR_LIST_ID", default="")
+MAILCHIMP_NEWSLETTER_FR_ID = env("MAILCHIMP_NEWSLETTER_FR_ID", default="")
+MAILCHIMP_NEWSLETTER_EN_ID = env("MAILCHIMP_NEWSLETTER_EN_ID", default="")
