@@ -9,6 +9,10 @@ from wagtail.admin.panels import (
     InlinePanel,
     MultiFieldPanel,
 )
+from wagtail.contrib.settings.models import (
+    BaseGenericSetting,
+    register_setting,
+)
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Locale, Orderable, Page
@@ -19,16 +23,16 @@ from african_cities_lab.home.layouts import (
     AgendaLayout,
     BlankSpace,
     Button,
+    ContentBox,
+    Counter,
+    IconBox,
+    InfiniteScrollingText,
     Map,
     ParagraphLayout,
+    Section,
     SectionTitleLayout,
     SpeakerLayout,
-    InfiniteScrollingText,
-    ContentBox,
-    IconBox,
-    Counter,
     Timeline,
-    Section,
 )
 
 
@@ -73,6 +77,7 @@ class HomePage(MetadataPageMixin, Page):
         "home.ContactPage",
         "home.TeamPage",
         "home.FlatPage",
+        "home.NewsletterPage",
     ]
 
     parent_page_type = [
@@ -338,6 +343,57 @@ class ContactPage(MetadataPageMixin, Page):
         "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
     )
 
+    contacts_informations_section = StreamField(
+        [
+            (
+                "contacts_informations",
+                blocks.StructBlock(
+                    [
+                        ("session_title", blocks.CharBlock(required=False)),
+                        ("paragraph", blocks.TextBlock(required=False)),
+                        (
+                            "contacts_card",
+                            blocks.StructBlock(
+                                [
+                                    ("title", blocks.CharBlock(required=False)),
+                                    ("content", blocks.RichTextBlock(required=False)),
+                                ]
+                            ),
+                        ),
+                        (
+                            "social_media_card",
+                            blocks.StructBlock(
+                                [
+                                    ("title", blocks.CharBlock(required=False)),
+                                    ("content", blocks.RichTextBlock(required=False)),
+                                ]
+                            ),
+                        ),
+                    ]
+                ),
+            )
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    additional_informations_section = StreamField(
+        [
+            ("section_title_layout", SectionTitleLayout()),
+            ("paragraph_layout", ParagraphLayout()),
+            ("section", Section()),
+            ("button", Button()),
+            ("content_box", ContentBox()),
+            ("icon_box", IconBox()),
+            ("map", Map()),
+            ("blank_space", BlankSpace()),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -345,6 +401,8 @@ class ContactPage(MetadataPageMixin, Page):
             ],
             heading="Hero section",
         ),
+        FieldPanel("contacts_informations_section"),
+        FieldPanel("additional_informations_section"),
     ]
 
     parent_page_type = [
@@ -892,3 +950,52 @@ class Mooc(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class NewsletterPage(MetadataPageMixin, Page):
+    """NewsletterPage page model."""
+
+    template = "pages/newsletter.html"
+
+    banner_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("banner_image"),
+            ],
+            heading="Hero section",
+        ),
+    ]
+    parent_page_type = [
+        "home.HomePage",
+    ]
+    max_count = 1
+
+    class Meta:
+        verbose_name = "Newsletter Page"
+
+
+@register_setting
+class SocialMediaSettings(BaseGenericSetting):
+    twitter_url = models.URLField(verbose_name="Twitter URL", blank=True)
+    linkedin_url = models.URLField(verbose_name="Linkedin URL", blank=True)
+    facebook_url = models.URLField(verbose_name="Facebook URL", blank=True)
+    instagram_url = models.URLField(verbose_name="Instagram URL", blank=True)
+    medium_url = models.URLField(verbose_name="Medium URL", blank=True)
+    youtube_url = models.URLField(verbose_name="Youtube URL", blank=True)
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("twitter_url"),
+                FieldPanel("linkedin_url"),
+                FieldPanel("facebook_url"),
+                FieldPanel("instagram_url"),
+                FieldPanel("medium_url"),
+                FieldPanel("youtube_url"),
+            ],
+            "Social settings",
+        ),
+    ]

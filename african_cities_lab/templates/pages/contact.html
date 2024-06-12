@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags wagtailsettings_tags %}
 
 {% block meta_tag %}
   {% meta_tags %}
@@ -27,70 +27,109 @@
            src="{% static 'images/assets/outline-sharpe-bottom.svg' %}" />
     </div>
   </section>
-  <section>
-    <div class="container-xl py-5 p-md-5">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
-          <h3 class="section-title text-center">{% translate "We’re here to help" %}</h3>
-          <div class="text-center font-size-18 mb-5">
-            {% translate "Please contact us in case of any query. We are happy to help" %}.
-          </div>
-          <div class="row justify-content-around">
-            <div class="col-12 col-md-6 icon-box m-3 m-md-0">
-              <div class="card w-100 box_shadow_level_1">
-                <div class="card-body">
-                  <div class="icon-box__title">
-                    <h5 class="pb-3">{% translate "Email Us To Get Information" %}</h5>
+  {% if self.contacts_informations_section %}
+    <section>
+      <div class="container-xl py-5 p-md-5">
+        {% for block in self.contacts_informations_section %}
+          {% if block.block_type == "contacts_informations" %}
+            <div class="row justify-content-center">
+              <div class="col-12 col-lg-10">
+                <h3 class="section-title text-center">{{ block.value.session_title }}</h3>
+                <div class="text-center font-size-16 mb-5">{{ block.value.paragraph }}</div>
+                <div class="row justify-content-around">
+                  <div class="col-12 col-md-6 icon-box m-3 m-md-0">
+                    <div class="card w-100 box_shadow_level_1">
+                      <div class="card-body">
+                        <div class="icon-box__title">
+                          <h5 class="pb-3">{{ block.value.contacts_card.title }}</h5>
+                        </div>
+                        <div class="icon-box__desc font-size-16">{{ block.value.contacts_card.content }}</div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="icon-box__desc font-size-16">
-                    <a class="d-block text_primary"
-                       href="mailto:contact@africancitieslab.org">
-                      <strong>contact@africancitieslab.org</strong>
-                    </a>
+                  <div class="col-12 col-md-6 icon-box m-3 m-md-0">
+                    <div class="card w-100 box_shadow_level_1">
+                      <div class="card-body">
+                        <div class="icon-box__title">
+                          <h5>{{ block.value.social_media_card.title }}</h5>
+                        </div>
+                        <div class="icon-box__desc font-size-16">
+                          {{ block.value.social_media_card.content }}
+                          {% with twitter_url=settings.home.SocialMediaSettings.twitter_url linkedin_url=settings.home.SocialMediaSettings.linkedin_url facebook_url=settings.home.SocialMediaSettings.facebook_url instagram_url=settings.home.SocialMediaSettings.instagram_url medium_url=settings.home.SocialMediaSettings.medium_url youtube_url=settings.home.SocialMediaSettings.youtube_url %}
+                            {% if twitter_url or linkedin_url or facebook_url or instagram_url or medium_url or youtube_url %}
+                              <div class="social-media__wrapper my-3">
+                                <ul class="list-inline">
+                                  {% if twitter_url %}
+                                    <li class="list-inline-item mx-2">
+                                      <a href="{{ twitter_url }}" class="text_primary"><i class="fab fa-twitter"></i></a>
+                                    </li>
+                                  {% endif %}
+                                  {% if linkedin_url %}
+                                    <li class="list-inline-item mx-2">
+                                      <a href="{{ linkedin_url }}" class="text_primary"><i class="fab fa-linkedin-in"></i></a>
+                                    </li>
+                                  {% endif %}
+                                  {% if facebook_url %}
+                                    <li class="list-inline-item mx-2">
+                                      <a href="{{ facebook_url }}" class="text_primary"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                  {% endif %}
+                                  {% if instagram_url %}
+                                    <li class="list-inline-item mx-2">
+                                      <a href="{{ instagram_url }}" class="text_primary"><i class="fab fa-instagram"></i></a>
+                                    </li>
+                                  {% endif %}
+                                  {% if medium_url %}
+                                    <li class="list-inline-item mx-2">
+                                      <a href="{{ medium_url }}" class="text_primary"><i class="fab fa-medium-m"></i></a>
+                                    </li>
+                                  {% endif %}
+                                  {% if youtube_url %}
+                                    <li class="list-inline-item mx-2">
+                                      <a href="{{ youtube_url }}" class="text_primary"><i class="fab fa-youtube"></i></a>
+                                    </li>
+                                  {% endif %}
+                                </ul>
+                              </div>
+                            {% endif %}
+                          {% endwith %}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-6 icon-box m-3 m-md-0">
-              <div class="card w-100 box_shadow_level_1">
-                <div class="card-body">
-                  <div class="icon-box__title">
-                    <h5>{% translate "Follow us on" %}</h5>
-                  </div>
-                  <div class="icon-box__desc social-media__wrapper">
-                    <ul class="list-inline my-3">
-                      <li class="list-inline-item mx-2">
-                        <a href="https://twitter.com/AfricanCtiesLab" class="text_primary"><i class="fab fa-twitter"></i></a>
-                      </li>
-                      <li class="list-inline-item mx-2">
-                        <a href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true"
-                           class="text_primary"><i class="fab fa-linkedin-in"></i></a>
-                      </li>
-                      <li class="list-inline-item mx-2">
-                        <a href="https://www.facebook.com/African-Cities-Lab-103073095772023"
-                           class="text_primary"><i class="fab fa-facebook-f"></i></a>
-                      </li>
-                      <li class="list-inline-item mx-2">
-                        <a href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y="
-                           class="text_primary"><i class="fab fa-instagram"></i></a>
-                      </li>
-                      <li class="list-inline-item mx-2">
-                        <a href="https://medium.com/@African_Cities_Lab" class="text_primary"><i class="fab fa-medium-m"></i></a>
-                      </li>
-                      <li class="list-inline-item mx-2">
-                        <a href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA"
-                           class="text_primary"><i class="fab fa-youtube"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          {% endif %}
+        {% endfor %}
       </div>
-    </div>
-  </section>
+    </section>
+  {% endif %}
+  {% with blocks = self.additional_informations_section %}
+    <section>
+      <div class="container-xl mb-5 p-md-5">
+        {% for block in blocks %}
+          {% if block.block_type == "section_title_layout" %}
+            <div>{% include_block block.value.section_title_layout %}</div>
+          {% elif block.block_type == "paragraph_layout" %}
+            <div>{% include_block block.value.paragraph_layout %}</div>
+          {% elif block.block_type == "section" %}
+            <div>{% include_block block.value.section %}</div>
+          {% elif block.block_type == "button" %}
+            <div>{% include_block block.value.button %}</div>
+          {% elif block.block_type == "content_box" %}
+            <div>{% include_block block.value.content_box %}</div>
+          {% elif block.block_type == "icon_box" %}
+            <div>{% include_block block.value.icon_box %}</div>
+          {% elif block.block_type == "map" %}
+            <div>{% include_block block.value.map %}</div>
+          {% elif block.block_type == "blank_space" %}
+            <div>{% include_block block.value.blank_space %}</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endwith %}
   <!-- Start Partners Area-->
   <section class="our-partners">
     {% include "components/partners_section.html" %}

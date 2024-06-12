@@ -1,4 +1,4 @@
-{% load home_tags menu_tags i18n static wagtailcore_tags %}
+{% load home_tags menu_tags i18n static wagtailcore_tags wagtailsettings_tags %}
 
 <footer>
   <div class="footer-top">
@@ -27,40 +27,52 @@
               {% translate "Stay up to date with all the recent news, updates, and courses by simply your email address to our mailing list. We promise to never spam you." %}
             </p>
             <div class="newsletter-widget my-3">
-              <a href="" class="input-group">
+              <a href="{% localized_slugurl 'newsletter' %}" class="input-group">
                 <span class="newsletter-widget__title">{% translate 'Subscribe to our newsletter!' %}</span>
                 <div class="input-group-append">
                   <span class="btn">{% translate "Sign up" %}</span>
                 </div>
               </a>
             </div>
-            <div class="social-media__wrapper">
-              <span>{% translate "Connect with us :" %}</span>
-              <ul class="list-inline m-3">
-                <li class="list-inline-item mx-2">
-                  <a href="https://twitter.com/AfricanCtiesLab" class="text_primary"><i class="fab fa-twitter"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true"
-                     class="text_primary"><i class="fab fa-linkedin-in"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://www.facebook.com/African-Cities-Lab-103073095772023"
-                     class="text_primary"><i class="fab fa-facebook-f"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y="
-                     class="text_primary"><i class="fab fa-instagram"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://medium.com/@African_Cities_Lab" class="text_primary"><i class="fab fa-medium-m"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA"
-                     class="text_primary"><i class="fab fa-youtube"></i></a>
-                </li>
-              </ul>
-            </div>
+            {% with twitter_url=settings.home.SocialMediaSettings.twitter_url linkedin_url=settings.home.SocialMediaSettings.linkedin_url facebook_url=settings.home.SocialMediaSettings.facebook_url instagram_url=settings.home.SocialMediaSettings.instagram_url medium_url=settings.home.SocialMediaSettings.medium_url youtube_url=settings.home.SocialMediaSettings.youtube_url %}
+              {% if twitter_url or linkedin_url or facebook_url or instagram_url or medium_url or youtube_url %}
+                <div class="social-media__wrapper">
+                  <span>{% translate "Connect with us:" %}</span>
+                  <ul class="list-inline m-3">
+                    {% if twitter_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ twitter_url }}" class="text_primary"><i class="fab fa-twitter"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if linkedin_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ linkedin_url }}" class="text_primary"><i class="fab fa-linkedin-in"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if facebook_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ facebook_url }}" class="text_primary"><i class="fab fa-facebook-f"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if instagram_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ instagram_url }}" class="text_primary"><i class="fab fa-instagram"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if medium_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ medium_url }}" class="text_primary"><i class="fab fa-medium-m"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if youtube_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ youtube_url }}" class="text_primary"><i class="fab fa-youtube"></i></a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              {% endif %}
+            {% endwith %}
           </div>
         </div>
       </div>

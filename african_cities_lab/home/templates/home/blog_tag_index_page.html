@@ -5,93 +5,79 @@
 {% block meta_tag %}
   {% meta_tags %}
 {% endblock meta_tag %}
-
 {% block content %}
-
-{% image self.banner_image original as img %}
-<section class="{% if img.url %}page-banner{% else %}page-banner bg_primary{% endif %}"
-         {% if img.url %} style='background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})' {% endif %}>
-  <div class="container-fluid">
-    <div class="row py-5">
-      <div class="col-12 col-lg-6 col-md-10">
-        <div class="position-relative h1">
-          {{ page.title }}
-          {% if img.url %}
-            <span class="dash-accent"></span>
-          {% else %}
-            <span class="dash-accent__"></span>
-          {% endif %}
+  {% image self.banner_image original as img %}
+  <section class="{% if img.url %}page-banner{% else %}page-banner bg_primary{% endif %}"
+           {% if img.url %} style='background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})' {% endif %}>
+    <div class="container-fluid">
+      <div class="row py-5">
+        <div class="col-12 col-lg-6 col-md-10">
+          <div class="position-relative h1">
+            {{ page.title }}
+            {% if img.url %}
+              <span class="dash-accent"></span>
+            {% else %}
+              <span class="dash-accent__"></span>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="acl-sharpes {% if img.url %} right-sharpe{% else %} bottom-right__sharpe{% endif %}">
-    <img alt="icon"
-         class="d-none d-lg-block"
-         {% if img.url %} width="195" height="380" src="{% static 'images/assets/outline-sharpe-right.svg' %}" {% else %} width="400" height="205" src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}" {% endif %} />
-  </div>
-</section>
-
-    <section class="py-5">
-        <div class="container-xl">
-            <div class="row">
-                {% if request.GET.tag %}
-                    <h2>{% translate "Showing pages tagged" %} "{{ request.GET.tag }}"</h2>
-                {% endif %}
-                {% for blogpage in blogpages %}
-                    <div class="col-12 col-lg-4 col-md-6 article-card">
-                        <div class="card border-0">
-                            <div class="card-header article-preview-img p-0">
-                                <a href="{% pageurl blogpage %}" class="d-block">
-                                    {% image blogpage.specific.main_image original %}
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <div class="article-meta d-flex align-items-center">
-                                    <div class="article__date">{{ blogpage.specific.date }}</div>
-                                    <div class="fas fa-circle text_primary mx-2" style="font-size: 5px;"></div>
-                                    <div class="article__category">
-                                        {% with categories=blogpage.categories.all %}
-                                            {% if categories %}
-                                                <ul class="list-inline mb-0">
-                                                    {% for category in categories %}
-                                                        <li class="post-info__item list-inline-item mr-2">
-                                                            <a href="?category={{category.slug}}" class="text_primary font-weight-bold">
-                                                                {{ category.name }}
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            {% endif %}
-                                        {% endwith %}
-                                    </div>
-                                </div>
-                                <h5 class="article-title py-3">
-                                    <a href="{% pageurl blogpage %}" class="d-block text-black">
-                                        {{ blogpage.title }}
-                                    </a>
-                                </h5>
-                                <div class="article-exerpt">
-                                    {{ blogpage.specific.summary }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                {% empty %}
-                    <div class="py-5">
-                        <h2>{% translate "No pages found with that tag." %}</h2>
-                    </div>
-                {% endfor %}
-
+    <div class="acl-sharpes {% if img.url %} right-sharpe{% else %} bottom-right__sharpe{% endif %}">
+      <img alt="icon"
+           class="d-none d-lg-block"
+           {% if img.url %} width="195" height="380" src="{% static 'images/assets/outline-sharpe-right.svg' %}" {% else %} width="400" height="205" src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}" {% endif %} />
+    </div>
+  </section>
+  <section class="py-5">
+    <div class="container-xl">
+      <div class="row">
+        {% if request.GET.tag %}
+          <h2>{% translate "Showing pages tagged" %} "{{ request.GET.tag }}"</h2>
+        {% endif %}
+        {% for blogpage in blogpages %}
+          <div class="col-12 col-lg-4 col-md-6 article-card">
+            <div class="card border-0">
+              <div class="card-header article-preview-img p-0">
+                <a href="{% pageurl blogpage %}" class="d-block">{% image blogpage.specific.main_image original %}</a>
+              </div>
+              <div class="card-body">
+                <div class="article-meta d-flex align-items-center">
+                  <div class="article__date">{{ blogpage.specific.date }}</div>
+                  <div class="fas fa-circle text_primary mx-2" style="font-size: 5px;"></div>
+                  <div class="article__category">
+                    {% with categories=blogpage.categories.all %}
+                      {% if categories %}
+                        <ul class="list-inline mb-0">
+                          {% for category in categories %}
+                            <li class="post-info__item list-inline-item mr-2">
+                              <a href="?category={{ category.slug }}"
+                                 class="text_primary font-weight-bold">{{ category.name }}</a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endwith %}
+                  </div>
+                </div>
+                <h5 class="article-title py-3">
+                  <a href="{% pageurl blogpage %}" class="d-block text-black">{{ blogpage.title }}</a>
+                </h5>
+                <div class="article-exerpt">{{ blogpage.specific.summary }}</div>
+              </div>
             </div>
-        </div>
-    </section>
-
+          </div>
+        {% empty %}
+          <div class="py-5">
+            <h2>{% translate "No pages found with that tag." %}</h2>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
   <!-- Start Partners Area-->
   <section class="our-partners">
     {% include "components/partners_section.html" %}
   </section>
   <!-- End Partners Area -->
-
 {% endblock content %}

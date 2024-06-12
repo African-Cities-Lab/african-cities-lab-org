@@ -75,6 +75,7 @@ DJANGO_APPS = [
     "django.contrib.admin",
     "django.forms",
     "django.contrib.sitemaps",
+    "django_countries",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -99,6 +100,7 @@ WAGTAIL_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.modeladmin",
+    "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -215,6 +217,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "wagtailmenus.context_processors.wagtailmenus",
                 "african_cities_lab.users.context_processors.allauth_settings",
+                "wagtail.contrib.settings.context_processors.settings",
             ],
         },
     }
@@ -363,3 +366,13 @@ WAGTAILEMBEDS_RESPONSIVE_HTML = True
 # ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "African Cities Lab"
 WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"
+
+
+# Mailchimp
+# ------------------------------------------------------------------------------
+MAILCHIMP_API_KEY = env("MAILCHIMP_API_KEY")
+MAILCHIMP_DATA_CENTER = env("MAILCHIMP_DATA_CENTER")
+MAILCHIMP_WEBINAR_EN_LIST_ID = env("MAILCHIMP_WEBINAR_EN_LIST_ID")
+MAILCHIMP_WEBINAR_FR_LIST_ID = env("MAILCHIMP_WEBINAR_FR_LIST_ID")
+MAILCHIMP_NEWSLETTER_FR_ID = env("MAILCHIMP_NEWSLETTER_FR_ID")
+MAILCHIMP_NEWSLETTER_EN_ID = env("MAILCHIMP_NEWSLETTER_EN_ID")

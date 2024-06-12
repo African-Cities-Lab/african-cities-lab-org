@@ -5,85 +5,87 @@
 {% block meta_tag %}
   {% meta_tags %}
 {% endblock meta_tag %}
-
 {% block content %}
-
-    <section id="single-post">
-        <div class="post-hero__container" >
-             <div class="acl-sharpes top-right__sharpe">
-                 <img class="d-none d-lg-block" alt="icon" src="{% static 'images/assets/sharpe-top.svg' %}"/>
-             </div>
-
-            <div class="container p-md-5">
-                <div class="row">
-                    <div class="col">
-                        <ul class="post-info ">
-                            {% with categories=page.categories.all %}
-                                {% if categories %}
-                                    <ul class="list-inline ">
-                                        {% for category in categories %}
-                                            <li class="post-info__item list-inline-item mr-2">
-                                                <span class="text-white font-weight-bold">{{ category.name }}</span>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            {% endwith %}
-                            <div class="pst-hr-line"></div>
-                            <li class="post-info__item">{{ page.date }}</li>
-                        </ul>
-                        <div class="h2 pt-4">{{ self.title }}</div>
-                    </div>
-                </div>
-            </div>
+  <section id="single-post">
+    <div class="post-hero__container">
+      <div class="acl-sharpes top-right__sharpe">
+        <img class="d-none d-lg-block"
+             alt="icon"
+             src="{% static 'images/assets/sharpe-top.svg' %}" />
+      </div>
+      <div class="container p-md-5">
+        <div class="row">
+          <div class="col">
+            <ul class="post-info ">
+              {% with categories=page.categories.all %}
+                {% if categories %}
+                  <ul class="list-inline ">
+                    {% for category in categories %}
+                      <li class="post-info__item list-inline-item mr-2">
+                        <span class="text-white font-weight-bold">{{ category.name }}</span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+              <div class="pst-hr-line"></div>
+              <li class="post-info__item">{{ page.date }}</li>
+            </ul>
+            <div class="h2 pt-4">{{ self.title }}</div>
+          </div>
         </div>
-
-        <div class="container  p-md-5">
-            <div class="row post-content__container position-relative">
-                <div class="col col-xl-10 position-relative">
-                    <div class="row">
-                        <div class="col-12 col-lg-10 p-3 p-lg-5 ">
-                            <article>
-                                <div class="post-thumbnail text-center my-2">
-                                    {% image page.main_image original %}
-                                </div>
-                                <div class="post-content__body my-5">
-                                    {{ page.body|richtext }}
-                                </div>
-                                {% if page.tags.all.count %}
-                                    <div class="post-tags__wrapper">
-                                        <span class="h6">{% translate "Tags:" %}</span>
-
-                                        {% for tag in page.tags.all %}
-                                            <span class="post-tag">{{ tag }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="widget-share">
-                    <span class="widget-share__title">
-                        <i class="fa fa-share-alt mx-2" aria-hidden="true"></i>{% translate "Share" %}
-                    </span>
-                    <div class="novashare-buttons-wrapper">
-                        <a href="https://twitter.com/intent/tweet?text={{self.title}}&amp;url={{self.full_url}}" target="_blank" rel="noopener noreferrer follow" class="novashare-button">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://facebook.com/sharer/sharer.php?u={{self.full_url}}" target="_blank" rel="noopener noreferrer follow" class="novashare-button">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{self.full_url}}" target="_blank" rel="noopener noreferrer follow" class="novashare-button">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a  href="mailto:?subject={{self.title}}&amp;body={{self.full_url}}" target="_self" rel="nofollow noopener noreferrer" class="novashare-button">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
+      </div>
+    </div>
+    <div class="container  p-md-5">
+      <div class="row post-content__container position-relative">
+        <div class="col col-xl-10 position-relative">
+          <div class="row">
+            <div class="col-12 col-lg-10 p-3 p-lg-5 ">
+              <article>
+                <div class="post-thumbnail text-center my-2">{% image page.main_image original %}</div>
+                <div class="post-content__body my-5">{{ page.body|richtext }}</div>
+                {% if page.tags.all.count %}
+                  <div class="post-tags__wrapper">
+                    <span class="h6">{% translate "Tags:" %}</span>
+                    {% for tag in page.tags.all %}<span class="post-tag">{{ tag }}</span>{% endfor %}
+                  </div>
+                {% endif %}
+              </article>
             </div>
+          </div>
         </div>
-    </section>
-
+        <div class="widget-share">
+          <span class="widget-share__title">
+            <i class="fa fa-share-alt mx-2" aria-hidden="true"></i>{% translate "Share" %}
+          </span>
+          <div class="novashare-buttons-wrapper">
+            <a href="https://twitter.com/intent/tweet?text={{ self.title }}&amp;url={{ self.full_url }}"
+               target="_blank"
+               rel="noopener noreferrer follow"
+               class="novashare-button">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://facebook.com/sharer/sharer.php?u={{ self.full_url }}"
+               target="_blank"
+               rel="noopener noreferrer follow"
+               class="novashare-button">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ self.full_url }}"
+               target="_blank"
+               rel="noopener noreferrer follow"
+               class="novashare-button">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:?subject={{ self.title }}&amp;body={{ self.full_url }}"
+               target="_self"
+               rel="nofollow noopener noreferrer"
+               class="novashare-button">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock content %}

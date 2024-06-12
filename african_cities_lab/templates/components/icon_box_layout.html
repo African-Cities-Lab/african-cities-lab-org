@@ -1,23 +1,23 @@
 {% load home_tags menu_tags i18n static wagtailcore_tags %}
 
 <div class="row pb-4 justify-content-center">
-    {% for icon_box in self.icon_box %}
-      <div class="col-12 col-lg-3 col-md-5 icon-box">
-        <div class="card">
-          {% image icon_box.icon original as icon %}
-          <div class="card-header icon-container">
-            <img alt="{{ icon.alt }}" src="{{ icon.url }}" height="62" width="62">
+  {% for icon_box in self.icon_box %}
+    <div class="col-12 col-lg-3 col-md-5 icon-box">
+      <div class="card">
+        {% image icon_box.icon original as icon %}
+        <div class="card-header icon-container">
+          <img alt="{{ icon.alt }}" src="{{ icon.url }}" height="62" width="62" />
+        </div>
+        <div class="card-body">
+          <div class="icon-box__title">
+            <h6>{{ icon_box.title }}</h6>
           </div>
-          <div class="card-body">
-            <div class="icon-box__title">
-              <h6>{{ icon_box.title }}</h6>
-            </div>
-            <div class="icon-box__desc text-align-left__max-576">{{ icon_box.content }}</div>
-            {% if icon_box.link %}
-                <a href="{{icon_box.link }}">{% translate "Learn more" %}</a>
-            {% endif %}
-          </div>
+          <div class="icon-box__desc text-align-left__max-576">{{ icon_box.content }}</div>
+          {% if icon_box.link %}
+            <a href="{{ icon_box.link }}">{% translate "Learn more" %}</a>
+          {% endif %}
         </div>
       </div>
-    {% endfor %}
-  </div>
+    </div>
+  {% endfor %}
+</div>

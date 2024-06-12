@@ -29,23 +29,22 @@
            {% if img.url %} width="195" height="380" src="{% static 'images/assets/outline-sharpe-right.svg' %}" {% else %} width="400" height="205" src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}" {% endif %} />
     </div>
   </section>
-  <section class="py-5">
-    <div class="container p-md-5">
+  <section class="upcoming-events">
+    <div class="container-lg p-md-5">
       <div class="row justify-content-center">
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-md-10 col-lg-8">
           <!-- message if email is sent -->
           {% if messages %}
             {% for message in messages %}
               <div class="my-5 alert alert-success">
-                <h6 class="m-0 font-size-18">{{ message }}</h6>
+                <h5 class="m-0">{{ message }}</h5>
               </div>
             {% endfor %}
           {% endif %}
-          <h3 class="section-title pt-3 mb-3">{% translate "Want to stay informed?" %}</h3>
-          <p class="font-size-18 pb-5">
-            {% translate "Leave us your e-mail, so we can send you your new all recent news, updates, and courses when they are published! " %}
+          <p class="font-size-18 pt-3 pb-5 text-center">
+            {% translate "Please fill out the form so that your registration can be validated." %}
           </p>
-          <form action="{% url 'suscribe-newsletter' %}" method="post">
+          <form action="{% url 'ssubscribe-event' %}" method="post">
             {% csrf_token %}
             <div class="row">
               <div class="col-12 col-md-6 form-group">
@@ -71,17 +70,43 @@
               <input type="email" name="EMAIL" class="form-control" required />
             </div>
             <div class="form-group">
+              <label>{% translate "Organization Name" %}</label>
+              <input type="text" name="INSTITUT" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>{% translate "Title" %}</label>
+              <input type="text" name="TITLE" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>{% translate "Function" %}</label>
+              <input type="text" name="FUNCTION" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>
+                {% translate "Country" %}
+                <div class="form-asterix">*</div>
+              </label>
+              {% get_countries as countries %}
+              <select name="COUNTRY" class="form-select" required>
+                <option disabled selected>{% translate "Select your country" %}</option>
+                {% for country in countries %}<option value="{{ country.name }}">{{ country.name }}</option>{% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label>{% translate "LinkedIn account" %}</label>
+              <input type="text" name="LINKEDIN" class="form-control" />
+            </div>
+            <div class="form-group">
               <input name="site_language" type="hidden" value="{{ LANGUAGE_CODE }}" />
             </div>
             <div>
               {% translate "By submitting your info in the form above, you agree to our" %}
-              <a class="text_primary"
-                 href="{% localized_slugurl 'terms-conditions' %}">{% translate "Terms & Condition" %}</a>
-            </a> {% translate "and" %} <a class="text_primary" href="{% localized_slugurl 'data-policy' %}">{% translate "GDPR" %}</a>.
+              <a class="text_primary" href="{% url 'terms-conditions' %}">{% translate "Terms & Condition" %}</a>
+            </a> {% translate "and" %} <a class="text_primary" href="{% url 'gdpr' %}">{% translate "GDPR" %}</a>.
             {% translate "We may use this info to contact you and/or use data from third parties to personalize your experience." %}
           </div>
           <div class="mt-5">
-            <button type="submit" class="btn btn__primary btn__small">{% translate "Suscribe" %}</button>
+            <button type="submit" class="btn btn__primary btn__small">{% translate "Register" %}</button>
           </div>
         </form>
       </div>

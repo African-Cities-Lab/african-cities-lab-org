@@ -454,8 +454,8 @@ msgid "Sign up"
 msgstr "S'inscrire"
 
 #: african_cities_lab/templates/components/footer.html:38
-msgid "Connect with us :"
-msgstr "Suivez-nous"
+msgid "Connect with us:"
+msgstr "Suivez-nous :"
 
 #: african_cities_lab/templates/components/footer.html:73
 msgid "African Cities Lab. All rights reserved. "
