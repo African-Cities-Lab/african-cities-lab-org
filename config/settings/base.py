@@ -358,11 +358,9 @@ WEBPACK_LOADER = {
 # Wagtail stuff
 # ------------------------------------------------------------------------------
 WAGTAILEMBEDS_RESPONSIVE_HTML = True
-
-# Your stuff...
-# ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "African Cities Lab"
 WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"
+WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
 
 # Wagtail localize
 # ------------------------------------------------------------------------------
