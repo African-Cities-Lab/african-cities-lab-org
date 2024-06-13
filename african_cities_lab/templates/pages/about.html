@@ -92,9 +92,7 @@
             </div>
           </div>
           {% if block.value.timeline_item %}
-            <div class="container-fluid">
-              <div class="timeline-wrapper" dir="ltr">{% include_block block.value.timeline_item %}</div>
-            </div>
+            <div class="container-fluid">{% include_block block.value.timeline_item %}</div>
           {% endif %}
         {% endif %}
       {% endfor %}

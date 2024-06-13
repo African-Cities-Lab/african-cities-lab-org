@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from taggit.models import TaggedItemBase
@@ -8,6 +9,7 @@ from wagtail.admin.panels import (
     FieldPanel,
     InlinePanel,
     MultiFieldPanel,
+    PageChooserPanel,
 )
 from wagtail.contrib.settings.models import (
     BaseGenericSetting,
@@ -15,7 +17,12 @@ from wagtail.contrib.settings.models import (
 )
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.models import Locale, Orderable, Page
+from wagtail.models import (
+    Locale,
+    Orderable,
+    Page,
+    TranslatableMixin,
+)
 from wagtail.snippets.models import register_snippet
 from wagtailmetadata.models import MetadataPageMixin
 
@@ -383,7 +390,6 @@ class ContactPage(MetadataPageMixin, Page):
         [
             ("section_title_layout", SectionTitleLayout()),
             ("paragraph_layout", ParagraphLayout()),
-            ("section", Section()),
             ("button", Button()),
             ("content_box", ContentBox()),
             ("icon_box", IconBox()),
@@ -562,7 +568,6 @@ class FlatPage(MetadataPageMixin, Page):
     )
     body = StreamField(
         [
-            ("section", Section()),
             ("section_title_layout", SectionTitleLayout()),
             ("paragraph_layout", ParagraphLayout()),
             ("button", Button()),
@@ -977,14 +982,170 @@ class NewsletterPage(MetadataPageMixin, Page):
         verbose_name = "Newsletter Page"
 
 
+class FlatMenuChoices(models.TextChoices):
+    FOOTERMENU_1 = ("footer_menu_1",)
+    FOOTERMENU_2 = "footer_menu_2"
+    FOOTERMENU_3 = "footer_menu_3"
+
+
 @register_setting
-class SocialMediaSettings(BaseGenericSetting):
-    twitter_url = models.URLField(verbose_name="Twitter URL", blank=True)
-    linkedin_url = models.URLField(verbose_name="Linkedin URL", blank=True)
-    facebook_url = models.URLField(verbose_name="Facebook URL", blank=True)
-    instagram_url = models.URLField(verbose_name="Instagram URL", blank=True)
-    medium_url = models.URLField(verbose_name="Medium URL", blank=True)
-    youtube_url = models.URLField(verbose_name="Youtube URL", blank=True)
+class GlobalSettings(TranslatableMixin, BaseGenericSetting):
+    twitter_url = models.URLField(verbose_name="Twitter URL", blank=True, null=True)
+    linkedin_url = models.URLField(verbose_name="Linkedin URL", blank=True, null=True)
+    facebook_url = models.URLField(verbose_name="Facebook URL", blank=True, null=True)
+    instagram_url = models.URLField(verbose_name="Instagram URL", blank=True, null=True)
+    medium_url = models.URLField(verbose_name="Medium URL", blank=True, null=True)
+    youtube_url = models.URLField(verbose_name="Youtube URL", blank=True, null=True)
+
+    terms_and_conditions_page = models.ForeignKey(
+        "wagtailcore.Page", null=True, blank=True, related_name="+", on_delete=models.SET_NULL
+    )
+    data_policy_page = models.ForeignKey(
+        "wagtailcore.Page", null=True, blank=True, related_name="+", on_delete=models.SET_NULL
+    )
+    newsletter_page = models.ForeignKey(
+        "wagtailcore.Page", null=True, blank=True, related_name="+", on_delete=models.SET_NULL
+    )
+
+    partners_section_heading = StreamField(
+        [
+            (
+                "heading",
+                blocks.StructBlock(
+                    [
+                        ("section_title_en", blocks.CharBlock(required=False, help_text=_("Add content in english"))),
+                        ("section_title_fr", blocks.CharBlock(required=False, help_text=_("Add content in french"))),
+                        (
+                            "section_subtitle_en",
+                            blocks.TextBlock(required=False, help_text=_("Add content in english")),
+                        ),
+                        (
+                            "section_subtitle_fr",
+                            blocks.TextBlock(required=False, help_text=_("Add content in french")),
+                        ),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    main_partner = StreamField(
+        [
+            (
+                "main_patner",
+                blocks.StructBlock(
+                    [
+                        ("logo", ImageChooserBlock(required=False)),
+                        ("organisation_url", blocks.URLBlock(required=False)),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    other_partners = StreamField(
+        [
+            (
+                "partners",
+                blocks.StructBlock(
+                    [
+                        (
+                            "partner",
+                            blocks.ListBlock(
+                                blocks.StructBlock(
+                                    [
+                                        ("logo", ImageChooserBlock(required=False)),
+                                        ("organisation_url", blocks.URLBlock(required=False)),
+                                    ],
+                                ),
+                            ),
+                        )
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    newsletter_widget = StreamField(
+        [
+            (
+                "newsletter_widget",
+                blocks.StructBlock(
+                    [
+                        (
+                            "newsletter_widget_title_en",
+                            blocks.CharBlock(required=False, help_text=_("Add content in english")),
+                        ),
+                        (
+                            "newsletter_widget_title_fr",
+                            blocks.CharBlock(required=False, help_text=_("Add content in french")),
+                        ),
+                        (
+                            "newsletter_widget_subtitle_en",
+                            blocks.TextBlock(required=False, help_text=_("Add content in english")),
+                        ),
+                        (
+                            "newsletter_widget_subtitle_fr",
+                            blocks.TextBlock(required=False, help_text=_("Add content in french")),
+                        ),
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
+
+    menus_widget = StreamField(
+        [
+            (
+                "widgets",
+                blocks.StructBlock(
+                    [
+                        (
+                            "menu_widget",
+                            blocks.ListBlock(
+                                blocks.StructBlock(
+                                    [
+                                        (
+                                            "widget_title_en",
+                                            blocks.CharBlock(required=False, help_text=_("Add content in english")),
+                                        ),
+                                        (
+                                            "widget_title_fr",
+                                            blocks.CharBlock(required=False, help_text=_("Add content in french")),
+                                        ),
+                                        (
+                                            "flat_menu",
+                                            blocks.ChoiceBlock(required=False, choices=FlatMenuChoices.choices),
+                                        ),
+                                    ],
+                                ),
+                            ),
+                        )
+                    ]
+                ),
+            ),
+        ],
+        min_num=0,
+        max_num=1,
+        blank=True,
+        use_json_field=True,
+    )
 
     panels = [
         MultiFieldPanel(
@@ -996,6 +1157,29 @@ class SocialMediaSettings(BaseGenericSetting):
                 FieldPanel("medium_url"),
                 FieldPanel("youtube_url"),
             ],
-            "Social settings",
+            "Social media settings",
+        ),
+        MultiFieldPanel(
+            [
+                PageChooserPanel("terms_and_conditions_page"),
+                PageChooserPanel("data_policy_page"),
+                PageChooserPanel("newsletter_page"),
+            ],
+            "Utility pages",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("partners_section_heading"),
+                FieldPanel("main_partner"),
+                FieldPanel("other_partners"),
+            ],
+            "Partners Section",
+        ),
+        MultiFieldPanel(
+            [FieldPanel("newsletter_widget"), FieldPanel("menus_widget")],
+            "Footer Settings",
         ),
     ]
+
+    class Meta(TranslatableMixin.Meta):
+        verbose_name_plural = "Global Settings"

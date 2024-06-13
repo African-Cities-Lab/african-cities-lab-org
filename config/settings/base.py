@@ -361,6 +361,11 @@ WEBPACK_LOADER = {
 # Wagtail stuff
 # ------------------------------------------------------------------------------
 WAGTAILEMBEDS_RESPONSIVE_HTML = True
+WAGTAILMENUS_FLAT_MENUS_HANDLE_CHOICES = (
+    ("footer_menu_1", "FOOTERMENU_1"),
+    ("footer_menu_2", "FOOTERMENU_2"),
+    ("footer_menu_3", "FOOTERMENU_3"),
+)
 
 # Your stuff...
 # ------------------------------------------------------------------------------

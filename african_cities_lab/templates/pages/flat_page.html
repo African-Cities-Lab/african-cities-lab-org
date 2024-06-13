@@ -29,38 +29,32 @@
            {% if img.url %} width="195" height="380" src="{% static 'images/assets/outline-sharpe-right.svg' %}" {% else %} width="400" height="205" src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}" {% endif %} />
     </div>
   </section>
-  {% with blocks = page.body %}
+  {% with blocks=self.body %}
     <section>
       <div class="container-fluid p-md-5">
         <div class="row justify-content-center">
           <div class="col-12 col-lg-11 page-content">
             {% for block in blocks %}
               {% if block.block_type == "section_title_layout" %}
-                <div>{% include_block block.value.section_title_layout %}</div>
+                {% include_block block.value %}
               {% elif block.block_type == "paragraph_layout" %}
-                <div>{% include_block block.value.paragraph_layout %}</div>
-              {% elif block.block_type == "section" %}
-                <div>{% include_block block.value.section %}</div>
+                {% include_block block.value %}
               {% elif block.block_type == "button" %}
-                <div>{% include_block block.value.button %}</div>
-              {% elif block.block_type == "infinite_scrolling_text" %}
-                <div>{% include_block block.value.infinite_scrolling_text %}</div>
-              {% elif block.block_type == "counter" %}
-                <div>{% include_block block.value.counter %}</div>
+                {% include_block block.value %}
               {% elif block.block_type == "content_box" %}
-                <div>{% include_block block.value.content_box %}</div>
+                {{ block }}
               {% elif block.block_type == "icon_box" %}
-                <div>{% include_block block.value.icon_box %}</div>
+                {{ block }}
               {% elif block.block_type == "timeline_item" %}
-                <div>{% include_block block.value.timeline_item %}</div>
+                {{ block }}
               {% elif block.block_type == "map" %}
-                <div>{% include_block block.value.map %}</div>
+                {% include_block block.value %}
               {% elif block.block_type == "blank_space" %}
-                <div>{% include_block block.value.blank_space %}</div>
+                {% include_block block.value %}
               {% elif block.block_type == "speaker_layout" %}
-                <div>{% include_block block.value.speaker_layout %}</div>
+                {{ block }}
               {% elif block.block_type == "agenda_layout" %}
-                <div>{% include_block block.value.agenda_layout %}</div>
+                {{ block }}
               {% endif %}
             {% endfor %}
           </div>

@@ -55,7 +55,7 @@
                         </div>
                         <div class="icon-box__desc font-size-16">
                           {{ block.value.social_media_card.content }}
-                          {% with twitter_url=settings.home.SocialMediaSettings.twitter_url linkedin_url=settings.home.SocialMediaSettings.linkedin_url facebook_url=settings.home.SocialMediaSettings.facebook_url instagram_url=settings.home.SocialMediaSettings.instagram_url medium_url=settings.home.SocialMediaSettings.medium_url youtube_url=settings.home.SocialMediaSettings.youtube_url %}
+                          {% with twitter_url=settings.home.GlobalSettings.twitter_url linkedin_url=settings.home.GlobalSettings.linkedin_url facebook_url=settings.home.GlobalSettings.facebook_url instagram_url=settings.home.GlobalSettings.instagram_url medium_url=settings.home.GlobalSettings.medium_url youtube_url=settings.home.GlobalSettings.youtube_url %}
                             {% if twitter_url or linkedin_url or facebook_url or instagram_url or medium_url or youtube_url %}
                               <div class="social-media__wrapper my-3">
                                 <ul class="list-inline">
@@ -105,26 +105,24 @@
       </div>
     </section>
   {% endif %}
-  {% with blocks = self.additional_informations_section %}
+  {% with blocks=self.additional_informations_section %}
     <section>
       <div class="container-xl mb-5 p-md-5">
         {% for block in blocks %}
           {% if block.block_type == "section_title_layout" %}
-            <div>{% include_block block.value.section_title_layout %}</div>
+            {% include_block block.value %}
           {% elif block.block_type == "paragraph_layout" %}
-            <div>{% include_block block.value.paragraph_layout %}</div>
-          {% elif block.block_type == "section" %}
-            <div>{% include_block block.value.section %}</div>
+            {% include_block block.value %}
           {% elif block.block_type == "button" %}
-            <div>{% include_block block.value.button %}</div>
+            {% include_block block.value %}
           {% elif block.block_type == "content_box" %}
-            <div>{% include_block block.value.content_box %}</div>
+            {{ block }}
           {% elif block.block_type == "icon_box" %}
-            <div>{% include_block block.value.icon_box %}</div>
+            {{ block }}
           {% elif block.block_type == "map" %}
-            <div>{% include_block block.value.map %}</div>
+            {% include_block block.value %}
           {% elif block.block_type == "blank_space" %}
-            <div>{% include_block block.value.blank_space %}</div>
+            {% include_block block.value %}
           {% endif %}
         {% endfor %}
       </div>

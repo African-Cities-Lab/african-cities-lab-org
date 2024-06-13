@@ -73,13 +73,16 @@
             <div class="form-group">
               <input name="site_language" type="hidden" value="{{ LANGUAGE_CODE }}" />
             </div>
-            <div>
-              {% translate "By submitting your info in the form above, you agree to our" %}
-              <a class="text_primary"
-                 href="{% localized_slugurl 'terms-conditions' %}">{% translate "Terms & Condition" %}</a>
-            </a> {% translate "and" %} <a class="text_primary" href="{% localized_slugurl 'data-policy' %}">{% translate "GDPR" %}</a>.
-            {% translate "We may use this info to contact you and/or use data from third parties to personalize your experience." %}
-          </div>
+            {% with terms_page_url=settings.home.GlobalSettings.terms_and_conditions_page.url policy_url=settings.home.GlobalSettings.data_policy_page.url %}
+              {% if terms_page_url and policy_url %}
+                <div>
+                  {% translate "By submitting your info in the form above, you agree to our" %}
+                  <a class="text_primary" href="{{ terms_page_url }}">{% translate "Terms & Condition" %}</a>
+                </a> {% translate "and" %} <a class="text_primary" href="{{ policy_url }}">{% translate "Data privacy" %}</a>.
+                {% translate "We may use this info to contact you and/or use data from third parties to personalize your experience." %}
+              </div>
+            {% endif %}
+          {% endwith %}
           <div class="mt-5">
             <button type="submit" class="btn btn__primary btn__small">{% translate "Suscribe" %}</button>
           </div>

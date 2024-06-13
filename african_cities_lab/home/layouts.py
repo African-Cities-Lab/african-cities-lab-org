@@ -159,8 +159,8 @@ class IconBox(blocks.StructBlock):
                 ("title", blocks.CharBlock()),
                 ("content", blocks.TextBlock(required=False)),
                 ("link", blocks.URLBlock(required=False)),
-            ]
-        )
+            ],
+        ),
     )
 
     class Meta:

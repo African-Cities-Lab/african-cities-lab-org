@@ -905,7 +905,6 @@ strong {
 .bg-light__ {
   background-color: #f7f8fa;
 }
-
 /*----------------------------------------*/
 /*  Patterns
 /*----------------------------------------*/
@@ -1262,6 +1261,7 @@ a.novashare-button {
 .icon-box .icon-container {
   background-color: #fff;
   border: 0 !important;
+  min-height: 78px;
 }
 .icon-box .icon-box__title {
   padding-bottom: 0.75rem;
