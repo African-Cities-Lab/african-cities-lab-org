@@ -8,7 +8,7 @@ from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
 
 
-def _subscribe(email, list_id, merge_fields=None):
+def subscribe(email, list_id, merge_fields=None):
     """
     Contains code handling the communication to the mailchimp api
     to create a contact/member in an audience/list.
@@ -58,7 +58,7 @@ def subscribe_event(request):
         else:  # "fr"
             list_id = settings.MAILCHIMP_WEBINAR_FR_LIST_ID
 
-        status = _subscribe(email, list_id, merge_fields)
+        status = subscribe(email, list_id, merge_fields)
         if status == "subscribed":
             messages.success(
                 request,
@@ -77,35 +77,3 @@ def subscribe_event(request):
         "pages/event_subscribe_form.html",
         context={"title": _("Subscribe to the event")},
     )
-
-
-def suscribe_newsletter(request):
-    if request.method == "POST":
-        email = request.POST["EMAIL"]
-        merge_fields = {
-            "LNAME": request.POST["LNAME"],
-            "FNAME": request.POST["FNAME"],
-        }
-
-        if request.POST["site_language"] == "en":
-            list_id = settings.MAILCHIMP_NEWSLETTER_EN_ID
-        else:  # "fr"
-            list_id = settings.MAILCHIMP_NEWSLETTER_FR_ID
-
-        status = _subscribe(email, list_id, merge_fields)
-        if status == "subscribed":
-            messages.success(
-                request,
-                _(
-                    "Thank you for subscribing to our newsletter. Watch your mailbox for news, updates and courses from the African Cities Lab very soon!"
-                ),
-            )  # message
-        elif status == "exists":
-            messages.info(
-                request,
-                _(
-                    "Your email is already registered. Watch your mailbox for news, updates and courses from the African Cities Lab very soon!"
-                ),
-            )  # message
-
-    return render(request, "pages/newsletter.html")

@@ -1,5 +1,11 @@
+from datetime import timedelta
+
 from django import forms
+from django.conf import settings
+from django.contrib import messages
 from django.db import models
+from django.shortcuts import render
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
@@ -26,21 +32,79 @@ from wagtail.models import (
 from wagtail.snippets.models import register_snippet
 from wagtailmetadata.models import MetadataPageMixin
 
-from african_cities_lab.home.layouts import (
-    AgendaLayout,
-    BlankSpace,
-    Button,
-    ContentBox,
-    Counter,
-    IconBox,
-    InfiniteScrollingText,
-    Map,
-    ParagraphLayout,
-    Section,
-    SectionTitleLayout,
-    SpeakerLayout,
-    Timeline,
+from african_cities_lab.home import views
+from african_cities_lab.home.blocks import (
+    AgendaBlock,
+    BannerImageBlock,
+    BlankSpaceBlock,
+    ButtonBlock,
+    ContentBoxesBlock,
+    CountersBlock,
+    FormationsBlock,
+    IconBoxesBlock,
+    MapBlock,
+    MoocsBlock,
+    NewsletterFormBlock,
+    ParagraphBlock,
+    SectionTitleBlock,
+    SpeakersBlock,
+    TimelineBlock,
+    WebinarsBlock,
 )
+
+BODY_BLOCKS = [
+    ("section_title", SectionTitleBlock()),
+    ("paragraph", ParagraphBlock()),
+    ("button", ButtonBlock()),
+    ("banner_image", BannerImageBlock()),
+    ("counters", CountersBlock()),
+    ("content_boxes", ContentBoxesBlock()),
+    ("icon_boxes", IconBoxesBlock()),
+    ("timeline", TimelineBlock()),
+    ("map", MapBlock()),
+    ("blank_space", BlankSpaceBlock()),
+    ("speakers", SpeakersBlock()),
+    ("agenda", AgendaBlock()),
+]
+
+HOME_BLOCKS = BODY_BLOCKS + [
+    ("moocs", MoocsBlock()),
+    ("formations", FormationsBlock()),
+    ("webinars", WebinarsBlock()),
+]
+
+EVENTS_BLOCKS = BODY_BLOCKS + [
+    ("formations", FormationsBlock()),
+    ("webinars", WebinarsBlock()),
+]
+
+
+class Organization(models.Model):
+    """Organization model."""
+
+    name = models.CharField()
+    short_name = models.CharField(max_length=50, blank=True)
+    logo_url = models.URLField()
+
+    def __str__(self):
+        return self.name
+
+
+class Mooc(models.Model):
+    """Mooc model."""
+
+    name = models.CharField()
+    url = models.URLField()
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    image_url = models.URLField()
+    start_date = models.DateField()
+
+    def __str__(self):
+        return self.name
+
+    def is_new(self):
+        # whether the mooc's start date is within the last 90 days
+        return self.start_date >= timezone.now().date() - timedelta(days=90)
 
 
 class HomePageCarouselImages(Orderable):
@@ -56,8 +120,8 @@ class HomePageCarouselImages(Orderable):
     )
     banner_title = models.CharField(max_length=100, blank=False, null=True)
     banner_subtitle = models.TextField(blank=True)
-    banner_cta = models.URLField(blank=False, help_text="Put URL here")
-    banner_button_label = models.CharField(blank=False, default="Learn more")
+    banner_cta = models.URLField(blank=False, help_text=_("Enter button URL here"))
+    banner_button_label = models.CharField(blank=False, default=_("Enter button label here (e.g., Learn more)"))
 
     panels = [
         FieldPanel("carousel_image"),
@@ -69,602 +133,96 @@ class HomePageCarouselImages(Orderable):
 
 
 class HomePage(MetadataPageMixin, Page):
-    """HomePage page model."""
+    """HomePage model."""
 
-    template = "pages/home.html"
+    body = StreamField(
+        HOME_BLOCKS,
+        block_counts={block: {"max_num": 1} for block in ["moocs", "formations", "webinars"]},
+        blank=True,
+        use_json_field=True,
+    )
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [InlinePanel("carousel_images", max_num=3, min_num=1, label=_("Caroussel Images"))],
+            heading=_("Slider"),
+        ),
+        FieldPanel("body"),
+    ]
 
     subpage_types = [
-        "home.AboutPage",
-        "home.MoocIndexPage",
-        "home.EventsPage",
+        "home.EventIndexPage",
         "home.BlogIndexPage",
-        "home.WebinarsIndexPage",
-        "home.FormationsIndexPage",
-        "home.ContestPage",
-        "home.ContactPage",
-        "home.TeamPage",
+        "home.WebinarIndexPage",
+        "home.FormationIndexPage",
         "home.FlatPage",
         "home.NewsletterPage",
     ]
-
     parent_page_type = [
         "wagtailcore.Page",
     ]
     max_count = 1
 
-    offers_section = StreamField(
-        [
-            (
-                "our_offers",
-                blocks.StructBlock(
-                    [
-                        ("heading", blocks.CharBlock(required=False)),
-                        ("sub_paragraph", blocks.RichTextBlock(required=False)),
-                        (
-                            "icon_box",
-                            blocks.ListBlock(
-                                blocks.StructBlock(
-                                    [
-                                        ("icon", ImageChooserBlock(required=False)),
-                                        ("title", blocks.CharBlock(required=False)),
-                                        ("content", blocks.TextBlock(required=False)),
-                                    ],
-                                ),
-                            ),
-                        ),
-                    ]
-                ),
-            ),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    focus_areas_section = StreamField(
-        [
-            (
-                "focus_areas",
-                blocks.StructBlock(
-                    [
-                        ("heading", blocks.CharBlock(required=False)),
-                        ("sub_paragraph", blocks.RichTextBlock(required=False)),
-                        (
-                            "items",
-                            blocks.ListBlock(
-                                blocks.StructBlock(
-                                    [
-                                        ("title", blocks.CharBlock()),
-                                        (
-                                            "link",
-                                            blocks.URLBlock(required=False),
-                                        ),
-                                    ],
-                                ),
-                            ),
-                        ),
-                    ]
-                ),
-            ),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [InlinePanel("carousel_images", max_num=3, min_num=1, label="Caroussel Images")],
-            heading="Slider",
-        ),
-        FieldPanel("offers_section"),
-        FieldPanel("focus_areas_section"),
-    ]
-
     def get_context(self, request):
         # Get current language
         current_lang = Locale.get_active()
 
         # Get last 3 webinars
         latest_webinars = (
-            WebinarsPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
+            WebinarPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
         )
         # Get last 3 articles
         latest_articles = (
             BlogPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
         )
+
+        # Get latest 6 moocs
+        latest_moocs = Mooc.objects.order_by("-start_date")[:6]
+
         # Update template context
         context = super().get_context(request)
-        context["latest_webinars"] = latest_webinars
-        context["latest_articles"] = latest_articles
+        context["webinars"] = latest_webinars
+        context["articles"] = latest_articles
+        context["moocs"] = latest_moocs
 
         return context
 
     class Meta:
-        verbose_name = "Home Page"
-
-
-class AboutPage(MetadataPageMixin, Page):
-    """AboutPage page model."""
-
-    template = "pages/about.html"
-
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
-    )
-    page_title = models.CharField(blank=True, null=True)
-    infinite_scrolling_text = StreamField(
-        [
-            ("infinite_scrolling_text", InfiniteScrollingText()),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    mission_session = StreamField(
-        [
-            (
-                "mission",
-                blocks.StructBlock(
-                    [
-                        ("image", ImageChooserBlock(required=False)),
-                        ("title", blocks.CharBlock(required=False)),
-                        ("subtitle", blocks.TextBlock(required=False)),
-                        ("paragraph", blocks.RichTextBlock(required=False)),
-                        ("counter", Counter()),
-                    ]
-                ),
-            ),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    content_box_section = StreamField(
-        [
-            (
-                "content_box",
-                blocks.StructBlock(
-                    [
-                        ("title", blocks.CharBlock(required=False)),
-                        ("subtitle", blocks.RichTextBlock(required=False)),
-                        ("content_box", ContentBox()),
-                    ]
-                ),
-            ),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    timeline_section = StreamField(
-        [
-            (
-                "timeline",
-                blocks.StructBlock(
-                    [
-                        ("title", blocks.CharBlock(required=False)),
-                        ("subtitle", blocks.RichTextBlock(required=False)),
-                        ("timeline_item", Timeline()),
-                    ]
-                ),
-            ),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    section_layout = StreamField(
-        [
-            (
-                "section",
-                blocks.StructBlock(
-                    [
-                        ("section", Section()),
-                    ]
-                ),
-            ),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [FieldPanel("banner_image"), FieldPanel("page_title"), FieldPanel("infinite_scrolling_text")],
-            heading="Hero section",
-        ),
-        FieldPanel("mission_session"),
-        FieldPanel("content_box_section"),
-        FieldPanel("timeline_section"),
-        FieldPanel("section_layout"),
-    ]
-
-    parent_page_type = [
-        "home.HomePage",
-    ]
-    max_count = 1
-
-    class Meta:
-        verbose_name = "About Page"
-
-
-class ContestPage(MetadataPageMixin, Page):
-    """ContestPage page model."""
-
-    template = "pages/contest.html"
-
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
-    )
-
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
-    ]
-
-    parent_page_type = [
-        "home.HomePage",
-    ]
-    max_count = 1
-
-    class Meta:
-        verbose_name = "Contest Page"
-
-
-class MoocIndexPage(MetadataPageMixin, Page):
-    """MoocIndex page model."""
-
-    template = "pages/moocs_index_page.html"
-    parent_page_type = [
-        "home.HomePage",
-    ]
-    max_count = 1
-
-    class Meta:
-        verbose_name = "Moocs Page"
-
-
-class ContactPage(MetadataPageMixin, Page):
-    """ContactPage page model."""
-
-    template = "pages/contact.html"
-
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
-    )
-
-    contacts_informations_section = StreamField(
-        [
-            (
-                "contacts_informations",
-                blocks.StructBlock(
-                    [
-                        ("session_title", blocks.CharBlock(required=False)),
-                        ("paragraph", blocks.TextBlock(required=False)),
-                        (
-                            "contacts_card",
-                            blocks.StructBlock(
-                                [
-                                    ("title", blocks.CharBlock(required=False)),
-                                    ("content", blocks.RichTextBlock(required=False)),
-                                ]
-                            ),
-                        ),
-                        (
-                            "social_media_card",
-                            blocks.StructBlock(
-                                [
-                                    ("title", blocks.CharBlock(required=False)),
-                                    ("content", blocks.RichTextBlock(required=False)),
-                                ]
-                            ),
-                        ),
-                    ]
-                ),
-            )
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    additional_informations_section = StreamField(
-        [
-            ("section_title_layout", SectionTitleLayout()),
-            ("paragraph_layout", ParagraphLayout()),
-            ("button", Button()),
-            ("content_box", ContentBox()),
-            ("icon_box", IconBox()),
-            ("map", Map()),
-            ("blank_space", BlankSpace()),
-        ],
-        blank=True,
-        use_json_field=True,
-    )
-
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
-        FieldPanel("contacts_informations_section"),
-        FieldPanel("additional_informations_section"),
-    ]
-
-    parent_page_type = [
-        "home.HomePage",
-    ]
-    max_count = 1
-
-    class Meta:
-        verbose_name = "Contact Page"
-
-
-class TeamPage(MetadataPageMixin, Page):
-    """TeamPage page model."""
-
-    template = "pages/team.html"
-
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
-    )
-
-    overview_section = StreamField(
-        [
-            (
-                "overview",
-                blocks.StructBlock(
-                    [
-                        ("image", ImageChooserBlock(required=False)),
-                        ("heading", blocks.CharBlock(required=False)),
-                        ("paragraph", blocks.RichTextBlock(required=False)),
-                    ]
-                ),
-            ),
-        ],
-        min_num=0,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    board_directors_section = StreamField(
-        [
-            (
-                "board",
-                blocks.StructBlock(
-                    [
-                        ("heading", blocks.CharBlock(required=False)),
-                        ("sub_paragraph", blocks.RichTextBlock(required=False)),
-                        (
-                            "board_director",
-                            blocks.ListBlock(
-                                blocks.StructBlock(
-                                    [
-                                        ("image", ImageChooserBlock(required=False)),
-                                        ("name", blocks.CharBlock(required=False)),
-                                        ("institution", blocks.CharBlock(required=False)),
-                                        (
-                                            "function",
-                                            blocks.CharBlock(required=False),
-                                        ),
-                                        (
-                                            "social_links",
-                                            blocks.ListBlock(
-                                                blocks.StructBlock(
-                                                    [
-                                                        ("fa_class", blocks.CharBlock(required=False)),
-                                                        ("profile_link", blocks.CharBlock(required=False)),
-                                                    ]
-                                                ),
-                                            ),
-                                        ),
-                                        (
-                                            "biography",
-                                            blocks.RichTextBlock(required=False),
-                                        ),
-                                    ],
-                                ),
-                            ),
-                        ),
-                    ]
-                ),
-            ),
-        ],
-        min_num=1,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    collaborators_section = StreamField(
-        [
-            (
-                "collaborators",
-                blocks.StructBlock(
-                    [
-                        ("heading", blocks.CharBlock(required=False)),
-                        ("sub_paragraph", blocks.RichTextBlock(required=False)),
-                        (
-                            "collaborator",
-                            blocks.ListBlock(
-                                blocks.StructBlock(
-                                    [
-                                        ("name", blocks.CharBlock(required=False)),
-                                        ("function", blocks.CharBlock(required=False)),
-                                        (
-                                            "social_links",
-                                            blocks.ListBlock(
-                                                blocks.StructBlock(
-                                                    [
-                                                        ("fa_class", blocks.CharBlock(required=False)),
-                                                        ("profile_link", blocks.CharBlock(required=False)),
-                                                    ]
-                                                ),
-                                            ),
-                                        ),
-                                    ],
-                                ),
-                            ),
-                        ),
-                    ]
-                ),
-            ),
-        ],
-        min_num=1,
-        max_num=1,
-        blank=True,
-        use_json_field=True,
-    )
-
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
-        FieldPanel("overview_section"),
-        FieldPanel("board_directors_section"),
-        FieldPanel("collaborators_section"),
-    ]
-
-    parent_page_type = [
-        "home.HomePage",
-    ]
-    max_count = 1
-
-    class Meta:
-        verbose_name = "Team Page"
+        verbose_name = _("Home Page")
 
 
 class FlatPage(MetadataPageMixin, Page):
-    """FlatPage page model."""
+    """FlatPage model."""
 
-    template = "pages/flat_page.html"
-
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
-    )
     body = StreamField(
-        [
-            ("section_title_layout", SectionTitleLayout()),
-            ("paragraph_layout", ParagraphLayout()),
-            ("button", Button()),
-            ("infinite_scrolling_text", InfiniteScrollingText()),
-            ("counter", Counter()),
-            ("content_box", ContentBox()),
-            ("icon_box", IconBox()),
-            ("timeline_item", Timeline()),
-            ("map", Map()),
-            ("blank_space", BlankSpace()),
-            ("speaker_layout", SpeakerLayout()),
-            ("agenda_layout", AgendaLayout()),
-        ],
+        BODY_BLOCKS,
         blank=True,
         use_json_field=True,
     )
+
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
         FieldPanel("body"),
     ]
+
     parent_page_type = [
         "home.HomePage",
     ]
 
     class Meta:
-        verbose_name = "Flat Page"
+        verbose_name = _("Flat Page")
 
 
-class EventsPage(MetadataPageMixin, Page):
-    """EventsPage page model."""
+class IndexPage(Page):
+    """IndexPage model."""
 
-    template = "pages/events_page.html"
-
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
-    )
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
-    ]
-    parent_page_type = [
-        "home.HomePage",
-    ]
-    max_count = 1
-
-    def get_context(self, request):
-        # Get current language
-        current_lang = Locale.get_active()
-
-        # Get last 3 webinars
-        latest_webinars = (
-            WebinarsPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
-        )
-
-        # Get last 3 formations
-        latest_formations = (
-            FormationsPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
-        )
-
-        # Update template context
-        context = super().get_context(request)
-        context["latest_webinars"] = latest_webinars
-        context["latest_formations"] = latest_formations
-
-        return context
-
-    class Meta:
-        verbose_name = "Events Page"
-
-
-class WebinarsIndexPage(MetadataPageMixin, Page):
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
+    body = StreamField(
+        BODY_BLOCKS,
+        blank=True,
+        use_json_field=True,
     )
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
-    ]
-
-    subpage_types = ["home.WebinarsPage"]
-
-    parent_page_type = [
-        "home.HomePage",
+        FieldPanel("body"),
     ]
 
     def get_children(self):
@@ -673,27 +231,89 @@ class WebinarsIndexPage(MetadataPageMixin, Page):
         return qs
 
     class Meta:
-        verbose_name = "Webinar Index Page"
+        abstract = True
+        verbose_name = _("Index Page")
 
 
-class WebinarsPage(MetadataPageMixin, Page):
+class EventIndexPage(MetadataPageMixin, IndexPage):
+    """EventIndexPage model."""
+
+    body = StreamField(
+        EVENTS_BLOCKS,
+        block_counts={block: {"max_num": 1} for block in ["formations", "webinars"]},
+        blank=True,
+        use_json_field=True,
+    )
+
+    template = "home/flat_page.html"
+    parent_page_type = [
+        "home.HomePage",
+    ]
+    max_count = 1
+
+    def get_context(self, request):
+        # Get current language
+        current_lang = Locale.get_active()
+
+        # Get last 3 webinars
+        latest_webinars = (
+            WebinarPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
+        )
+
+        # Get last 3 formations
+        latest_formations = (
+            FormationPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
+        )
+
+        # Update template context
+        context = super().get_context(request)
+        context["webinars"] = latest_webinars
+        context["formations"] = latest_formations
+
+        return context
+
+    class Meta:
+        verbose_name = _("Event Index Page")
+
+
+class WebinarIndexPage(MetadataPageMixin, IndexPage):
+    """WebinarIndexPage model."""
+
+    body = StreamField(
+        BODY_BLOCKS + [("webinars", WebinarsBlock())],
+        block_counts={"webinars": {"min_num": 1, "max_num": 1}},
+        blank=True,
+        use_json_field=True,
+    )
+
+    template = "home/flat_page.html"
+    subpage_types = ["home.WebinarPage"]
+    parent_page_type = [
+        "home.HomePage",
+    ]
+
+    class Meta:
+        verbose_name = _("Webinar Index Page")
+
+
+class WebinarPage(MetadataPageMixin, Page):
+    """WebinarPage model."""
+
     main_image = models.ForeignKey(
         "wagtailimages.Image",
         on_delete=models.PROTECT,
     )
     summary = models.TextField(blank=False)
-    date = models.DateField("Webinar date")
+    date = models.DateField()
     time = models.CharField(max_length=50, blank=False, null=True)
     location = models.CharField(max_length=100, blank=False, null=True)
     register_link = models.URLField(blank=True)
     replay_link = models.URLField(blank=True)
-
     overview = RichTextField(features=["h2", "h3", "h4", "ol", "ul", "bold", "italic", "link"], blank=True)
-
-    agenda = StreamField([("agenda_layout", AgendaLayout())], blank=True, use_json_field=True)
+    agenda = StreamField([("agenda", AgendaBlock())], blank=True, use_json_field=True)
     speakers = StreamField(
         [
-            ("speaker_layout", SpeakerLayout()),
+            ("speakers", SpeakersBlock()),
         ],
         blank=True,
         use_json_field=True,
@@ -710,7 +330,7 @@ class WebinarsPage(MetadataPageMixin, Page):
                 FieldPanel("register_link"),
                 FieldPanel("replay_link"),
             ],
-            heading="About Webinar",
+            heading=_("About Webinar"),
         ),
         FieldPanel("overview"),
         FieldPanel("agenda"),
@@ -729,36 +349,29 @@ class WebinarsPage(MetadataPageMixin, Page):
         return month[:3]
 
 
-class FormationsIndexPage(MetadataPageMixin, Page):
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
+class FormationIndexPage(MetadataPageMixin, IndexPage):
+    """FormationIndexPage model."""
+
+    body = StreamField(
+        BODY_BLOCKS + [("formations", FormationsBlock())],
+        block_counts={"formations": {"min_num": 1, "max_num": 1}},
+        blank=True,
+        use_json_field=True,
     )
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
-    ]
-
-    subpage_types = ["home.FormationsPage"]
-
+    template = "home/flat_page.html"
+    subpage_types = ["home.FormationPage"]
     parent_page_type = [
         "home.HomePage",
     ]
 
-    def get_children(self):
-        qs = super().get_children()
-        qs = qs.order_by("-first_published_at")
-        return qs
-
     class Meta:
-        verbose_name = "Formation Index Page"
+        verbose_name = _("Formation Index Page")
 
 
-class FormationsPage(MetadataPageMixin, Page):
+class FormationPage(MetadataPageMixin, Page):
+    """FormationPage model."""
+
     main_image = models.ForeignKey(
         "wagtailimages.Image",
         on_delete=models.PROTECT,
@@ -768,12 +381,10 @@ class FormationsPage(MetadataPageMixin, Page):
     ending_date = models.DateField("Ending date", null=True, blank=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     register_link = models.CharField(blank=True)
-
     overview = RichTextField(blank=True)
-
     agenda = StreamField(
         [
-            ("agenda_layout", AgendaLayout()),
+            ("agenda", AgendaBlock()),
         ],
         blank=True,
         use_json_field=True,
@@ -789,7 +400,7 @@ class FormationsPage(MetadataPageMixin, Page):
                 FieldPanel("location"),
                 FieldPanel("register_link"),
             ],
-            heading="About Formation",
+            heading=_("About Formation"),
         ),
         FieldPanel("overview"),
         FieldPanel("agenda"),
@@ -817,22 +428,10 @@ class FormationsPage(MetadataPageMixin, Page):
         return month[:3]
 
 
-class BlogIndexPage(MetadataPageMixin, Page):
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=False, on_delete=models.SET_NULL, related_name="+"
-    )
-
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
-    ]
+class BlogIndexPage(MetadataPageMixin, IndexPage):
+    """BlogIndexPage model."""
 
     subpage_types = ["home.BlogPage"]
-
     parent_page_type = [
         "home.HomePage",
     ]
@@ -849,20 +448,19 @@ class BlogIndexPage(MetadataPageMixin, Page):
         context["categories"] = categories
         return context
 
-    def get_children(self):
-        qs = super().get_children()
-        qs = qs.order_by("-first_published_at")
-        return qs
-
     class Meta:
-        verbose_name = "Blog Index Page"
+        verbose_name = _("Blog Index Page")
 
 
 class BlogPageTag(TaggedItemBase):
+    """BlogPageTag model."""
+
     content_object = ParentalKey("BlogPage", related_name="tagged_items", on_delete=models.CASCADE)
 
 
 class BlogTagIndexPage(Page):
+    """BlogTagIndexPage model."""
+
     def get_context(self, request):
         # Get current language
         current_lang = Locale.get_active()
@@ -877,12 +475,14 @@ class BlogTagIndexPage(Page):
 
 
 class BlogPage(MetadataPageMixin, Page):
+    """BlogPage model."""
+
     summary = models.TextField(blank=False)
     main_image = models.ForeignKey(
         "wagtailimages.Image",
         on_delete=models.PROTECT,
     )
-    date = models.DateField("Post date")
+    date = models.DateField()
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     categories = ParentalManyToManyField("BlogCategory", blank=True)
@@ -894,7 +494,7 @@ class BlogPage(MetadataPageMixin, Page):
                 FieldPanel("tags"),
                 FieldPanel("categories", widget=forms.CheckboxSelectMultiple),
             ],
-            heading="Blog details",
+            heading=_("Blog details"),
         ),
         FieldPanel("summary"),
         FieldPanel("main_image"),
@@ -916,6 +516,8 @@ class LangChoices(models.TextChoices):
 
 @register_snippet
 class BlogCategory(models.Model):
+    """BlogCategory model."""
+
     name = models.CharField(max_length=255)
     language = models.TextField(
         max_length=10,
@@ -927,7 +529,7 @@ class BlogCategory(models.Model):
         allow_unicode=True,
         null=True,
         max_length=255,
-        help_text="A slug to identify posts by this category",
+        help_text=_("A slug to identify posts by this category"),
     )
 
     panels = [
@@ -940,49 +542,68 @@ class BlogCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Blog Category"
-        verbose_name_plural = "blog categories"
+        verbose_name = _("Blog Category")
+        verbose_name_plural = _("Blog Categories")
         ordering = ["name"]
 
 
-class Mooc(models.Model):
-    name = models.CharField(blank=False)
-    url = models.SlugField(blank=False, unique=True)
-    organisation = models.CharField(blank=False)
-    course_image = models.ImageField(upload_to="moocs", blank=False, null=True)
-    start_date = models.CharField(max_length=50, blank=False)
-    start_display = models.CharField(max_length=50, blank=False)
-
-    def __str__(self):
-        return self.name
-
-
 class NewsletterPage(MetadataPageMixin, Page):
-    """NewsletterPage page model."""
+    """NewsletterPage model."""
 
-    template = "pages/newsletter.html"
-
-    banner_image = models.ForeignKey(
-        "wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    body = StreamField(
+        BODY_BLOCKS + [("newsletter_form", NewsletterFormBlock())],
+        block_counts={"newsletter_form": {"min_num": 1, "max_num": 1}},
+        blank=True,
+        use_json_field=True,
     )
+
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("banner_image"),
-            ],
-            heading="Hero section",
-        ),
+        FieldPanel("body"),
     ]
+
     parent_page_type = [
         "home.HomePage",
     ]
     max_count = 1
 
+    def serve(self, request):
+        if request.method == "POST":
+            email = request.POST["EMAIL"]
+            merge_fields = {
+                "LNAME": request.POST["LNAME"],
+                "FNAME": request.POST["FNAME"],
+            }
+
+            if request.POST["site_language"] == "en":
+                list_id = settings.MAILCHIMP_NEWSLETTER_EN_ID
+            else:  # "fr"
+                list_id = settings.MAILCHIMP_NEWSLETTER_FR_ID
+
+            status = views.subscribe(email, list_id, merge_fields)
+            if status == "subscribed":
+                messages.success(
+                    request,
+                    _(
+                        "Thank you for subscribing to our newsletter. Watch your mailbox for news, updates and courses from the African Cities Lab very soon!"
+                    ),
+                )  # message
+            elif status == "exists":
+                messages.info(
+                    request,
+                    _(
+                        "Your email is already registered. Watch your mailbox for news, updates and courses from the African Cities Lab very soon!"
+                    ),
+                )  # message
+
+        return render(request, "home/newsletter_page.html", {"page": self})
+
     class Meta:
-        verbose_name = "Newsletter Page"
+        verbose_name = _("Newsletter Page")
 
 
 class FlatMenuChoices(models.TextChoices):
+    """FlatMenuChoices model."""
+
     FOOTERMENU_1 = ("footer_menu_1",)
     FOOTERMENU_2 = "footer_menu_2"
     FOOTERMENU_3 = "footer_menu_3"
@@ -990,6 +611,8 @@ class FlatMenuChoices(models.TextChoices):
 
 @register_setting
 class GlobalSettings(TranslatableMixin, BaseGenericSetting):
+    """GlobalSettings."""
+
     twitter_url = models.URLField(verbose_name="Twitter URL", blank=True, null=True)
     linkedin_url = models.URLField(verbose_name="Linkedin URL", blank=True, null=True)
     facebook_url = models.URLField(verbose_name="Facebook URL", blank=True, null=True)
@@ -1006,7 +629,6 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
     newsletter_page = models.ForeignKey(
         "wagtailcore.Page", null=True, blank=True, related_name="+", on_delete=models.SET_NULL
     )
-
     partners_section_heading = StreamField(
         [
             (
@@ -1032,7 +654,6 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
         blank=True,
         use_json_field=True,
     )
-
     main_partner = StreamField(
         [
             (
@@ -1050,7 +671,6 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
         blank=True,
         use_json_field=True,
     )
-
     other_partners = StreamField(
         [
             (
@@ -1077,7 +697,6 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
         blank=True,
         use_json_field=True,
     )
-
     newsletter_widget = StreamField(
         [
             (
@@ -1109,7 +728,6 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
         blank=True,
         use_json_field=True,
     )
-
     menus_widget = StreamField(
         [
             (
@@ -1157,7 +775,7 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
                 FieldPanel("medium_url"),
                 FieldPanel("youtube_url"),
             ],
-            "Social media settings",
+            _("Social media settings"),
         ),
         MultiFieldPanel(
             [
@@ -1165,7 +783,7 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
                 PageChooserPanel("data_policy_page"),
                 PageChooserPanel("newsletter_page"),
             ],
-            "Utility pages",
+            _("Utility pages"),
         ),
         MultiFieldPanel(
             [
@@ -1173,13 +791,13 @@ class GlobalSettings(TranslatableMixin, BaseGenericSetting):
                 FieldPanel("main_partner"),
                 FieldPanel("other_partners"),
             ],
-            "Partners Section",
+            _("Partners Section"),
         ),
         MultiFieldPanel(
             [FieldPanel("newsletter_widget"), FieldPanel("menus_widget")],
-            "Footer Settings",
+            _("Footer Settings"),
         ),
     ]
 
     class Meta(TranslatableMixin.Meta):
-        verbose_name_plural = "Global Settings"
+        verbose_name_plural = _("Global Settings")

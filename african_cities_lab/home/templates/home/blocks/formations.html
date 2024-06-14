@@ -1,0 +1,51 @@
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+<section class="formations-wrapper">
+  <div class="container-lg py-md-5">
+    {% for formation in page.localized.get_children %}
+      <div class="row formation-item">
+        <div class="col-md-3 col-lg-2 col-sm-3 col-xs-12">
+          <div class="formation-meta__card float-md-end">
+            <div class="formation-date">
+              <div class="start-date">
+                <div class="date-d">{{ formation.specific.starting_date.day }}</div>
+                <div class="date-m">{{ formation.specific.get_split_start_month }}</div>
+                <div class="date-y">{{ formation.specific.starting_date.year }}</div>
+              </div>
+              <div class="text-center">
+                <img alt="icon"
+                     width="12"
+                     height="30"
+                     src="{% static 'images/assets/chevron-icon.svg' %}" />
+              </div>
+              <div class="end-date">
+                <div class="date-d">{{ formation.specific.ending_date.day }}</div>
+                <div class="date-m">{{ formation.specific.get_split_end_month }}</div>
+                <div class="date-y">{{ formation.specific.ending_date.year }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9 col-lg-3 col-sm-9 col-xs-12">
+          <div class="formation-item__img">
+            <a href="{% pageurl formation %}">
+              <div>
+                {% image formation.specific.main_image original as img %}
+                <img width="408" height="245" alt="{{ img.alt }}" src="{{ img.url }}" />
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5">
+          <div class="formation-item__inner py-3">
+            <a href="{% pageurl formation %}" class="h3">{{ formation.title }}</a>
+          </div>
+          <p>{{ formation.specific.summary }}</p>
+          <div class="mt-3">
+            <a class="text_primary font-weight-500" href="{% pageurl formation %}">{% translate "Learn more" %}</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
