@@ -3,22 +3,28 @@
 {% get_current_language as LANGUAGE_CODE %}
 {% with heading=settings.home.GlobalSettings.partners_section_heading main_partner=settings.home.GlobalSettings.main_partner other_partners=settings.home.GlobalSettings.other_partners %}
   {% if heading %}
-    <div class="container-fluid p-md-5">
+    <div class="container-lg p-md-5">
       <div class="row justify-content-center">
         {% for block in heading %}
           {% if LANGUAGE_CODE == 'en' %}
             <h3 class="section-title text-center pt-5 pb-3">{{ block.value.section_title_en }}</h3>
-            <div class="my-3 font-size-16 w-75 mb-4 text-align-left__max-576">{{ block.value.section_subtitle_en }}</div>
+            {% if block.value.section_subtitle_en %}
+              <div class="my-3 font-size-16 w-75 mb-4 text-align-left__max-576">{{ block.value.section_subtitle_en }}</div>
+            {% endif %}
           {% elif LANGUAGE_CODE == 'fr' %}
             <h3 class="section-title text-center pt-5 pb-3">{{ block.value.section_title_fr }}</h3>
-            <div class="my-3 font-size-16 w-75 mb-4 text-align-left__max-576">{{ block.value.section_subtitle_fr }}</div>
+            {% if block.value.section_subtitle_fr %}
+              <div class="my-3 font-size-16 w-75 mb-4 text-align-left__max-576">{{ block.value.section_subtitle_fr }}</div>
+            {% endif %}
           {% else %}
             <h3 class="section-title text-center pt-5 pb-3">{{ block.value.section_title_en }}</h3>
-            <div class="my-3 font-size-16 w-75 mb-4 text-align-left__max-576">{{ block.value.section_subtitle_en }}</div>
+            {% if block.value.section_subtitle_fr %}
+              <div class="my-3 font-size-16 w-75 mb-4 text-align-left__max-576">{{ block.value.section_subtitle_en }}</div>
+            {% endif %}
           {% endif %}
         {% endfor %}
       </div>
-      <div class="row {% if main_partner and other_partners %}justify-content-lg-between{% else %}justify-content-center{% endif %} align-items-lg-center">
+      <div class="row {% if main_partner and other_partners %}justify-content-lg-between{% else %}justify-content-center{% endif %} align-items-lg-center mb-5">
         {% if other_partners %}
           {% for block in other_partners %}
             {% if block.block_type == "partners" %}

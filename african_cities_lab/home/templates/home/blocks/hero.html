@@ -1,10 +1,10 @@
-{% load static wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
-{% image value.image original as img %}
+{% image value.hero_options.background_image original as img %}
 <section class="{% if img.url %}page-banner{% else %}page-banner bg_primary{% endif %}"
-         {% if img.url %} style='background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})' {% endif %}>
+         {% if img.url %} style='background-image:linear-gradient(rgba(84,84,84,0.25) 12%,rgba(0,0,0,.5) 100%),url({{ img.url }})'{% endif %}>
   <div class="container-fluid">
-    <div class="row py-5">
+    <div class="row py-5 {% if value.hero_options.content_position %}justify-content-{{ value.hero_options.content_position }}{% endif %}">
       <div class="col-12 col-lg-6 col-md-10">
         <div class="position-relative h1">
           {{ value.banner_title }}
@@ -14,8 +14,12 @@
             <span class="dash-accent__"></span>
           {% endif %}
         </div>
-        {% if value.infinite_scrolling_texts %}
-          <div class="infinite_scrolling_text__wrapper">{{ value.infinite_scrolling_texts }}</div>
+        {% if value.banner_content %}
+          <div class="py-4">
+            {% for block in value.banner_content %}
+              {% include_block block %}
+            {% endfor %}
+          </div>
         {% endif %}
       </div>
     </div>

@@ -1,0 +1,25 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="row mb-5">
+  {% for collaborator in value.collaborators %}
+    <div class="col-sm-4">
+      <div class="team-box cooperator">
+        <div class="box-container">
+          <h4 class="name">{{ collaborator.name }}</h4>
+          <p class="function">{{ collaborator.function }}</p>
+          {% if collaborator.social_links %}
+            <ul class="mdl-speaker-social-list list-inline m-0">
+              {% for social in collaborator.social_links %}
+                <li class="list-inline-item" target="_blank">
+                  <a href="{{ social.profile_link }}">
+                    <i class="{{ social.fa_class }}"></i>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

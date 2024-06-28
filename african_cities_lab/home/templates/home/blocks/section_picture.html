@@ -1,0 +1,25 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="my-5 position-relative section-picture">
+  <div class="container-lg">
+    <div class="row justify-content-around">
+      <div class="col-12 col-md-3 col-lg-4 p-5 p-md-3 order-1 order-md-0">
+        {% image value.spotlight_image original as img %}
+        <img class="spotlight_image"
+             width="408"
+             height="500"
+             alt="{{ img.alt }}"
+             src="{{ img.url }}" />
+      </div>
+      <div class="col-12 col-md-9 col-lg-8 order-0 order-md-1 pt-5 px-lg-5">
+        {% for block in value.content %}
+          {% if block.block_type == "paragraph" %}
+            <div class="font-size-16 pt-3">{% include_block block %}</div>
+          {% else %}
+            {% include_block block %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
