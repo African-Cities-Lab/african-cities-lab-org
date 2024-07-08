@@ -1,66 +1,101 @@
-{% load home_tags menu_tags i18n static wagtailcore_tags %}
+{% load home_tags menu_tags i18n static wagtailcore_tags wagtailsettings_tags %}
 
+{% get_current_language as LANGUAGE_CODE %}
 <footer>
   <div class="footer-top">
     <div class="container-lg py-3">
       <div class="row justify-content-lg-between p-md-5">
         <div class="col-12 col-lg-7 order-2 order-lg-1">
           <div class="row">
-            <div class="col-6 col-sm-4">
-              <h5 class="footer__col-title my-3">{% translate "Get to know us" %}</h5>
-              <ul class="footer-menu list-unstyled">
-                {% flat_menu 'footer_menu_1' template="components/menus/menu_footer.html" %}
-              </ul>
-            </div>
-            <div class="col-6 col-sm-4">
-              <h5 class="footer__col-title my-3">{% translate "Legal" %}</h5>
-              <ul class="footer-menu list-unstyled">
-                {% flat_menu 'footer_menu_2' template="components/menus/menu_footer.html" %}
-              </ul>
-            </div>
+            {% with menus_widget=settings.home.GlobalSettings.menus_widget %}
+              {% if menus_widget %}
+                {% for block in menus_widget %}
+                  {% if block.block_type == "widgets" %}
+                    {% for menu_widget in block.value.menu_widget %}
+                      <div class="col-6 col-sm-4">
+                        {% if LANGUAGE_CODE == 'en' %}
+                          <h5 class="footer__col-title my-3">{{ menu_widget.widget_title_en }}</h5>
+                        {% elif LANGUAGE_CODE == 'fr' %}
+                          <h5 class="footer__col-title my-3">{{ menu_widget.widget_title_fr }}</h5>
+                        {% else %}
+                          <h5 class="footer__col-title my-3">{{ menu_widget.widget_title_en }}</h5>
+                        {% endif %}
+                        <ul class="footer-menu list-unstyled">
+                          {% flat_menu menu_widget.flat_menu template="components/menus/menu_footer.html" %}
+                        </ul>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
           </div>
         </div>
         <div class="col-12 col-md-9 col-lg-5 order-1 order-lg-2">
           <div class="footer__articleletter-col">
-            <h5 class="footer__col-title my-3">{% translate "Stay updated with our newsletter" %}</h5>
-            <p class="footer__col-text">
-              {% translate "Stay up to date with all the recent news, updates, and courses by simply your email address to our mailing list. We promise to never spam you." %}
-            </p>
-            <div class="newsletter-widget my-3">
-              <a href="" class="input-group">
-                <span class="newsletter-widget__title">{% translate 'Subscribe to our newsletter!' %}</span>
-                <div class="input-group-append">
-                  <span class="btn">{% translate "Sign up" %}</span>
+            {% with newsletter_page_url=settings.home.GlobalSettings.newsletter_page.url newsletter_widget=settings.home.GlobalSettings.newsletter_widget %}
+              {% if newsletter_page_url %}
+                {% for block in newsletter_widget %}
+                  {% if LANGUAGE_CODE == 'en' %}
+                    <h5 class="footer__col-title my-3">{{ block.value.newsletter_widget_title_en }}</h5>
+                    <p class="footer__col-text">{{ block.value.newsletter_widget_subtitle_en }}</p>
+                  {% elif LANGUAGE_CODE == 'fr' %}
+                    <h5 class="footer__col-title my-3">{{ block.value.newsletter_widget_title_fr }}</h5>
+                    <p class="footer__col-text">{{ block.value.newsletter_widget_subtitle_fr }}</p>
+                  {% else %}
+                    <h5 class="footer__col-title my-3">{{ block.value.newsletter_widget_title_en }}</h5>
+                    <p class="footer__col-text">{{ block.value.newsletter_widget_subtitle_en }}</p>
+                  {% endif %}
+                {% endfor %}
+                <div class="newsletter-widget my-3">
+                  <a href="{{ newsletter_page_url }}" class="input-group">
+                    <span class="newsletter-widget__title">{% translate 'Subscribe to our newsletter!' %}</span>
+                    <div class="input-group-append">
+                      <span class="btn">{% translate "Sign up" %}</span>
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-            <div class="social-media__wrapper">
-              <span>{% translate "Connect with us :" %}</span>
-              <ul class="list-inline m-3">
-                <li class="list-inline-item mx-2">
-                  <a href="https://twitter.com/AfricanCtiesLab" class="text_primary"><i class="fab fa-twitter"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true"
-                     class="text_primary"><i class="fab fa-linkedin-in"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://www.facebook.com/African-Cities-Lab-103073095772023"
-                     class="text_primary"><i class="fab fa-facebook-f"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y="
-                     class="text_primary"><i class="fab fa-instagram"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://medium.com/@African_Cities_Lab" class="text_primary"><i class="fab fa-medium-m"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA"
-                     class="text_primary"><i class="fab fa-youtube"></i></a>
-                </li>
-              </ul>
-            </div>
+              {% endif %}
+            {% endwith %}
+            {% with twitter_url=settings.home.GlobalSettings.twitter_url linkedin_url=settings.home.GlobalSettings.linkedin_url facebook_url=settings.home.GlobalSettings.facebook_url instagram_url=settings.home.GlobalSettings.instagram_url medium_url=settings.home.GlobalSettings.medium_url youtube_url=settings.home.GlobalSettings.youtube_url %}
+              {% if twitter_url or linkedin_url or facebook_url or instagram_url or medium_url or youtube_url %}
+                <div class="social-media__wrapper">
+                  <span>{% translate "Connect with us:" %}</span>
+                  <ul class="list-inline m-3">
+                    {% if twitter_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ twitter_url }}" class="text_primary"><i class="fab fa-twitter"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if linkedin_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ linkedin_url }}" class="text_primary"><i class="fab fa-linkedin-in"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if facebook_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ facebook_url }}" class="text_primary"><i class="fab fa-facebook-f"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if instagram_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ instagram_url }}" class="text_primary"><i class="fab fa-instagram"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if medium_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ medium_url }}" class="text_primary"><i class="fab fa-medium-m"></i></a>
+                      </li>
+                    {% endif %}
+                    {% if youtube_url %}
+                      <li class="list-inline-item mx-2">
+                        <a href="{{ youtube_url }}" class="text_primary"><i class="fab fa-youtube"></i></a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              {% endif %}
+            {% endwith %}
           </div>
         </div>
       </div>

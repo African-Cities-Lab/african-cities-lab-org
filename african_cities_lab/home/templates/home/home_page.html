@@ -1,0 +1,58 @@
+{% extends "home/wagtail_base.html" %}
+
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+  <!-- Slider-->
+  <section class="homepage-slider">
+    <div class="swiper home-swiper">
+      <div class="swiper-wrapper">
+        {% for loop_cycle in self.carousel_images.all %}
+          {% image loop_cycle.carousel_image original as img %}
+          <div class="swiper-slide">
+            <div class="slide-image"
+                 style="background-image: linear-gradient(90deg, rgba(0,0,0,.5) 12%, rgba(0,0,0,0.25) 100%), url({{ img.url }});
+                        min-height: 575px">
+              <div class="container-fluid">
+                <div class="row py-5">
+                  <div class="col-12 col-lg-7 col-md-10">
+                    <div class="position-relative h1">
+                      {{ loop_cycle.banner_title }}
+                      <span class="dash-accent"></span>
+                    </div>
+                    <p class="my-4 font-size-16">{{ loop_cycle.banner_subtitle }}</p>
+                    <div class="pt-3">
+                      <a class="btn btn-small font-size-14 btn-outline__white"
+                         href="{{ loop_cycle.banner_cta }}">{{ loop_cycle.banner_button_label }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="acl-sharpes bottom-right__sharpe">
+                <img class="d-none d-lg-block"
+                     alt="icon"
+                     width="400"
+                     height="205"
+                     src="{% static 'images/assets/outline-sharpe-bottom.svg' %}" />
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid p-md-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-11 page-content">
+          {% for block in page.body %}
+            {% include_block block %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

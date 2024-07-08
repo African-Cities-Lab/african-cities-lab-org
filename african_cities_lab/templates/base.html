@@ -39,7 +39,7 @@
             href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     {% endblock css %}
     <!-- Le javascript
-    ================================================== -->
+	     ================================================== -->
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
       <!-- Vendor dependencies bundled as one file -->
@@ -78,6 +78,11 @@
     <main>
       {% block content %}
       {% endblock content %}
+      <!-- Start Partners Area-->
+      <section class="our-partners">
+        {% include "components/partners_section.html" %}
+      </section>
+      <!-- End Partners Area -->
     </main>
     <!-- Footer-->
     {% include "components/footer.html" %}
@@ -87,13 +92,13 @@
     {% endblock modal %}
     {% block inline_javascript %}
       {% comment %}
-      Script tags with only code, no src (defer by default). To run
-      with a "defer" so that you run inline code:
-      <script>
-        window.addEventListener('DOMContentLoaded', () => {
-          /* Run whatever you want */
-        });
-      </script>
+	    Script tags with only code, no src (defer by default). To run
+	    with a "defer" so that you run inline code:
+	    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        /* Run whatever you want */
+      });
+    </script>
       {% endcomment %}
     {% endblock inline_javascript %}
   </body>
