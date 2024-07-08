@@ -1,0 +1,13 @@
+{% load static %}
+
+<ul class="banner-text-list">
+  {% for scrolling_text in value.infinite_scrolling_texts %}
+    <li class="banner-text__item item-{{ forloop.counter }}">
+      <img width="12"
+           height="30"
+           alt="icon"
+           src="{% static 'images/assets/small-pointer.svg' %}" />
+      <h2 class="bannner__add-text">{{ scrolling_text.content_text }}</h2>
+    </li>
+  {% endfor %}
+</ul>

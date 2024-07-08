@@ -1,0 +1,20 @@
+<section class="overview-section p-lg-5">
+  <div class="container-xl">
+    {% for overview in value.overviews %}
+      <div class="row justify-content-around">
+        <div class="col-12 col-md-3 col-lg-4 p-5 p-md-3 order-1 order-md-0">
+          {% image overview.image original as img %}
+          <img class="about-mission__img"
+               width="408"
+               height="500"
+               alt="acl-team"
+               src="{{ img.url }}" />
+        </div>
+        <div class="col-12 col-md-9 col-lg-8 order-0 order-md-1 pt-5 px-lg-5">
+          <h2 class="section-title mb-3">{{ overview.heading }}</h2>
+          <div class="py-3 font-size-16 text-justify">{{ overview.paragraph }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>

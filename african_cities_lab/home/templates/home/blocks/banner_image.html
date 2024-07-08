@@ -1,0 +1,28 @@
+{% load static wagtailimages_tags %}
+
+{% image value.image original as img %}
+<section class="{% if img.url %}page-banner{% else %}page-banner bg_primary{% endif %}"
+         {% if img.url %} style='background-image: linear-gradient(rgba(84,84,84,0.25) 12%, rgba(0,0,0,.5) 100%), url({{ img.url }})' {% endif %}>
+  <div class="container-fluid">
+    <div class="row py-5">
+      <div class="col-12 col-lg-6 col-md-10">
+        <div class="position-relative h1">
+          {{ value.banner_title }}
+          {% if img.url %}
+            <span class="dash-accent"></span>
+          {% else %}
+            <span class="dash-accent__"></span>
+          {% endif %}
+        </div>
+        {% if value.infinite_scrolling_texts %}
+          <div class="infinite_scrolling_text__wrapper">{{ value.infinite_scrolling_texts }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="acl-sharpes {% if img.url %} right-sharpe{% else %} bottom-right__sharpe{% endif %}">
+    <img alt="icon"
+         class="d-none d-lg-block"
+         {% if img.url %} width="195" height="380" src="{% static 'images/assets/outline-sharpe-right.svg' %}" {% else %} width="400" height="205" src="{% static 'images/assets/sharpe-bottom#d29675.svg' %}" {% endif %} />
+  </div>
+</section>

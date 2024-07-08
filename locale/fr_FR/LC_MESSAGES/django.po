@@ -7,33 +7,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-10 10:41+0200\n"
+"POT-Creation-Date: 2024-06-14 00:47+0200\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: african_cities_lab/home/templates/home/blog_page.html:55
+#: african_cities_lab/home/models.py:1025
+#: african_cities_lab/home/models.py:1027
+#: african_cities_lab/home/models.py:1091
+#: african_cities_lab/home/models.py:1093
+#: african_cities_lab/home/models.py:1116
+msgid "Add content in english"
+msgstr "Ajouter un contenu en anglais"
+
+#: african_cities_lab/home/models.py:1026
+#: african_cities_lab/home/models.py:1028
+#: african_cities_lab/home/models.py:1092
+#: african_cities_lab/home/models.py:1094
+#: african_cities_lab/home/models.py:1117
+msgid "Add content in french"
+msgstr "Ajouter un contenu en français"
+
+#: african_cities_lab/home/templates/home/blog_page.html:49
 msgid "Tags:"
 msgstr "Étiquettes"
 
-#: african_cities_lab/home/templates/home/blog_page.html:68
+#: african_cities_lab/home/templates/home/blog_page.html:59
 msgid "Share"
 msgstr "Partager"
 
-#: african_cities_lab/home/templates/home/blog_tag_index_page.html:39
+#: african_cities_lab/home/templates/home/blog_tag_index_page.html:36
 msgid "Showing pages tagged"
 msgstr "Afficher les articles étiquetées"
 
-#: african_cities_lab/home/templates/home/blog_tag_index_page.html:83
+#: african_cities_lab/home/templates/home/blog_tag_index_page.html:72
 msgid "No pages found with that tag."
 msgstr "Aucune page n'a été trouvée avec cette étiquette."
 
 #: african_cities_lab/home/templates/home/formations_index_page.html:73
 #: african_cities_lab/home/templates/home/webinars_index_page.html:58
 #: african_cities_lab/templates/components/icon_box_layout.html:17
-#: african_cities_lab/templates/components/row_layout.html:29
+#: african_cities_lab/templates/components/row_layout.html:27
 msgid "Learn more"
 msgstr "En savoir plus"
 
@@ -72,6 +88,43 @@ msgstr "Au programme"
 #: african_cities_lab/home/templates/home/webinars_page.html:77
 msgid "Speakers"
 msgstr "Intervenants"
+
+#: african_cities_lab/home/views.py:66
+msgid ""
+"Thank you for registering! A confirmation email has been sent to you, please "
+"check your mailbox or your spam."
+msgstr ""
+"Merci de vous être inscrit ! Un email de confirmation vous a été envoyé, "
+"veuillez vérifier votre boîte aux lettres ou vos spams."
+
+#: african_cities_lab/home/views.py:72
+msgid ""
+"Your email is already registered, please check your mailbox or your spam. "
+"Thank you!"
+msgstr ""
+"Votre email est déjà enregistré, veuillez vérifier votre boîte mail ou vos "
+"spams. Nous vous remercions de votre intérêt."
+
+#: african_cities_lab/home/views.py:78
+msgid "Subscribe to the event"
+msgstr "Inscrivez-vous à l'évernement"
+
+#: african_cities_lab/home/views.py:100
+msgid ""
+"Thank you for subscribing to our newsletter. Watch your mailbox for news, "
+"updates and courses from the African Cities Lab very soon!"
+msgstr ""
+"Merci de vous être abonné à notre newsletter. Surveillez votre boite mail "
+"pour des nouvelles, des mises à jour et des cours de l'African Cities Lab "
+"très bientôt !"
+
+#: african_cities_lab/home/views.py:107
+msgid ""
+"Your email is already registered. Watch your mailbox for news, updates and "
+"courses from the African Cities Lab very soon!"
+msgstr ""
+"Votre email est déjà enregistré. Surveillez votre boite mail pour des "
+"nouvelles, des mises à jour et des cours du African Cities Lab très bientôt !"
 
 #: african_cities_lab/templates/403.html:13
 #: african_cities_lab/templates/403_csrf.html:13
@@ -425,43 +478,23 @@ msgstr "Intervenant(s) :"
 msgid "Moderator:"
 msgstr "Modérateur :"
 
-#: african_cities_lab/templates/components/footer.html:10
-msgid "Get to know us"
-msgstr "Nous connaître"
-
-#: african_cities_lab/templates/components/footer.html:16
-msgid "Legal"
-msgstr "Mentions légales"
-
-#: african_cities_lab/templates/components/footer.html:25
-msgid "Stay updated with our newsletter"
-msgstr "Recevez la newsletter ACL"
-
-#: african_cities_lab/templates/components/footer.html:27
-msgid ""
-"Stay up to date with all the recent news, updates, and courses by simply "
-"your email address to our mailing list. We promise to never spam you."
-msgstr ""
-"Restez informés de la mise à jour des cours. Et suivez toute l’actualité de "
-"la transformation des villes africaines."
-
-#: african_cities_lab/templates/components/footer.html:31
+#: african_cities_lab/templates/components/footer.html:51
 msgid "Subscribe to our newsletter!"
 msgstr "Inscrivez-vous à notre newsletter !"
 
-#: african_cities_lab/templates/components/footer.html:33
+#: african_cities_lab/templates/components/footer.html:53
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: african_cities_lab/templates/components/footer.html:38
-msgid "Connect with us :"
-msgstr "Suivez-nous"
+#: african_cities_lab/templates/components/footer.html:63
+msgid "Connect with us:"
+msgstr "Suivez-nous :"
 
-#: african_cities_lab/templates/components/footer.html:73
+#: african_cities_lab/templates/components/footer.html:108
 msgid "African Cities Lab. All rights reserved. "
 msgstr "African Cities Lab. Tous droits réservés."
 
-#: african_cities_lab/templates/components/mooc_card.html:29
+#: african_cities_lab/templates/components/mooc_card.html:35
 #: african_cities_lab/templates/pages/home.html:127
 #: african_cities_lab/templates/pages/home.html:159
 #: african_cities_lab/templates/pages/home.html:186
@@ -494,31 +527,10 @@ msgstr "Se connecter"
 
 #: african_cities_lab/templates/components/navbar.html:35
 #: african_cities_lab/templates/components/navbar.html:86
+#: african_cities_lab/templates/pages/event_subscribe_form.html:114
 #: african_cities_lab/templates/pages/moocs_index_page.html:465
 msgid "Register"
 msgstr "S'inscrire"
-
-#: african_cities_lab/templates/components/partners_section.html:4
-msgid "Our Partners"
-msgstr "Nos Partenaires"
-
-#: african_cities_lab/templates/pages/contact.html:34
-msgid "We’re here to help"
-msgstr "Nous sommes là pour vous aider"
-
-#: african_cities_lab/templates/pages/contact.html:36
-msgid "Please contact us in case of any query. We are happy to help"
-msgstr ""
-"Merci de nous contacter en cas de question. Nous serons heureux de vous "
-"aider."
-
-#: african_cities_lab/templates/pages/contact.html:43
-msgid "Email Us To Get Information"
-msgstr "Écrivez-nous"
-
-#: african_cities_lab/templates/pages/contact.html:58
-msgid "Follow us on"
-msgstr "Suivez-nous"
 
 #: african_cities_lab/templates/pages/contest.html:15
 msgid "Participate to the \"African urban visions\" contest"
@@ -740,6 +752,80 @@ msgstr ""
 "».\n"
 "                            "
 
+#: african_cities_lab/templates/pages/event_subscribe_form.html:45
+msgid "Please fill out the form so that your registration can be validated."
+msgstr ""
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:52
+#: african_cities_lab/templates/pages/newsletter.html:53
+msgid "Last name"
+msgstr "Prénoms"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:59
+#: african_cities_lab/templates/pages/newsletter.html:60
+msgid "First name"
+msgstr "Nom"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:67
+#: african_cities_lab/templates/pages/newsletter.html:68
+msgid "Email Address"
+msgstr "Adresses e-mail"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:73
+msgid "Organization Name"
+msgstr "Nom de l'organisation"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:77
+msgid "Title"
+msgstr "Titre"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:81
+msgid "Function"
+msgstr "Fonction"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:86
+msgid "Country"
+msgstr "Pays"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:91
+msgid "Select your country"
+msgstr "Sélectionnez votre pays"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:96
+msgid "LinkedIn account"
+msgstr "Compte LinkedIn"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:105
+#: african_cities_lab/templates/pages/newsletter.html:79
+msgid "By submitting your info in the form above, you agree to our"
+msgstr ""
+"En soumettant vos informations dans le formulaire ci-dessus, vous acceptez "
+"que nous nous engagions à"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:107
+#: african_cities_lab/templates/pages/newsletter.html:81
+msgid "Terms & Condition"
+msgstr "Termes & Conditions"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:108
+#: african_cities_lab/templates/pages/newsletter.html:82
+msgid "and"
+msgstr "et"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:108
+#: african_cities_lab/templates/pages/newsletter.html:82
+msgid "Data privacy"
+msgstr "Politique de gestion des données"
+
+#: african_cities_lab/templates/pages/event_subscribe_form.html:109
+#: african_cities_lab/templates/pages/newsletter.html:83
+msgid ""
+"We may use this info to contact you and/or use data from third parties to "
+"personalize your experience."
+msgstr ""
+"Nous pouvons utiliser ces informations pour vous contacter et/ou utiliser "
+"des données provenant de tiers pour personnaliser votre expérience."
+
 #: african_cities_lab/templates/pages/events_page.html:38
 #: african_cities_lab/templates/pages/home.html:289
 msgid "Webinars"
@@ -878,6 +964,20 @@ msgstr ""
 
 #: african_cities_lab/templates/pages/moocs_index_page.html:443
 msgid "Villes africaines : Introduction à la planification urbaine"
+msgstr ""
+
+#: african_cities_lab/templates/pages/newsletter.html:44
+msgid "Want to stay informed?"
+msgstr ""
+
+#: african_cities_lab/templates/pages/newsletter.html:46
+msgid ""
+"Leave us your e-mail, so we can send you your new all recent news, updates, "
+"and courses when they are published! "
+msgstr ""
+
+#: african_cities_lab/templates/pages/newsletter.html:88
+msgid "Suscribe"
 msgstr ""
 
 #: african_cities_lab/templates/pages/team.html:97
