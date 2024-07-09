@@ -234,28 +234,6 @@ class EventIndexPage(MetadataPageMixin, IndexPage):
         "home.HomePage",
     ]
     max_count = 1
-
-    def get_context(self, request):
-        # Get current language
-        current_lang = Locale.get_active()
-
-        # Get last 3 webinars
-        latest_webinars = (
-            WebinarPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
-        )
-
-        # Get last 3 formations
-        latest_formations = (
-            FormationPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
-        )
-
-        # Update template context
-        context = super().get_context(request)
-        context["webinars"] = latest_webinars
-        context["formations"] = latest_formations
-
-        return context
-
     class Meta:
         verbose_name = _("Event Index Page")
 

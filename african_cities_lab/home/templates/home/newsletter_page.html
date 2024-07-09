@@ -7,7 +7,7 @@
     {% for block in blocks %}
       {% if block.block_type == "hero_block" %}{{ block }}{% endif %}
       {% if block.block_type == "newsletter_form" %}
-        {% include_block block %}
+        {{ block }}
       {% endif %}
       {% if block.block_type == "section_block" %}
         {% include_block block %}
