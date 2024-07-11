@@ -1,25 +1,20 @@
 {% extends "home/wagtail_base.html" %}
 
-{% load static i18n wagtailcore_tags wagtailimages_tags %}
+{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags wagtailsettings_tags %}
 
 {% block content %}
-  <section class="py-5">
-    <div class="container p-md-5">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-8">
-          <!-- message if email is sent -->
-          {% if messages %}
-            {% for message in messages %}
-              <div class="my-5 alert alert-success">
-                <h6 class="m-0 font-size-18">{{ message }}</h6>
-              </div>
-            {% endfor %}
-          {% endif %}
-          {% for block in page.body %}
-            {% include_block block %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
+  {% with blocks=page.body %}
+    {% for block in blocks %}
+      {% if block.block_type == "hero_block" %}{{ block }}{% endif %}
+      {% if block.block_type == "newsletter_form" %}
+        {{ block }}
+      {% endif %}
+      {% if block.block_type == "section_block" %}
+        {% include_block block %}
+      {% endif %}
+      {% if block.block_type == "section_picture_block" %}
+        {% include_block block %}
+      {% endif %}
+    {% endfor %}
+  {% endwith %}
 {% endblock content %}

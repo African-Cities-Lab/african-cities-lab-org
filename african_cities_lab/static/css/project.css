@@ -695,6 +695,9 @@ strong {
 .text-justify {
   text-align: justify;
 }
+.margin-top-6-rem {
+  margin-top: 6rem;
+}
 .btn__primary {
   background-color: #be3712;
   border-color: #be3712;
@@ -1872,7 +1875,7 @@ ul.event-meta {
 .team-box.cooperator {
   border: none;
   height: auto;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .team-box.cooperator .box-container {
   padding: 0;
@@ -2477,7 +2480,7 @@ ul.event-meta {
 /*----------------------------------------*/
 /*  About Page
 /*----------------------------------------*/
-.about-mission__img {
+.spotlight_image {
   object-fit: cover;
   min-height: 500px;
 }
@@ -2500,6 +2503,8 @@ ul.event-meta {
   background-size: cover;
   position: relative;
   background-repeat: no-repeat;
+}
+.acl-conference {
   min-height: 465px;
   color: #fff;
   display: flex;
@@ -2842,7 +2847,7 @@ h2.bannner__add-text {
   .font-size-2-45em {
     font-size: 2.25em;
   }
-  .about-mission__img {
+  .spotlight_image {
     min-height: auto;
   }
   .event-agenda .nav-tabs .nav-link {
@@ -2974,6 +2979,9 @@ h2.bannner__add-text {
   }
   .event-meta__card .date-y {
     border-top: none;
+  }
+  .event-speakers__list {
+    justify-content: center;
   }
 }
 @media (max-width: 992px) {

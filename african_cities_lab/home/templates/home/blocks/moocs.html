@@ -1,7 +1,6 @@
 {% load i18n %}
 
-{# <section class="py-5"> #}
-<section class="featured-moocs position-relative bg_secondary py-5">
+<section class="py-5">
   <div class="container-fluid py-3">
     <div class="row justify-content-xl-center">
       {% for mooc in moocs %}
@@ -24,7 +23,7 @@
             </div>
             <div class="card-body">
               <div class="moocsCard-university d-flex align-items-center">
-                <img alt="{{ moo.organization.name }}"
+                <img alt="{{ mooc.organization.name }}"
                      width="95"
                      height="95"
                      class="brand-icon"
