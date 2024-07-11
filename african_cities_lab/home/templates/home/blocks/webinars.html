@@ -1,9 +1,11 @@
-<div class="upcoming-events py-md-5">
-  {% if webinars %}
-    {% include "home/blocks/webinar.html" %}
-  {% else %}
-    {% with page.localized.get_children as webinars %}
+<section class="upcoming-events">
+  <div class="container-lg py-md-5">
+    {% if webinars %}
       {% include "home/blocks/webinar.html" %}
-    {% endwith %}
-  {% endif %}
-</div>
+    {% else %}
+      {% with page.localized.get_children as webinars %}
+        {% include "home/blocks/webinar.html" %}
+      {% endwith %}
+    {% endif %}
+  </div>
+</section>
