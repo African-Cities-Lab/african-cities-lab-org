@@ -695,6 +695,9 @@ strong {
 .text-justify {
   text-align: justify;
 }
+.margin-top-6-rem {
+  margin-top: 6rem;
+}
 .btn__primary {
   background-color: #be3712;
   border-color: #be3712;

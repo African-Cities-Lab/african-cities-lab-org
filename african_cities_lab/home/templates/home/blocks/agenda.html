@@ -1,6 +1,6 @@
 {% load i18n static wagtailcore_tags %}
 
-<div class="event-agenda mb-5">
+<div class="event-agenda mt-5">
   {% if value.sessions|length > 1 %}
     <ul class="nav nav-tabs" id="agenda-tab" role="tablist">
       {% for session in value.sessions %}

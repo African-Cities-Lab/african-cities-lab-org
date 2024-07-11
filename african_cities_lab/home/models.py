@@ -234,6 +234,7 @@ class EventIndexPage(MetadataPageMixin, IndexPage):
         "home.HomePage",
     ]
     max_count = 1
+
     class Meta:
         verbose_name = _("Event Index Page")
 
