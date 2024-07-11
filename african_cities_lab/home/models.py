@@ -35,47 +35,33 @@ from wagtailmetadata.models import MetadataPageMixin
 from african_cities_lab.home import views
 from african_cities_lab.home.blocks import (
     AgendaBlock,
-    BannerImageBlock,
-    BlankSpaceBlock,
-    ButtonBlock,
-    ContentBoxesBlock,
-    CountersBlock,
+    FeaturedPostsBlock,
     FormationsBlock,
-    IconBoxesBlock,
-    MapBlock,
-    MoocsBlock,
+    HeroBlock,
     NewsletterFormBlock,
-    ParagraphBlock,
-    SectionTitleBlock,
+    SectionBlock,
+    SectionPictureBlock,
     SpeakersBlock,
-    TimelineBlock,
     WebinarsBlock,
 )
 
-BODY_BLOCKS = [
-    ("section_title", SectionTitleBlock()),
-    ("paragraph", ParagraphBlock()),
-    ("button", ButtonBlock()),
-    ("banner_image", BannerImageBlock()),
-    ("counters", CountersBlock()),
-    ("content_boxes", ContentBoxesBlock()),
-    ("icon_boxes", IconBoxesBlock()),
-    ("timeline", TimelineBlock()),
-    ("map", MapBlock()),
-    ("blank_space", BlankSpaceBlock()),
-    ("speakers", SpeakersBlock()),
-    ("agenda", AgendaBlock()),
+HERO_BLOCKS = [
+    ("hero_block", HeroBlock()),
 ]
+
+BODY_BLOCKS = [
+    ("section_picture_block", SectionPictureBlock()),
+    ("section_block", SectionBlock()),
+]
+
+PAGE_BLOCKS = HERO_BLOCKS + BODY_BLOCKS
 
 HOME_BLOCKS = BODY_BLOCKS + [
-    ("moocs", MoocsBlock()),
-    ("formations", FormationsBlock()),
-    ("webinars", WebinarsBlock()),
+    ("featured_posts_block", FeaturedPostsBlock()),
 ]
 
-EVENTS_BLOCKS = BODY_BLOCKS + [
-    ("formations", FormationsBlock()),
-    ("webinars", WebinarsBlock()),
+EVENTS_BLOCKS = PAGE_BLOCKS + [
+    ("featured_posts_block", FeaturedPostsBlock()),
 ]
 
 
@@ -137,7 +123,6 @@ class HomePage(MetadataPageMixin, Page):
 
     body = StreamField(
         HOME_BLOCKS,
-        block_counts={block: {"max_num": 1} for block in ["moocs", "formations", "webinars"]},
         blank=True,
         use_json_field=True,
     )
@@ -195,7 +180,7 @@ class FlatPage(MetadataPageMixin, Page):
     """FlatPage model."""
 
     body = StreamField(
-        BODY_BLOCKS,
+        PAGE_BLOCKS,
         blank=True,
         use_json_field=True,
     )
@@ -216,7 +201,7 @@ class IndexPage(Page):
     """IndexPage model."""
 
     body = StreamField(
-        BODY_BLOCKS,
+        PAGE_BLOCKS,
         blank=True,
         use_json_field=True,
     )
@@ -240,7 +225,6 @@ class EventIndexPage(MetadataPageMixin, IndexPage):
 
     body = StreamField(
         EVENTS_BLOCKS,
-        block_counts={block: {"max_num": 1} for block in ["formations", "webinars"]},
         blank=True,
         use_json_field=True,
     )
@@ -251,27 +235,6 @@ class EventIndexPage(MetadataPageMixin, IndexPage):
     ]
     max_count = 1
 
-    def get_context(self, request):
-        # Get current language
-        current_lang = Locale.get_active()
-
-        # Get last 3 webinars
-        latest_webinars = (
-            WebinarPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
-        )
-
-        # Get last 3 formations
-        latest_formations = (
-            FormationPage.objects.filter(locale=current_lang).live().public().order_by("-first_published_at")[:3]
-        )
-
-        # Update template context
-        context = super().get_context(request)
-        context["webinars"] = latest_webinars
-        context["formations"] = latest_formations
-
-        return context
-
     class Meta:
         verbose_name = _("Event Index Page")
 
@@ -280,7 +243,7 @@ class WebinarIndexPage(MetadataPageMixin, IndexPage):
     """WebinarIndexPage model."""
 
     body = StreamField(
-        BODY_BLOCKS + [("webinars", WebinarsBlock())],
+        PAGE_BLOCKS + [("webinars", WebinarsBlock())],
         block_counts={"webinars": {"min_num": 1, "max_num": 1}},
         blank=True,
         use_json_field=True,
@@ -353,7 +316,7 @@ class FormationIndexPage(MetadataPageMixin, IndexPage):
     """FormationIndexPage model."""
 
     body = StreamField(
-        BODY_BLOCKS + [("formations", FormationsBlock())],
+        PAGE_BLOCKS + [("formations", FormationsBlock())],
         block_counts={"formations": {"min_num": 1, "max_num": 1}},
         blank=True,
         use_json_field=True,
@@ -551,7 +514,7 @@ class NewsletterPage(MetadataPageMixin, Page):
     """NewsletterPage model."""
 
     body = StreamField(
-        BODY_BLOCKS + [("newsletter_form", NewsletterFormBlock())],
+        PAGE_BLOCKS + [("newsletter_form", NewsletterFormBlock())],
         block_counts={"newsletter_form": {"min_num": 1, "max_num": 1}},
         blank=True,
         use_json_field=True,

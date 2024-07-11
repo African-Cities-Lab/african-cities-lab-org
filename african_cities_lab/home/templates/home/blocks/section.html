@@ -1,0 +1,21 @@
+{% load i18n static wagtailcore_tags wagtailimages_tags %}
+
+{% image value.section_options.background_image original as img %}
+<section class="section-layout margin-top-6-rem"
+         {% if img.url %} style='background-image: linear-gradient(105deg, rgba(0,0,0,.5) 12%, rgba(0,0,0,0.10) 60%), url({{ img.url }});min-height: 465px;color: #fff;display: flex;align-items: end;padding:6rem 0'{% endif %}
+         {% if value.section_options.background_color %}style='background-color: {{ value.section_options.background_color }};padding:6rem 0'{% endif %}>
+  {% if img.url %}
+    <div class="acl-sharpes top-right__sharpe">
+      <img class="d-none d-lg-block"
+           alt="icon"
+           width="400"
+           height="205"
+           src="{% static 'images/assets/outline-sharpe-top.svg' %}" />
+    </div>
+  {% endif %}
+  <div class="container-lg">
+    {% for block in value.content %}
+      {% include_block block %}
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,82 @@
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+<div class="row justify-content-center mt-5">
+  {% for director in value.directors %}
+    <div class="col-xl-3 col-md-4">
+      <div class="team-box">
+        {% image director.image original as img %}
+        <div class="director-img">
+          <img width="312" height="242" alt="{{ img.alt }}" src="{{ img.url }}" />
+        </div>
+        <div class="box-container">
+          <h4 class="name">{{ director.name }}</h4>
+          <p class="institution font-size-14">{{ director.institution }}</p>
+          {% if director.social_links %}
+            <ul class="mdl-speaker-social-list list-inline m-0">
+              {% for social in director.social_links %}
+                <li class="list-inline-item" target="_blank">
+                  <a href="{{ social.profile_link }}">
+                    <i class="{{ social.fa_class }}"></i>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          <p class="my-2">{{ director.function }}</p>
+        </div>
+        <div class="box-footer">
+          <a ref="#speaker-modal-{{ forloop.counter }}"
+             type="button"
+             class="d-block"
+             data-bs-toggle="modal"
+             data-bs-target="#speaker-modal-{{ forloop.counter }}">{% translate "Read more" %}</a>
+        </div>
+        <!-- .box-container -->
+        <!-- Modal -->
+        <div class="modal fade"
+             id="speaker-modal-{{ forloop.counter }}"
+             tabindex="-1"
+             aria-labelledby="speaker-modal-{{ forloop.counter }}"
+             aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header border-0">
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+              </div>
+              <div class="modal-body pb-5">
+                <div class="row">
+                  <div class="col-lg-4 col-md-5">
+                    <div class="mdl-speaker-avatar">{% image director.image original class="speaker-avatar" %}</div>
+                  </div>
+                  <div class="col-lg-8 col-md-7">
+                    <div class="mdl-speaker-details p-3">
+                      <h4 class="name">{{ director.name }}</h4>
+                      <p class="institution font-size-14">{{ director.institution }}</p>
+                      <p class="my-2">{{ director.function }}</p>
+                      {% if director.social_links %}
+                        <ul class="mdl-speaker-social-list list-inline m-0">
+                          {% for social in director.social_links %}
+                            <li class="list-inline-item" target="_blank">
+                              <a href="{{ social.profile_link }}">
+                                <i class="{{ social.fa_class }}"></i>
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                      <span class="xs-hr-line"></span>
+                      {{ director.biography }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

@@ -44,15 +44,9 @@
       <div class="swiper-pagination"></div>
     </div>
   </section>
-  <section>
-    <div class="container-fluid p-md-5">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-11 page-content">
-          {% for block in page.body %}
-            {% include_block block %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
+  {% with blocks=page.body %}
+    {% for block in blocks %}
+      {% include_block block %}
+    {% endfor %}
+  {% endwith %}
 {% endblock content %}
