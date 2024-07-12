@@ -5,7 +5,7 @@
 {% block content %}
   {% with blocks=page.body %}
     {% for block in blocks %}
-      {% if block.block_type in "hero_block,newsletter_form" %}
+      {% if block.block_type in "hero_block" %}
         {{ block }}
       {% else %}
         {% include_block block %}
