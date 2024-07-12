@@ -558,7 +558,7 @@ class NewsletterPage(MetadataPageMixin, Page):
                     ),
                 )  # message
 
-        return render(request, "home/newsletter_page.html", {"page": self})
+        return render(request, "home/flat_page.html", {"page": self})
 
     class Meta:
         verbose_name = _("Newsletter Page")
