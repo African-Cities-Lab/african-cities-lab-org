@@ -1,7 +1,7 @@
 {% load i18n static wagtailcore_tags wagtailimages_tags %}
 
-<section class="featured-posts pt-5"
-         {% if value.section_options.background_color %}style='background-color: {{ value.section_options.background_color }};'{% endif %}>
+<section class="featured-posts margin-top-6-rem"
+         {% if value.section_options.background_color %}style='background-color: {{ value.section_options.background_color }};color:#FFF;padding:6rem 0'{% endif %}>
   <div class="container-lg">
     {% if value.content.button.button_position == "top" and value.content.button.button_label %}
       <div class="row">

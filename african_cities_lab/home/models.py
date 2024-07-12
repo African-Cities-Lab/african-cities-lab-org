@@ -510,7 +510,7 @@ class BlogCategory(models.Model):
         ordering = ["name"]
 
 
-class NewsletterPage(MetadataPageMixin, Page):
+class NewsletterPage(MetadataPageMixin,Page):
     """NewsletterPage model."""
 
     body = StreamField(
