@@ -1,18 +1,13 @@
 {% extends "home/wagtail_base.html" %}
 
-{% load static i18n home_tags wagtailcore_tags wagtailimages_tags wagtailmetadata_tags wagtailsettings_tags %}
+{% load wagtailcore_tags %}
 
 {% block content %}
   {% with blocks=page.body %}
     {% for block in blocks %}
-      {% if block.block_type == "hero_block" %}{{ block }}{% endif %}
-      {% if block.block_type == "section_block" %}
-        {% include_block block %}
-      {% endif %}
-      {% if block.block_type == "section_picture_block" %}
-        {% include_block block %}
-      {% endif %}
-      {% if block.block_type == "featured_posts_block" %}
+      {% if block.block_type == "hero_block" %}
+        {{ block }}
+      {% else %}
         {% include_block block %}
       {% endif %}
     {% endfor %}
