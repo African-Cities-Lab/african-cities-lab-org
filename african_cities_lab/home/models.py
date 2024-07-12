@@ -510,7 +510,7 @@ class BlogCategory(models.Model):
         ordering = ["name"]
 
 
-class NewsletterPage(MetadataPageMixin, Page):
+class NewsletterPage(MetadataPageMixin,Page):
     """NewsletterPage model."""
 
     body = StreamField(
@@ -520,6 +520,7 @@ class NewsletterPage(MetadataPageMixin, Page):
         use_json_field=True,
     )
 
+    template = "home/flat_page.html"
     content_panels = Page.content_panels + [
         FieldPanel("body"),
     ]
@@ -558,7 +559,10 @@ class NewsletterPage(MetadataPageMixin, Page):
                     ),
                 )  # message
 
-        return render(request, "home/flat_page.html", {"page": self})
+        # Get template context
+        context = super().get_context(request)
+        # context["page"] = self
+        return render(request, "home/flat_page.html", context)
 
     class Meta:
         verbose_name = _("Newsletter Page")

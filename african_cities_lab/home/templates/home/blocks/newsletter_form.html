@@ -16,7 +16,7 @@
         <p class="font-size-16 pb-5">
           {% translate "Leave us your e-mail, so we can send you your new all recent news, updates, and courses when they are published! " %}
         </p>
-        <form action="{% pageurl page %}" method="post">
+        <form action="{% slugurl page %}" method="post">
           {% csrf_token %}
           <div class="row">
             <div class="col-12 col-md-6 form-group">
