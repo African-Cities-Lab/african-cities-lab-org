@@ -1,11 +1,36 @@
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
 <section class="upcoming-events">
   <div class="container-lg py-md-5">
-    {% if webinars %}
-      {% include "home/blocks/webinar.html" %}
-    {% else %}
-      {% with page.localized.get_children as webinars %}
-        {% include "home/blocks/webinar.html" %}
-      {% endwith %}
-    {% endif %}
+    {% for webinar in webinars %}
+      <div class="row event-item">
+        <div class="col-md-2 col-lg-1 col-sm-2 col-xs-12">
+          <div class="event-meta__card float-md-end">
+            <div class="date-d">{{ webinar.specific.date.day }}</div>
+            <div class="date-m">{{ webinar.specific.get_month_published }}</div>
+            <div class="date-y">{{ webinar.specific.date.year }}</div>
+          </div>
+        </div>
+        <div class="col-md-8 col-lg-4 col-sm-8 col-xs-12">
+          <div class="event-item__img">
+            <a href="{% pageurl webinar %}">
+              <div>
+                {% image webinar.specific.main_image original as img %}
+                <img width="408" height="245" alt="{{ img.alt }}" src="{{ img.url }}" />
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="event-item__inner py-3">
+            <a href="{% pageurl webinar %}" class="h3">{{ webinar.title }}</a>
+          </div>
+          <p>{{ webinar.specific.summary }}</p>
+          <div class="mt-3">
+            <a class="text_primary font-weight-500" href="{% pageurl webinar %}">{% translate "Learn more" %}</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </section>

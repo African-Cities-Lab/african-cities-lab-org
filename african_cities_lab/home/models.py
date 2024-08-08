@@ -210,11 +210,6 @@ class IndexPage(Page):
         FieldPanel("body"),
     ]
 
-    def get_children(self):
-        qs = super().get_children()
-        qs = qs.order_by("-first_published_at")
-        return qs
-
     class Meta:
         abstract = True
         verbose_name = _("Index Page")
@@ -254,6 +249,17 @@ class WebinarIndexPage(MetadataPageMixin, IndexPage):
     parent_page_type = [
         "home.HomePage",
     ]
+
+    def get_context(self, request):
+        # get webinars
+        # see https://github.com/wagtail/wagtail/issues/12190
+        # webinars = WebinarPage.objects.filter(language=current_lang).all()
+        webinars = self.get_children().order_by("-first_published_at")
+
+        # update template context
+        context = super().get_context(request)
+        context["webinars"] = webinars
+        return context
 
     class Meta:
         verbose_name = _("Webinar Index Page")
@@ -327,6 +333,15 @@ class FormationIndexPage(MetadataPageMixin, IndexPage):
     parent_page_type = [
         "home.HomePage",
     ]
+
+    def get_context(self, request):
+        # get formations - TODO: DRY with `WebinarIndexPage.get_context`?
+        formations = self.get_children().order_by("-first_published_at")
+
+        # update template context
+        context = super().get_context(request)
+        context["formations"] = formations
+        return context
 
     class Meta:
         verbose_name = _("Formation Index Page")
