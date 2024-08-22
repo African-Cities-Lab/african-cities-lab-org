@@ -404,7 +404,7 @@ class FeaturedPostsBlock(blocks.StructBlock):
                             ),
                         ),
                         ("button_label", blocks.CharBlock(required=False)),
-                        ("archive_page", blocks.PageChooserBlock(required=False)),
+                        ("archive_page_url", blocks.URLBlock(required=False)),
                     ]
                 ),
             ),
