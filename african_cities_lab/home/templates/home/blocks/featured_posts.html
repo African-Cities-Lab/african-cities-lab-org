@@ -14,7 +14,7 @@
         <div class="col-12 col-md-4 d-none d-md-block">
           <a class="float-end btn __btn-outline-more btn__xxsmall"
              role="button"
-             href="{{ value.content.button.archive_page.url }}">
+             href="{{ value.content.button.archive_page_url }}">
             <span class="font-size-16">{{ value.content.button.button_label }}</span>
           </a>
         </div>
@@ -183,7 +183,7 @@
     {% endif %}
     {% if value.content.button.button_position == "bottom" and value.content.button.button_label %}
       <div class="my-5 text-center">
-        <a href="{{ value.content.button.archive_page.url }}"
+        <a href="{{ value.content.button.archive_page_url }}"
            class="btn btn__primary btn__big">{{ value.content.button.button_label }}</a>
       </div>
     {% endif %}
@@ -191,7 +191,7 @@
       <div class="my-5 text-center d-md-none">
         <a class="btn btn__primary btn__big"
            role="button"
-           href="{{ value.content.button.archive_page.url }}">{{ value.content.button.button_label }}</a>
+           href="{{ value.content.button.archive_page_url }}">{{ value.content.button.button_label }}</a>
       </div>
     {% endif %}
   </div>
