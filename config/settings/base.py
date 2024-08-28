@@ -389,3 +389,9 @@ MAILCHIMP_WEBINAR_EN_LIST_ID = env("MAILCHIMP_WEBINAR_EN_LIST_ID", default="")
 MAILCHIMP_WEBINAR_FR_LIST_ID = env("MAILCHIMP_WEBINAR_FR_LIST_ID", default="")
 MAILCHIMP_NEWSLETTER_FR_ID = env("MAILCHIMP_NEWSLETTER_FR_ID", default="")
 MAILCHIMP_NEWSLETTER_EN_ID = env("MAILCHIMP_NEWSLETTER_EN_ID", default="")
+
+# edX REST API client
+# ------------------------------------------------------------------------------
+EDX_CLIENT_ID = env("EDX_CLIENT_ID", default="")
+EDX_CLIENT_SECRET = env("EDX_CLIENT_SECRET", default="")
+EDX_API_KEY = env("EDX_API_KEY", default="")

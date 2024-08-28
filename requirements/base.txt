@@ -27,3 +27,7 @@ wagtail==5.2.3  # https://github.com/wagtail/wagtail
 wagtail-localize==1.8  # https://github.com/wagtail/wagtail-localize
 wagtailmenus==3.1.9  # https://wagtailmenus.readthedocs.io/en/stable
 wagtail-metadata==4.0.2  # https://github.com/neon-jungle/wagtail-metadata
+
+# edX REST API client
+# ------------------------------------------------------------------------------
+edx-rest-api-client==5.7.0   # https://github.com/openedx/edx-rest-api-client
