@@ -69,8 +69,8 @@ class Organization(models.Model):
     """Organization model."""
 
     name = models.CharField()
-    short_name = models.CharField(max_length=50, blank=True)
-    logo_url = models.URLField()
+    short_name = models.CharField(max_length=50)
+    logo_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.name
@@ -80,7 +80,7 @@ class Mooc(models.Model):
     """Mooc model."""
 
     name = models.CharField()
-    url = models.URLField()
+    course_id = models.CharField()
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     image_url = models.URLField()
     start_date = models.DateField()
@@ -91,6 +91,9 @@ class Mooc(models.Model):
     def is_new(self):
         # whether the mooc's start date is within the last 90 days
         return self.start_date >= timezone.now().date() - timedelta(days=90)
+
+    def url(self):
+        return f"{settings.COURSES_BASE_URL}/{self.course_id}"
 
 
 class HomePageCarouselImages(Orderable):
