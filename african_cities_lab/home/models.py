@@ -132,7 +132,7 @@ class HomePage(MetadataPageMixin, Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
-            [InlinePanel("carousel_images", max_num=3, min_num=1, label=_("Caroussel Images"))],
+            [InlinePanel("carousel_images", min_num=1, label=_("Caroussel Images"))],
             heading=_("Slider"),
         ),
         FieldPanel("body"),
