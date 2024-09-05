@@ -1,11 +1,16 @@
 import json
 
-from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
+from extra_settings.models import Setting
 from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
+
+MAILCHIMP_API_KEY = Setting.get("MAILCHIMP_API_KEY", default="")
+MAILCHIMP_DATA_CENTER = Setting.get("MAILCHIMP_DATA_CENTER", default="")
+MAILCHIMP_WEBINAR_EN_LIST_ID = Setting.get("MAILCHIMP_WEBINAR_EN_LIST_ID", default="")
+MAILCHIMP_WEBINAR_FR_LIST_ID = Setting.get("MAILCHIMP_WEBINAR_FR_LIST_ID", default="")
 
 
 def subscribe(email, list_id, merge_fields=None):
@@ -17,8 +22,8 @@ def subscribe(email, list_id, merge_fields=None):
     mailchimp = Client()
     mailchimp.set_config(
         {
-            "api_key": settings.MAILCHIMP_API_KEY,
-            "server": settings.MAILCHIMP_DATA_CENTER,
+            "api_key": MAILCHIMP_API_KEY,
+            "server": MAILCHIMP_DATA_CENTER,
         }
     )
 
@@ -54,9 +59,9 @@ def subscribe_event(request):
         }
 
         if request.POST["site_language"] == "en":
-            list_id = settings.MAILCHIMP_WEBINAR_EN_LIST_ID
+            list_id = MAILCHIMP_WEBINAR_EN_LIST_ID
         else:  # "fr"
-            list_id = settings.MAILCHIMP_WEBINAR_FR_LIST_ID
+            list_id = MAILCHIMP_WEBINAR_FR_LIST_ID
 
         status = subscribe(email, list_id, merge_fields)
         if status == "subscribed":
