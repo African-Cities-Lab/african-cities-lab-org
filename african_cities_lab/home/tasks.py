@@ -1,31 +1,27 @@
 import json
 
 from edx_rest_api_client.client import OAuthAPIClient
-from extra_settings.models import Setting
 
+from african_cities_lab.home import extra_settings
 from african_cities_lab.home.models import Mooc, Organization
 from config import celery_app
 
 PAGE_SIZE = 100
 
-EDX_BASE_URL = Setting.get("EDX_BASE_URL", default="https://courses.africancitieslab.org")
-CLIENT_ID = Setting.get("EDX_CLIENT_ID", default="")
-CLIENT_SECRET = Setting.get("EDX_CLIENT_SECRET", default="")
-EDX_API_KEY = Setting.get("EDX_API_KEY", default="")
 
-users_url = f"{EDX_BASE_URL}/api/user/v1/users"
-accounts_url = f"{EDX_BASE_URL}/api/user/v1/accounts"
-enrollments_url = f"{EDX_BASE_URL}/api/enrollment/v1/enrollments"
-organizations_url = f"{EDX_BASE_URL}/api/organizations/v0/organizations"
-courses_url = f"{EDX_BASE_URL}/api/courses/v1/courses/"
-course_modes_base_url = f"{EDX_BASE_URL}/api/course_modes/v1/courses"
-gradebook_base_url = f"{EDX_BASE_URL}/api/grades/v1/gradebook"
-certificates_base_url = f"{EDX_BASE_URL}/api/certificates/v0/certificates"
+users_url = f"{extra_settings.EDX_BASE_URL}/api/user/v1/users"
+accounts_url = f"{extra_settings.EDX_BASE_URL}/api/user/v1/accounts"
+enrollments_url = f"{extra_settings.EDX_BASE_URL}/api/enrollment/v1/enrollments"
+organizations_url = f"{extra_settings.EDX_BASE_URL}/api/organizations/v0/organizations"
+courses_url = f"{extra_settings.EDX_BASE_URL}/api/courses/v1/courses/"
+course_modes_base_url = f"{extra_settings.EDX_BASE_URL}/api/course_modes/v1/courses"
+gradebook_base_url = f"{extra_settings.EDX_BASE_URL}/api/grades/v1/gradebook"
+certificates_base_url = f"{extra_settings.EDX_BASE_URL}" "/api/certificates/v0/certificates"
 
-client = OAuthAPIClient(EDX_BASE_URL, CLIENT_ID, CLIENT_SECRET)
+client = OAuthAPIClient(extra_settings.EDX_BASE_URL, extra_settings.CLIENT_ID, extra_settings.CLIENT_SECRET)
 
 get_kwargs = dict(
-    headers={"X-EDX-API-KEY": EDX_API_KEY},
+    headers={"X-EDX-API-KEY": extra_settings.EDX_API_KEY},
     params={"page_size": PAGE_SIZE},
 )
 

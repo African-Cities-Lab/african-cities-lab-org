@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 from django import forms
-from django.conf import settings
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import render
@@ -32,7 +31,7 @@ from wagtail.models import (
 from wagtail.snippets.models import register_snippet
 from wagtailmetadata.models import MetadataPageMixin
 
-from african_cities_lab.home import views
+from african_cities_lab.home import extra_settings, views
 from african_cities_lab.home.blocks import (
     AgendaBlock,
     FeaturedPostsBlock,
@@ -93,7 +92,7 @@ class Mooc(models.Model):
         return self.start_date >= timezone.now().date() - timedelta(days=90)
 
     def url(self):
-        return f"{settings.COURSES_BASE_URL}/{self.course_id}"
+        return f"{extra_settings.EDX_BASE_URL}/{self.course_id}"
 
 
 class HomePageCarouselImages(Orderable):
@@ -557,9 +556,9 @@ class NewsletterPage(MetadataPageMixin, Page):
             }
 
             if request.POST["site_language"] == "en":
-                list_id = settings.MAILCHIMP_NEWSLETTER_EN_ID
+                list_id = extra_settings.MAILCHIMP_NEWSLETTER_EN_ID
             else:  # "fr"
-                list_id = settings.MAILCHIMP_NEWSLETTER_FR_ID
+                list_id = extra_settings.MAILCHIMP_NEWSLETTER_FR_ID
 
             status = views.subscribe(email, list_id, merge_fields)
             if status == "subscribed":
