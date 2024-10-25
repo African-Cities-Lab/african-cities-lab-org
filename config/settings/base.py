@@ -115,6 +115,7 @@ WAGTAIL_APPS = [
     "modelcluster",
     "taggit",
     "wagtailmetadata",
+    "wagtail_transfer",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -380,6 +381,18 @@ WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
         "FORMALITY": "default",
     },
 }
+WAGTAILTRANSFER_SOURCES = {
+    "staging": {
+        "BASE_URL": "https://staging.africancitieslab.org/wagtail-transfer/",
+        "SECRET_KEY": env("WAGTAILTRANSFER_STAGING_KEY", default=""),
+    },
+    "production": {
+        "BASE_URL": "https://africancitieslab.org/wagtail-transfer/",
+        "SECRET_KEY": env("WAGTAILTRANSFER_PRODUCTION_KEY", default=""),
+    },
+}
+
+WAGTAILTRANSFER_SECRET_KEY = env("WAGTAILTRANSFER_SECRET_KEY", default="")
 
 # Mailchimp
 # ------------------------------------------------------------------------------
