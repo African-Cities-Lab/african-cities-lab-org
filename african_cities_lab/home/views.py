@@ -6,14 +6,13 @@ from django.utils.translation import gettext_lazy as _
 from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
 
-from african_cities_lab.home import extra_settings
-
 
 def subscribe(email, list_id, merge_fields=None):
     """
     Contains code handling the communication to the mailchimp api
     to create a contact/member in an audience/list.
     """
+    from african_cities_lab.home import extra_settings
 
     mailchimp = Client()
     mailchimp.set_config(
@@ -43,6 +42,8 @@ def subscribe(email, list_id, merge_fields=None):
 
 def subscribe_event(request):
     if request.method == "POST":
+        from african_cities_lab.home import extra_settings
+
         email = request.POST["EMAIL"]
         merge_fields = {
             "LNAME": request.POST["LNAME"],
