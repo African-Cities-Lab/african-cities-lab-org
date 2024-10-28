@@ -6,7 +6,7 @@ terraform {
     }
     github = {
       source  = "integrations/github"
-      version = "~> 4.28"
+      version = "~> 6.0"
     }
   }
 }
@@ -19,4 +19,5 @@ provider "digitalocean" {
 provider "github" {
   # tokens are set in terraform cloud by setting the GITHUB_TOKEN environment variable there
   token = var.gh_token
+  owner = var.gh_owner
 }

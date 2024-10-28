@@ -38,6 +38,12 @@ SITE_ID = 1
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+# Wagtail internationalization
+WAGTAIL_I18N_ENABLED = True
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ("en", "English"),
+    ("fr", "French"),
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(BASE_DIR / "locale")]
 
@@ -68,6 +74,8 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    "django.contrib.sitemaps",
+    "django_countries",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -77,14 +85,41 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "django_celery_beat",
     "webpack_loader",
+    "extra_settings",
 ]
 
 LOCAL_APPS = [
     "african_cities_lab.users",
     # Your stuff: custom apps go here
+    "african_cities_lab.home.apps.HomeConfig",
 ]
+
+WAGTAIL_APPS = [
+    # "african_cities_lab.search",
+    "wagtail_localize",
+    "wagtail_localize.locales",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.contrib.modeladmin",
+    "wagtail.contrib.settings",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    "wagtailmenus",
+    "wagtail",
+    "modelcluster",
+    "taggit",
+    "wagtailmetadata",
+    "wagtail_transfer",
+]
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + WAGTAIL_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -136,6 +171,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 # STATIC
@@ -181,7 +217,9 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
+                "wagtailmenus.context_processors.wagtailmenus",
                 "african_cities_lab.users.context_processors.allauth_settings",
+                "wagtail.contrib.settings.context_processors.settings",
             ],
         },
     }
@@ -221,7 +259,8 @@ EMAIL_TIMEOUT = 5
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = "admin/"
+ADMIN_URL = "django-admin/"
+WAGTAIL_ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [("""Martí Bosch""", "marti.bosch@epfl.ch")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -320,5 +359,52 @@ WEBPACK_LOADER = {
         "IGNORE": [r".+\.hot-update.js", r".+\.map"],
     }
 }
-# Your stuff...
+
+# Wagtail stuff
 # ------------------------------------------------------------------------------
+
+WAGTAIL_SITE_NAME = "African Cities Lab"
+WAGTAILADMIN_BASE_URL = "https://africancitieslab.org"
+WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
+WAGTAILMENUS_FLAT_MENUS_HANDLE_CHOICES = (
+    ("footer_menu_1", "FOOTERMENU_1"),
+    ("footer_menu_2", "FOOTERMENU_2"),
+    ("footer_menu_3", "FOOTERMENU_3"),
+)
+WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+    "CLASS": "wagtail_localize.machine_translators.deepl.DeepLTranslator",
+    "OPTIONS": {
+        "AUTH_KEY": env("DEEPL_AUTH_KEY", default=""),
+        # Optional DeepL API setting. Accepts "default", "prefer_more" or "prefer_less".\
+        # For more information see the API docs https://www.deepl.com/docs-api/translate-text/
+        "FORMALITY": "default",
+    },
+}
+WAGTAILTRANSFER_SOURCES = {
+    "staging": {
+        "BASE_URL": "https://staging.africancitieslab.org/wagtail-transfer/",
+        "SECRET_KEY": env("WAGTAILTRANSFER_STAGING_KEY", default=""),
+    },
+    "production": {
+        "BASE_URL": "https://africancitieslab.org/wagtail-transfer/",
+        "SECRET_KEY": env("WAGTAILTRANSFER_PRODUCTION_KEY", default=""),
+    },
+}
+
+WAGTAILTRANSFER_SECRET_KEY = env("WAGTAILTRANSFER_SECRET_KEY", default="")
+
+# Mailchimp
+# ------------------------------------------------------------------------------
+# MAILCHIMP_API_KEY = env("MAILCHIMP_API_KEY", default="")
+# MAILCHIMP_DATA_CENTER = env("MAILCHIMP_DATA_CENTER", default="")
+# MAILCHIMP_WEBINAR_EN_LIST_ID = env("MAILCHIMP_WEBINAR_EN_LIST_ID", default="")
+# MAILCHIMP_WEBINAR_FR_LIST_ID = env("MAILCHIMP_WEBINAR_FR_LIST_ID", default="")
+# MAILCHIMP_NEWSLETTER_FR_ID = env("MAILCHIMP_NEWSLETTER_FR_ID", default="")
+# MAILCHIMP_NEWSLETTER_EN_ID = env("MAILCHIMP_NEWSLETTER_EN_ID", default="")
+
+# edX REST API client
+# ------------------------------------------------------------------------------
+# EDX_CLIENT_ID = env("EDX_CLIENT_ID", default="")
+# EDX_CLIENT_SECRET = env("EDX_CLIENT_SECRET", default="")
+# EDX_API_KEY = env("EDX_API_KEY", default="")

@@ -1,0 +1,12 @@
+<div class="row {% if value.content_position %}justify-content-{{ value.content_position }}{% endif %} mb-3">
+  <div class="col-12 col-lg-10">
+    <h3 class="section-title {% if value.section_title.text_align %}text-{{ value.section_title.text_align }}{% endif %}">
+      {{ value.section_title.title }}
+    </h3>
+    {% if value.section_subparagraph.subparagraph %}
+      <div class="font-size-16 pt-3 text-{{ value.section_subparagraph.text_align }}">
+        {{ value.section_subparagraph.subparagraph }}
+      </div>
+    {% endif %}
+  </div>
+</div>

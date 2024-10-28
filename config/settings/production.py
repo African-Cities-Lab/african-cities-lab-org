@@ -85,6 +85,7 @@ STORAGES = {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
             "location": "media",
+            "default_acl": "public-read",
             "file_overwrite": False,
         },
     },
@@ -119,6 +120,7 @@ EMAIL_SUBJECT_PREFIX = env(
 # ------------------------------------------------------------------------------
 # Django Admin URL regex.
 ADMIN_URL = env("DJANGO_ADMIN_URL")
+WAGTAIL_ADMIN_URL = env("WAGTAIL_ADMIN_URL")
 
 # Anymail
 # ------------------------------------------------------------------------------

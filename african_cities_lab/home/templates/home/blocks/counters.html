@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+<div class="banner-counter row justify-content-center justify-content-md-between text-center my-3">
+  {% for counter in value.counters %}
+    <div class="stats-item col-md-4 col-lg-3 mt-3">
+      <h3 class="stats-title">
+        <span>{{ counter.symbol }}</span>
+        <span class="counter">{{ counter.counter_number }}</span>
+      </h3>
+      <span class="banner-counter-title">{{ counter.counter_units }}</span>
+    </div>
+  {% endfor %}
+</div>

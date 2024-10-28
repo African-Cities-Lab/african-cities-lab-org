@@ -1,0 +1,25 @@
+{% load wagtailcore_tags %}
+
+<div class="row justify-content-lg-center mt-5">
+  {% for content_box in value.content_boxes %}
+    <div class="col-12 col-md-6 col-lg-4 p-3 platform-feature__card d-flex">
+      {% if content_box.box_link %}
+        <a href="{{ content_box.box_link }}" class="d-block">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="feature-card__title text_primary py-3">{{ content_box.box_title }}</h5>
+              <p class="feature-card__exerpt">{{ content_box.box_content }}</p>
+            </div>
+          </div>
+        </a>
+      {% else %}
+        <div class="card">
+          <div class="card-body">
+            <h5 class="feature-card__title text_primary py-3">{{ content_box.box_title }}</h5>
+            <p class="feature-card__exerpt">{{ content_box.box_content }}</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,23 @@
+{% load i18n wagtailimages_tags %}
+
+<div class="row mt-5 justify-content-center">
+  {% for box in value.icon_boxes %}
+    <div class="col-12 col-lg-3 col-md-5 icon-box">
+      <div class="card">
+        {% image box.icon original as icon %}
+        <div class="card-header icon-container">
+          <img alt="{{ icon.alt }}" src="{{ icon.url }}" height="62" width="62" />
+        </div>
+        <div class="card-body">
+          <div class="icon-box__title">
+            <h6>{{ box.title }}</h6>
+          </div>
+          <div class="icon-box__desc text-align-left__max-576 mb-3">{{ box.content }}</div>
+          {% if box.link %}
+            <a href="{{ box.link }}" class="text_primary">{% translate "Learn more" %}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

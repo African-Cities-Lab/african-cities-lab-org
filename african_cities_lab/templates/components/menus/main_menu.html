@@ -1,0 +1,19 @@
+{% load home_tags menu_tags i18n static wagtailcore_tags %}
+
+{% for item in menu_items %}
+  <li class="nav-item mx-3 {% if item.has_children_in_menu %}dropdown{% endif %}">
+    <a class="nav-link {{ item.active_class }} {% if item.has_children_in_menu %}dropdown-toggle{% endif %}"
+       {% if item.has_children_in_menu %} role="button" href="#" id="event-dropdown" data-bs-toggle="dropdown" aria-expanded="false" {% else %} href="{% if item.href %}{{ item.href }}{% else %}{{ item.link_page.localized.url }}{% endif %}
+       "
+       {% endif %}>
+      {% if item.text %}
+        {{ item.text }}
+      {% else %}
+        {{ item.link_page.localized.title }}
+      {% endif %}
+    </a>
+    {% if item.has_children_in_menu %}
+      {% sub_menu item %}
+    {% endif %}
+  </li>
+{% endfor %}

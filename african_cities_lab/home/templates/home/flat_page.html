@@ -1,0 +1,15 @@
+{% extends "home/wagtail_base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+  {% with blocks=page.body %}
+    {% for block in blocks %}
+      {% if block.block_type in "hero_block" %}
+        {{ block }}
+      {% else %}
+        {% include_block block %}
+      {% endif %}
+    {% endfor %}
+  {% endwith %}
+{% endblock content %}

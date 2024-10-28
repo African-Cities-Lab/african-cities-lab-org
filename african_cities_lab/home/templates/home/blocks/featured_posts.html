@@ -1,0 +1,198 @@
+{% load i18n static wagtailcore_tags wagtailimages_tags %}
+
+<section class="featured-posts margin-top-6-rem"
+         {% if value.section_options.background_color %}style='background-color: {{ value.section_options.background_color }};color:#FFF;padding:6rem 0'{% endif %}>
+  <div class="container-lg">
+    {% if value.content.button.button_position == "top" and value.content.button.button_label %}
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <h3 class="section-title">{{ value.content.section_title.title }}</h3>
+          {% if value.content.section_subparagraph.subparagraph %}
+            <div class="font-size-16">{{ value.content.section_subparagraph.subparagraph }}</div>
+          {% endif %}
+        </div>
+        <div class="col-12 col-md-4 d-none d-md-block">
+          <a class="float-end btn __btn-outline-more btn__xxsmall"
+             role="button"
+             href="{{ value.content.button.archive_page_url }}">
+            <span class="font-size-16">{{ value.content.button.button_label }}</span>
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="row {% if value.section_options.content_position %}justify-content-{{ value.section_options.content_position }}{% endif %} mb-3">
+        <div class="col-12 col-lg-10">
+          <h3 class="section-title text-{{ value.content.section_title.text_align }}">
+            {{ value.content.section_title.title }}
+          </h3>
+          {% if value.content.section_subparagraph.subparagraph %}
+            <div class="font-size-16 pt-3 text-{{ value.content.section_subparagraph.text_align }}">
+              {{ value.content.section_subparagraph.subparagraph }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    {% if value.content.posts_type == "moocs" and moocs %}
+      <div class="row justify-content-xl-center">
+        {% for mooc in moocs %}
+          <div class="col-12 col-lg-4 col-md-6 moocs-card">
+            <div class="card">
+              <div class="card-header p-0 border-0">
+                {% if mooc.is_new %}
+                  <div class="ribbon-wrapper">
+                    <div class="ribbon">{% translate "NEW" %}</div>
+                  </div>
+                {% endif %}
+                <a href="{{ mooc.url }}" class="d-block" target="_blank">
+                  {% with mooc.oganization.logo_url as logo_url %}
+                    <img width="399"
+                         height="200"
+                         alt="{{ mooc.title }}"
+                         src="{{ mooc.image_url }}" />
+                  {% endwith %}
+                </a>
+              </div>
+              <div class="card-body">
+                <div class="moocsCard-university d-flex align-items-center">
+                  <img alt="{{ mooc.organization.name }}"
+                       width="95"
+                       height="95"
+                       class="brand-icon"
+                       src="{{ mooc.organization.logo_url }}" />
+                  <div class="university__divider"></div>
+                  <div class="university__label">{{ mooc.organization.name }}</div>
+                </div>
+                <h5 class="moocsCard-title">
+                  <a href="{{ mooc.url }} }}" class="d-block" target="_blank">{{ mooc.name }}</a>
+                </h5>
+              </div>
+              <div class="card-footer">{% translate "Start date:" %} {{ mooc.start_date }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% elif value.content.posts_type == "formations" and formations %}
+      <div class="row pt-5 mb-5">
+        {% for formation in formations %}
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="featured-event__content">
+              <div class="featured-img">
+                <a href="{{ formation.url }}">
+                  <div class="featured-img__inner">
+                    {% image formation.main_image original as img %}
+                    <img width="416" height="250" alt="{{ img.alt }}" src="{{ img.url }}" />
+                  </div>
+                </a>
+              </div>
+              <div class="row">
+                <div class="d-inline-flex align-items-start">
+                  <div class="formation-date__wrapper featured-formation__date">
+                    <div class="start-date">
+                      <div class="date-d">{{ formation.starting_date.day }}</div>
+                      <div class="date-m mx-2">{{ formation.get_start_month_published }}</div>
+                      <div class="date-y">{{ formation.starting_date.year }}</div>
+                    </div>
+                    <div class="text-center">
+                      <img alt="icon"
+                           width="14"
+                           height="32"
+                           src="{% static 'images/assets/chevron-icon.svg' %}" />
+                    </div>
+                    <div class="end-date">
+                      <div class="date-d">{{ formation.ending_date.day }}</div>
+                      <div class="date-m mx-2">{{ formation.get_end_month_published }}</div>
+                      <div class="date-y">{{ formation.ending_date.year }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="featured-formation__title">
+                  <a href="{{ formation.url }}" class="h4">{{ formation.title }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% elif value.content.posts_type == "webinars" and webinars %}
+      <div class="row pt-5 mb-5">
+        {% for webinar in webinars %}
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="featured-event__content">
+              <div class="featured-img">
+                <a href="{{ webinar.url }}">
+                  <div class="featured-img__inner">
+                    {% image webinar.main_image original as img %}
+                    <img width="416" height="250" alt="{{ img.alt }}" src="{{ img.url }}" />
+                  </div>
+                </a>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-xs-12">
+                  <div class="event-meta__card">
+                    <div class="date-d">{{ webinar.date.day }}</div>
+                    <div class="date-m">{{ webinar.get_month_published }}</div>
+                    <div class="date-y">{{ webinar.date.year }}</div>
+                  </div>
+                </div>
+                <div class="col-lg-9 col-xs-12 ">
+                  <div class="featured-event-inner">
+                    <a href="{{ webinar.url }}" class="h4">{{ webinar.title }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% elif value.content.posts_type == "articles" and articles %}
+      <div class="row">
+        {% for article in latest_articles %}
+          <div class="col-12 col-lg-4 col-md-6 article-card">
+            <div class="card border-0">
+              <div class="card-header article-preview-img p-0">
+                <a href="{{ article.url }}" class="d-block">{% image article.main_image original %}</a>
+              </div>
+              <div class="card-body">
+                <div class="article-meta d-flex align-items-center">
+                  <div class="article__date">{{ article.date }}</div>
+                  <div class="fas fa-circle text_primary mx-2" style="font-size: 5px;"></div>
+                  <div class="article__category">
+                    {% with categories=article.categories.all %}
+                      {% if categories %}
+                        <ul class="list-inline mb-0">
+                          {% for category in categories %}
+                            <li class="post-info__item list-inline-item mr-2">
+                              <span class="text_primary font-weight-bold">{{ category.name }}</span>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endwith %}
+                  </div>
+                </div>
+                <h5 class="article-title py-3">
+                  <a href="{{ article.url }}" class="d-block text-black">{{ article.title }}</a>
+                </h5>
+                <div class="article-exerpt">{{ article.summary }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if value.content.button.button_position == "bottom" and value.content.button.button_label %}
+      <div class="my-5 text-center">
+        <a href="{{ value.content.button.archive_page_url }}"
+           class="btn btn__primary btn__big">{{ value.content.button.button_label }}</a>
+      </div>
+    {% endif %}
+    {% if value.content.button.button_label %}
+      <div class="my-5 text-center d-md-none">
+        <a class="btn btn__primary btn__big"
+           role="button"
+           href="{{ value.content.button.archive_page_url }}">{{ value.content.button.button_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>

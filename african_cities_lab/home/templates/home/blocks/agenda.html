@@ -1,0 +1,82 @@
+{% load i18n static wagtailcore_tags %}
+
+<div class="event-agenda mt-5">
+  {% if value.sessions|length > 1 %}
+    <ul class="nav nav-tabs" id="agenda-tab" role="tablist">
+      {% for session in value.sessions %}
+        <li class="nav-item" role="presentation">
+          <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}"
+             id="{{ forloop }}-tab"
+             data-bs-toggle="tab"
+             href="#tab{{ forloop.counter }}"
+             role="tab"
+             aria-controls="{{ forloop.counter }}"
+             aria-selected="true">
+            <h4>{% translate "Session" %} {{ forloop.counter }}</h4>
+            <span>{{ session.time }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <div class="tab-content" id="agenda-content">
+    {% for session in value.sessions %}
+      <div class="tab-pane fade {% if forloop.counter == 1 %}show active{% endif %}"
+           id="tab{{ forloop.counter }}"
+           role="tabpanel"
+           aria-labelledby="{{ forloop.counter }}-tab">
+        {% if session.session_title %}
+          <img alt="icon"
+               class="d-none d-md-inline-block"
+               width="12"
+               height="30"
+               src="{% static 'images/assets/small-pointer.svg' %}" />
+          <div class="h5 d-inline-block px-2 py-4">{{ session.session_title }}</div>
+        {% endif %}
+        {% if session.language %}
+          <div>
+            <h6 class="d-inline-block">{% translate "Language:" %}</h6>
+            <span>{{ session.language }}</span>
+          </div>
+        {% endif %}
+        {% for content in session.timeline %}
+          <div class="row border-bottom_grey">
+            <div class="col-12 col-sm-8 p-3 py-4">
+              {% if content.time %}<div class="meta-badge">{{ content.time }}</div>{% endif %}
+              <div class="font-size-18 font-weight-500">{{ content.title }}</div>
+              <div>{{ content.description }}</div>
+            </div>
+            <div class="col-12 col-sm-4 p-3 py-4">
+              {% if content.speakers %}
+                <h4 class="font-size-16">
+                  <span class="speaker-ico"></span>{% translate "Speaker(s):" %}
+                </h4>
+                {% for speaker in content.speakers %}
+                  <div class="speaker-list__speaker">
+                    <span class="speaker-list__speaker__name">
+                      {{ speaker.name }}
+                      {% if speaker.designation %}
+                        -
+                        <small>{{ speaker.designation }}</small>
+                      {% endif %}
+                    </span>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+        {% if session.moderator_name %}
+          <div class="row">
+            <div class="col-12 col-sm-8 py-4 p-3">
+              <p class="font-weight-500 font-size-16">
+                <span class="moderator-ico"></span>
+                {% translate "Moderator:" %} {{ session.moderator_name }}
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load i18n static wagtailcore_tags %}
 {% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
@@ -7,101 +7,94 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>
-      {% block title %}
-        African Cities Lab website
-      {% endblock title %}
-    </title>
+    {% block meta_tag %}
+      <title>
+        {% block title %}
+          {% if self.seo_title %}
+            {{ self.seo_title }}
+          {% else %}
+            {{ self.title }}
+          {% endif %}
+        {% endblock title %}
+        {% block title_suffix %}
+          {% with self.get_site.site_name as site_name %}
+            {% if site_name %}- {{ site_name }}{% endif %}
+          {% endwith %}
+        {% endblock title_suffix %}
+      </title>
+      <meta name="description" content="{{ page.search_description }}" />
+    {% endblock meta_tag %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="African Cities Lab website" />
-    <meta name="author" content="Martí Bosch" />
+    <meta name="author" content="Martí Bosch - Nabil Raimi" />
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
     {% block css %}
       <!-- Your stuff: Third-party CSS libraries go here -->
       <!-- This file stores project-specific CSS -->
       {% render_bundle 'project' 'css' %}
+      <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+      <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+      <link rel="stylesheet"
+            href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     {% endblock css %}
     <!-- Le javascript
-    ================================================== -->
+	     ================================================== -->
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
       <!-- Vendor dependencies bundled as one file -->
       {% render_bundle 'vendors' 'js' attrs='defer' %}
+      <!-- Bootstrap JS and its dependencies-->
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous">
+      </script>
+      <script defer src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+      <script defer src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+      <script defer src="{% static 'js/jquery.counterup.min.js' %}"></script>
       <!-- place project specific Javascript in this file -->
       {% render_bundle 'project' 'js' attrs='defer' %}
     {% endblock javascript %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-476VN6QQ4Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-476VN6QQ4Y');
+    </script>
   </head>
   <body>
-    <div class="mb-1">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
-          <button class="navbar-toggler navbar-toggler-right"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'home' %}">African Cities Lab website</a>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li>
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'users:detail' request.user.pk %}">{% translate "My Profile" %}</a>
-                </li>
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-                </li>
-              {% else %}
-                {% if ACCOUNT_ALLOW_REGISTRATION %}
-                  <li class="nav-item">
-                    {# URL provided by django-allauth/account/urls.py #}
-                    <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
-                  </li>
-                {% endif %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <div class="container">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-            {{ message }}
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"></button>
-          </div>
-        {% endfor %}
-      {% endif %}
+    <!-- Hello Bar-->
+    {% block hellobar %}
+    {% endblock hellobar %}
+    <!-- Hello Bar-->
+    <header id="header">
+      <!-- Navbar-->
+      {% include "components/navbar.html" %}
+      <!-- Navbar -->
+    </header>
+    <main>
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
       {% endblock content %}
-    </div>
+      <!-- Start Partners Area-->
+      <section class="our-partners">
+        {% include "components/partners_section.html" %}
+      </section>
+      <!-- End Partners Area -->
+    </main>
+    <!-- Footer-->
+    {% include "components/footer.html" %}
+    <!-- Footer -->
     <!-- /container -->
     {% block modal %}
     {% endblock modal %}
     {% block inline_javascript %}
       {% comment %}
-    Script tags with only code, no src (defer by default). To run
-    with a "defer" so that you run inline code:
-    <script>
+	    Script tags with only code, no src (defer by default). To run
+	    with a "defer" so that you run inline code:
+	    <script>
       window.addEventListener('DOMContentLoaded', () => {
         /* Run whatever you want */
       });
