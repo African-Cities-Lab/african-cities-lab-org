@@ -31,7 +31,7 @@ from wagtail.models import (
 from wagtail.snippets.models import register_snippet
 from wagtailmetadata.models import MetadataPageMixin
 
-from african_cities_lab.home import extra_settings, views
+from african_cities_lab.home import views
 from african_cities_lab.home.blocks import (
     AgendaBlock,
     FeaturedPostsBlock,
@@ -92,6 +92,8 @@ class Mooc(models.Model):
         return self.start_date >= timezone.now().date() - timedelta(days=90)
 
     def url(self):
+        from african_cities_lab.home import extra_settings
+
         return f"{extra_settings.EDX_BASE_URL}/{self.course_id}"
 
 
@@ -549,6 +551,8 @@ class NewsletterPage(MetadataPageMixin, Page):
 
     def serve(self, request):
         if request.method == "POST":
+            from african_cities_lab.home import extra_settings
+
             email = request.POST["EMAIL"]
             merge_fields = {
                 "LNAME": request.POST["LNAME"],
