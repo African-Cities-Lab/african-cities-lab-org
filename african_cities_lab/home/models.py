@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 from django import forms
-from django.conf import settings
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import render
@@ -32,7 +31,7 @@ from wagtail.models import (
 from wagtail.snippets.models import register_snippet
 from wagtailmetadata.models import MetadataPageMixin
 
-from african_cities_lab.home import views
+from african_cities_lab.home import extra_settings, views
 from african_cities_lab.home.blocks import (
     AgendaBlock,
     FeaturedPostsBlock,
@@ -69,8 +68,8 @@ class Organization(models.Model):
     """Organization model."""
 
     name = models.CharField()
-    short_name = models.CharField(max_length=50, blank=True)
-    logo_url = models.URLField()
+    short_name = models.CharField(max_length=50)
+    logo_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.name
@@ -80,7 +79,7 @@ class Mooc(models.Model):
     """Mooc model."""
 
     name = models.CharField()
-    url = models.URLField()
+    course_id = models.CharField()
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     image_url = models.URLField()
     start_date = models.DateField()
@@ -91,6 +90,9 @@ class Mooc(models.Model):
     def is_new(self):
         # whether the mooc's start date is within the last 90 days
         return self.start_date >= timezone.now().date() - timedelta(days=90)
+
+    def url(self):
+        return f"{extra_settings.EDX_BASE_URL}/{self.course_id}"
 
 
 class HomePageCarouselImages(Orderable):
@@ -129,7 +131,7 @@ class HomePage(MetadataPageMixin, Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
-            [InlinePanel("carousel_images", max_num=3, min_num=1, label=_("Caroussel Images"))],
+            [InlinePanel("carousel_images", min_num=1, label=_("Caroussel Images"))],
             heading=_("Slider"),
         ),
         FieldPanel("body"),
@@ -554,9 +556,9 @@ class NewsletterPage(MetadataPageMixin, Page):
             }
 
             if request.POST["site_language"] == "en":
-                list_id = settings.MAILCHIMP_NEWSLETTER_EN_ID
+                list_id = extra_settings.MAILCHIMP_NEWSLETTER_EN_ID
             else:  # "fr"
-                list_id = settings.MAILCHIMP_NEWSLETTER_FR_ID
+                list_id = extra_settings.MAILCHIMP_NEWSLETTER_FR_ID
 
             status = views.subscribe(email, list_id, merge_fields)
             if status == "subscribed":
