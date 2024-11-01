@@ -94,7 +94,7 @@ class Mooc(models.Model):
     def url(self):
         from african_cities_lab.home import extra_settings
 
-        return f"{extra_settings.EDX_BASE_URL}/{self.course_id}"
+        return f"{extra_settings.EDX_BASE_URL}/courses/{self.course_id}"
 
 
 class HomePageCarouselImages(Orderable):
