@@ -6,20 +6,21 @@ from african_cities_lab.home import extra_settings
 from african_cities_lab.home.models import Mooc, Organization
 from config import celery_app
 
+base_url = extra_settings.EDX_BASE_URL
+
+
+users_url = f"{base_url}/api/user/v1/users"
+accounts_url = f"{base_url}/api/user/v1/accounts"
+enrollments_url = f"{base_url}/api/enrollment/v1/enrollments"
+organizations_url = f"{base_url}/api/organizations/v0/organizations"
+courses_url = f"{base_url}/api/courses/v1/courses/"
+course_modes_base_url = f"{base_url}/api/course_modes/v1/courses"
+gradebook_base_url = f"{base_url}/api/grades/v1/gradebook"
+certificates_base_url = f"{base_url}/api/certificates/v0/certificates"
+
+client = OAuthAPIClient(base_url, extra_settings.EDX_CLIENT_ID, extra_settings.EDX_CLIENT_SECRET)
+
 PAGE_SIZE = 100
-
-
-users_url = f"{extra_settings.EDX_BASE_URL}/api/user/v1/users"
-accounts_url = f"{extra_settings.EDX_BASE_URL}/api/user/v1/accounts"
-enrollments_url = f"{extra_settings.EDX_BASE_URL}/api/enrollment/v1/enrollments"
-organizations_url = f"{extra_settings.EDX_BASE_URL}/api/organizations/v0/organizations"
-courses_url = f"{extra_settings.EDX_BASE_URL}/api/courses/v1/courses/"
-course_modes_base_url = f"{extra_settings.EDX_BASE_URL}/api/course_modes/v1/courses"
-gradebook_base_url = f"{extra_settings.EDX_BASE_URL}/api/grades/v1/gradebook"
-certificates_base_url = f"{extra_settings.EDX_BASE_URL}" "/api/certificates/v0/certificates"
-
-client = OAuthAPIClient(extra_settings.EDX_BASE_URL, extra_settings.CLIENT_ID, extra_settings.CLIENT_SECRET)
-
 get_kwargs = dict(
     headers={"X-EDX-API-KEY": extra_settings.EDX_API_KEY},
     params={"page_size": PAGE_SIZE},
@@ -150,74 +151,3 @@ def get_certificates():
             certificates.extend(account_certificates)
 
     return json.dumps(certificates)
-
-
-# users_resp = client.get(users_url, **get_kwargs).json()
-# accounts = get_accounts(users_resp)
-# while "next" in users_resp and users_resp["next"] is not None:
-#     print(users_resp["next"])
-#     users_resp = client.get(users_resp["next"], **get_kwargs).json()
-#     accounts.extend(get_accounts(users_resp))
-
-# enrollments_resp = client.get(enrollments_url).json()
-# enrollments = enrollments_resp["results"]
-# while enrollments_resp["next"] is not None:
-#     print(enrollments_resp["next"])
-#     enrollments_resp = client.get(enrollments_resp["next"]).json()
-#     enrollments.extend(enrollments_resp["results"])
-
-# courses_resp = client.get(courses_url).json()
-# courses = courses_resp["results"]
-# while "next" in courses_resp and courses_resp["next"] is not None:
-#     print(courses_resp["next"])
-#     courses_resp = client.get(courses_resp["next"]).json()
-#     courses.extend(courses_resp["results"])
-
-
-# # def is_honor(course_id):
-# #     url = f"{course_modes_base_url}/{course_id}"
-# #     for course_mode in client.get(url).json():
-# #         if course_mode["mode_slug"] == "honor":
-# #             return True
-# #     return False
-
-
-# # for course in courses:
-# #     course_id = courses["course_id"]
-# #     if is_honor(course_id):
-# #         gradebook_url = f"{gradebook_base_url}/{course_id}"
-# def get_certificates(account):
-#     username = account["username"]
-#     certificates_url = f"{certificates_base_url}/{username}"
-#     return client.get(certificates_url).json()
-
-
-# certificates = []
-# num_accounts = len(accounts)
-# for i, account in enumerate(accounts):
-#     print(f"{i}/{num_accounts}")
-#     account_certificates = get_certificates(account)
-#     if account_certificates:
-#         certificates.extend(
-#             [(account, certificate) for certificate in account_certificates]
-#         )
-
-# # lower_limit = datetime.now(pytz.utc) + timedelta(days=7)
-# # new_certificates = []
-# # for account in accounts:
-# #     certificates = get_certificates(account)
-# #     if certificates:
-# #         for certificate in certificates:
-# #             if (
-# #                 datetime.fromisoformat(
-# #                     certificate["modified_date"].replace("Z", "+00:00")
-# #                 )
-# #                 > lower_limit
-# #             ):
-# #                 new_certificates.append((account, certificate))
-
-# for data, dst_filename in zip(
-#     [accounts, enrollments, certificates], ["accounts", "enrollments", "certificates"]
-# ):
-#     with open(dst_filename, "w") as dst:
-#         json.dump(data, dst)
