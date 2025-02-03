@@ -45,7 +45,7 @@ def get_date(date_str, default="2000-01-01"):
     return dt.strftime("%Y-%m-%d")
 
 
-@celery_app.task
+@celery_app.task()
 def update_odoo_contacts():
     accounts = openedx_tasks.get_accounts()
     for account in accounts:
